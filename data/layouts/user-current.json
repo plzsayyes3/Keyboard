@@ -1,0 +1,24 @@
+{
+  "id": "user-current",
+  "name": "BeThirty Ortho / ユーザー薙刀式",
+  "version": "v18-custom",
+  "source": "ユーザー提供のBeThirty Ortho設定。薙刀式v18標準を継承し、提示された基本かなを上書き。",
+  "keyboard": { "model": "BeThirty Ortho", "matrix": "4x10", "layers": 7, "encoder": false },
+  "implementationLayer": 5,
+  "baseLayer": { "id": 0, "mode": "QWERTY", "preserved": true },
+  "modeSwitch": { "enable": ["KeyH", "KeyJ"], "disable": ["KeyG", "KeyF"] },
+  "tapDance": {
+    "TD0": { "tap": "KeyA", "hold": "MO(1)" },
+    "TD1": { "tap": "KeyS", "hold": "MO(2)" }
+  },
+  "special": { "KeyQ": "NG_SHFT" },
+  "inherits": "naginata-v18",
+  "physicalKeys": ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "Semicolon", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Comma", "Period", "Slash", "Space"],
+  "layers": {
+    "single": { "KeyJ": "あ", "KeyK": "い", "KeyL": "う", "KeyW": "き", "KeyE": "て", "KeyR": "し", "KeyI": "る", "KeyO": "す", "KeyF": "か", "KeyD": "と", "KeyH": "く", "KeyN": "た", "KeyM": "な", "Comma": "ん" },
+    "centerShift": {}
+  },
+  "combos": [],
+  "centerShiftKey": "Space",
+  "simultaneousWindowMs": 140
+}

@@ -1,0 +1,11 @@
+{
+  "id": "basic",
+  "title": "基礎文字",
+  "items": [
+    { "text": "あ", "expected": "あ" }, { "text": "い", "expected": "い" }, { "text": "う", "expected": "う" },
+    { "text": "て", "expected": "て" }, { "text": "き", "expected": "き" }, { "text": "し", "expected": "し" },
+    { "text": "る", "expected": "る" }, { "text": "す", "expected": "す" }, { "text": "か", "expected": "か" },
+    { "text": "な", "expected": "な" }, { "text": "こ", "expected": "こ" }, { "text": "と", "expected": "と" },
+    { "text": "が", "expected": "が" }, { "text": "じ", "expected": "じ" }, { "text": "しょ", "expected": "しょ" }
+  ]
+}

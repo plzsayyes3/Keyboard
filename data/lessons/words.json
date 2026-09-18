@@ -1,0 +1,10 @@
+{
+  "id": "words",
+  "title": "単語",
+  "items": [
+    { "text": "ある", "expected": "ある" }, { "text": "ない", "expected": "ない" },
+    { "text": "する", "expected": "する" }, { "text": "こと", "expected": "こと" },
+    { "text": "しごと", "expected": "しごと" }, { "text": "しょうじょ", "expected": "しょうじょ" },
+    { "text": "もの", "expected": "もの" }, { "text": "みらい", "expected": "みらい" }
+  ]
+}
