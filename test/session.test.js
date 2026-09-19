@@ -20,10 +20,13 @@ test('records the actual incorrect input', () => {
 test('advances through every unit in a word', () => {
   const session = new PracticeSession([{ text: 'ある', expected: 'ある' }]);
 
+  assert.equal(session.currentInput, '');
   assert.equal(session.currentUnit, 'あ');
   assert.equal(session.submit('あ').correct, true);
+  assert.equal(session.currentInput, 'あ');
   assert.equal(session.currentUnit, 'る');
   assert.equal(session.submit('る').correct, true);
+  assert.equal(session.currentInput, '');
   assert.equal(session.stats.completed, true);
   assert.equal(session.stats.correct, 2);
 });

@@ -5,6 +5,8 @@ export class PracticeSession {
     this.units = this.items.map((item) => this.tokenize(item.expected));
     this.index = 0;
     this.unitIndex = 0;
+    this.inputUnits = [];
+    this.lastActual = '';
     this.attempts = 0;
     this.correctCount = 0;
     this.errors = [];
@@ -16,6 +18,10 @@ export class PracticeSession {
 
   get currentUnit() {
     return this.units[this.index]?.[this.unitIndex] ?? null;
+  }
+
+  get currentInput() {
+    return this.inputUnits.join('');
   }
 
   get stats() {
@@ -36,6 +42,7 @@ export class PracticeSession {
     let correct = true;
     let expected = this.currentUnit ?? '';
     for (const token of tokens) {
+      this.lastActual = token;
       expected = this.currentUnit ?? '';
       this.attempts += 1;
       if (token !== expected) {
@@ -44,10 +51,12 @@ export class PracticeSession {
         break;
       }
       this.correctCount += 1;
+      this.inputUnits.push(token);
       this.unitIndex += 1;
       if (this.unitIndex >= this.units[this.index].length) {
         this.index += 1;
         this.unitIndex = 0;
+        this.inputUnits = [];
       }
     }
     return { correct, completed: this.index >= this.items.length, expected, actual };
