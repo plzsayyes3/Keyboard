@@ -15,6 +15,7 @@ test('records the actual incorrect input', () => {
   const session = new PracticeSession([{ text: 'し', expected: 'し' }]);
   session.submit('す');
   assert.deepEqual(session.errors, [{ expected: 'し', actual: 'す' }]);
+  assert.equal(session.displayInput, 'す');
 });
 
 test('advances through every unit in a word', () => {

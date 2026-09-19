@@ -7,6 +7,7 @@ export class PracticeSession {
     this.unitIndex = 0;
     this.inputUnits = [];
     this.lastActual = '';
+    this.lastAttemptCorrect = true;
     this.attempts = 0;
     this.correctCount = 0;
     this.errors = [];
@@ -22,6 +23,10 @@ export class PracticeSession {
 
   get currentInput() {
     return this.inputUnits.join('');
+  }
+
+  get displayInput() {
+    return this.currentInput + (!this.lastAttemptCorrect ? this.lastActual : '');
   }
 
   get stats() {
@@ -47,9 +52,11 @@ export class PracticeSession {
       this.attempts += 1;
       if (token !== expected) {
         correct = false;
+        this.lastAttemptCorrect = false;
         this.errors.push({ expected, actual: token });
         break;
       }
+      this.lastAttemptCorrect = true;
       this.correctCount += 1;
       this.inputUnits.push(token);
       this.unitIndex += 1;
@@ -57,6 +64,8 @@ export class PracticeSession {
         this.index += 1;
         this.unitIndex = 0;
         this.inputUnits = [];
+        this.lastActual = '';
+        this.lastAttemptCorrect = true;
       }
     }
     return { correct, completed: this.index >= this.items.length, expected, actual };
