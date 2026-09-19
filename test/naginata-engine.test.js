@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createLayoutIndex } from '../src/engine/layout.js';
+import { createLayoutIndex, resolveExpectedKeys } from '../src/engine/layout.js';
 import { NaginataEngine } from '../src/engine/naginata-engine.js';
+import naginataLayout from '../data/layouts/naginata-v18.json' with { type: 'json' };
 
 const layout = {
   layers: {
@@ -41,4 +42,21 @@ test('reports unknown physical combinations', () => {
   const engine = new NaginataEngine(createLayoutIndex(layout));
   assert.equal(engine.convert(['KeyQ']).text, '');
   assert.equal(engine.convert(['KeyQ']).kind, 'unknown');
+});
+
+test('uses the official physical keys for しょ', () => {
+  const index = createLayoutIndex(naginataLayout);
+  const engine = new NaginataEngine(index);
+
+  assert.deepEqual(resolveExpectedKeys(index, 'しょ'), [['KeyI', 'KeyR']]);
+  assert.equal(engine.convert(['KeyR', 'KeyI']).text, 'しょ');
+  assert.notEqual(engine.convert(['KeyW', 'KeyI']).text, 'しょ');
+});
+
+test('uses the base kana key plus the やゆよ key for clean youon', () => {
+  const engine = new NaginataEngine(createLayoutIndex(naginataLayout));
+  assert.equal(engine.convert(['KeyR', 'KeyH']).text, 'しゃ');
+  assert.equal(engine.convert(['KeyR', 'KeyP']).text, 'しゅ');
+  assert.equal(engine.convert(['KeyW', 'KeyI']).text, 'きょ');
+  assert.equal(engine.convert(['KeyG', 'KeyI']).text, 'ちょ');
 });
