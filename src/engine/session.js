@@ -1,7 +1,10 @@
 export class PracticeSession {
-  constructor(items) {
+  constructor(items, { tokenize = (text) => Array.from(String(text ?? '')) } = {}) {
     this.items = items ?? [];
+    this.tokenize = tokenize;
+    this.units = this.items.map((item) => this.tokenize(item.expected));
     this.index = 0;
+    this.unitIndex = 0;
     this.attempts = 0;
     this.correctCount = 0;
     this.errors = [];
@@ -9,6 +12,10 @@ export class PracticeSession {
 
   get current() {
     return this.items[this.index] ?? null;
+  }
+
+  get currentUnit() {
+    return this.units[this.index]?.[this.unitIndex] ?? null;
   }
 
   get stats() {
@@ -23,16 +30,26 @@ export class PracticeSession {
   }
 
   submit(actual) {
-    const item = this.current;
-    if (!item) return { correct: false, completed: true, expected: '', actual };
-    const correct = actual === item.expected;
-    this.attempts += 1;
-    if (correct) {
+    const tokens = this.tokenize(actual);
+    if (!this.current || tokens.length === 0) return { correct: false, completed: this.index >= this.items.length, expected: this.currentUnit ?? '', actual };
+
+    let correct = true;
+    let expected = this.currentUnit ?? '';
+    for (const token of tokens) {
+      expected = this.currentUnit ?? '';
+      this.attempts += 1;
+      if (token !== expected) {
+        correct = false;
+        this.errors.push({ expected, actual: token });
+        break;
+      }
       this.correctCount += 1;
-      this.index += 1;
-    } else {
-      this.errors.push({ expected: item.expected, actual });
+      this.unitIndex += 1;
+      if (this.unitIndex >= this.units[this.index].length) {
+        this.index += 1;
+        this.unitIndex = 0;
+      }
     }
-    return { correct, completed: this.index >= this.items.length, expected: item.expected, actual };
+    return { correct, completed: this.index >= this.items.length, expected, actual };
   }
 }

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createLayoutIndex, resolveExpectedKeys } from '../src/engine/layout.js';
+import { createLayoutIndex, resolveExpectedKeys, tokenizeText } from '../src/engine/layout.js';
 import { NaginataEngine } from '../src/engine/naginata-engine.js';
 import naginataLayout from '../data/layouts/naginata-v18.json' with { type: 'json' };
 
@@ -67,4 +67,10 @@ test('preserves official combo order when the same keys have two meanings', () =
   assert.equal(engine.convert(['KeyU', 'KeyF']).text, 'が');
   assert.equal(engine.convert(['KeyR', 'KeyU']).text, 'じ');
   assert.equal(engine.convert(['KeyU', 'KeyR']).text, 'ざ');
+});
+
+test('tokenizes words around multi-character kana combos', () => {
+  const index = createLayoutIndex(naginataLayout);
+  assert.deepEqual(tokenizeText(index, 'しょうじょ'), ['しょ', 'う', 'じょ']);
+  assert.deepEqual(tokenizeText(index, 'これはことばです。'), ['こ', 'れ', 'は', 'こ', 'と', 'ば', 'で', 'す', '。']);
 });

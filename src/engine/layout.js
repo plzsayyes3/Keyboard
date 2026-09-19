@@ -38,4 +38,29 @@ export function resolveExpectedKeys(index, text) {
   return candidates;
 }
 
+export function tokenizeText(index, text) {
+  const target = String(text ?? '');
+  const candidates = [...new Set([
+    ...index.combos.values(),
+    ...index.single.values(),
+    ...index.shifted.values()
+  ].map((value) => value.text ?? value).filter(Boolean))]
+    .filter((value) => value.length > 1)
+    .sort((a, b) => b.length - a.length);
+  const tokens = [];
+  let offset = 0;
+  while (offset < target.length) {
+    const match = candidates.find((candidate) => target.startsWith(candidate, offset));
+    if (match) {
+      tokens.push(match);
+      offset += match.length;
+    } else {
+      const [character] = Array.from(target.slice(offset));
+      tokens.push(character);
+      offset += character.length;
+    }
+  }
+  return tokens;
+}
+
 export { sortedKeyId };

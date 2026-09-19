@@ -16,3 +16,25 @@ test('records the actual incorrect input', () => {
   session.submit('す');
   assert.deepEqual(session.errors, [{ expected: 'し', actual: 'す' }]);
 });
+
+test('advances through every unit in a word', () => {
+  const session = new PracticeSession([{ text: 'ある', expected: 'ある' }]);
+
+  assert.equal(session.currentUnit, 'あ');
+  assert.equal(session.submit('あ').correct, true);
+  assert.equal(session.currentUnit, 'る');
+  assert.equal(session.submit('る').correct, true);
+  assert.equal(session.stats.completed, true);
+  assert.equal(session.stats.correct, 2);
+});
+
+test('treats a multi-character kana combo as one input unit', () => {
+  const tokenize = (text) => text === 'しょうじょ' ? ['しょ', 'う', 'じょ'] : ['しょ', 'じょ'].includes(text) ? [text] : Array.from(text);
+  const session = new PracticeSession([{ text: 'しょうじょ', expected: 'しょうじょ' }], { tokenize });
+
+  assert.equal(session.currentUnit, 'しょ');
+  assert.equal(session.submit('しょ').correct, true);
+  assert.equal(session.currentUnit, 'う');
+  assert.equal(session.submit('う').correct, true);
+  assert.equal(session.submit('じょ').completed, true);
+});
