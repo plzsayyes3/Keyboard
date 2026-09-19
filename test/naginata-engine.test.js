@@ -74,3 +74,11 @@ test('tokenizes words around multi-character kana combos', () => {
   assert.deepEqual(tokenizeText(index, 'しょうじょ'), ['しょ', 'う', 'じょ']);
   assert.deepEqual(tokenizeText(index, 'これはことばです。'), ['こ', 'れ', 'は', 'こ', 'と', 'ば', 'で', 'す', '。']);
 });
+
+test('uses the modifier, base, and やゆよ keys for voiced youon', () => {
+  const engine = new NaginataEngine(createLayoutIndex(naginataLayout));
+  assert.equal(engine.convert(['KeyJ', 'KeyR', 'KeyI']).text, 'じょ');
+  assert.equal(engine.convert(['KeyJ', 'KeyR', 'KeyP']).text, 'じゅ');
+  assert.equal(engine.convert(['KeyJ', 'KeyR', 'KeyH']).text, 'じゃ');
+  assert.notEqual(engine.convert(['KeyE', 'KeyO', 'KeyJ']).text, 'じょ');
+});
