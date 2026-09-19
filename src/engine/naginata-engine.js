@@ -18,7 +18,14 @@ export class NaginataEngine {
     }
 
     const combo = this.index.combos.get(normalized.join('+'));
-    if (combo) return { text: combo.text, keys: [...combo.keys], kind: combo.kind ?? 'combo' };
+    if (combo) {
+      return {
+        text: combo.text ?? '',
+        action: combo.action ?? null,
+        keys: [...combo.keys],
+        kind: combo.kind ?? 'combo'
+      };
+    }
 
     if (normalized.length === 1) {
       const text = this.index.single.get(normalized[0]);

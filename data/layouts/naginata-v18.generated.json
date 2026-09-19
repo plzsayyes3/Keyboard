@@ -1,0 +1,9347 @@
+{
+  "id": "naginata-v18-generated",
+  "name": "薙刀式 v18 トップ版（公式定義生成）",
+  "version": "v18",
+  "generatedFrom": "data/reference/naginata-v18.txt",
+  "sourceHash": "6472668ee04443367b346f620450b22b794ef5f1a044287e2733c7f9f01afa04",
+  "physicalKeys": [
+    "KeyQ",
+    "KeyW",
+    "KeyE",
+    "KeyR",
+    "KeyT",
+    "KeyY",
+    "KeyU",
+    "KeyI",
+    "KeyO",
+    "KeyP",
+    "KeyA",
+    "KeyS",
+    "KeyD",
+    "KeyF",
+    "KeyG",
+    "KeyH",
+    "KeyJ",
+    "KeyK",
+    "KeyL",
+    "Semicolon",
+    "KeyZ",
+    "KeyX",
+    "KeyC",
+    "KeyV",
+    "KeyB",
+    "KeyN",
+    "KeyM",
+    "Comma",
+    "Period",
+    "Slash",
+    "Space"
+  ],
+  "centerShiftKey": "Space",
+  "preserveComboOrder": true,
+  "simultaneousWindowMs": 180,
+  "aliases": {
+    "S": [
+      "Space"
+    ],
+    "右濁": [
+      "KeyJ"
+    ],
+    "左濁": [
+      "KeyF"
+    ],
+    "右半": [
+      "KeyM"
+    ],
+    "左半": [
+      "KeyV"
+    ],
+    "小": [
+      "KeyQ"
+    ],
+    "さ": [
+      "KeyU"
+    ],
+    "す": [
+      "KeyO"
+    ],
+    "へ": [
+      "KeyP"
+    ],
+    "く": [
+      "KeyH"
+    ],
+    "つ": [
+      "KeyL"
+    ],
+    "ふ": [
+      "Semicolon"
+    ],
+    "た": [
+      "KeyN"
+    ],
+    "き": [
+      "KeyW"
+    ],
+    "て": [
+      "KeyE"
+    ],
+    "し": [
+      "KeyR"
+    ],
+    "せ": [
+      "KeyA"
+    ],
+    "け": [
+      "KeyS"
+    ],
+    "と": [
+      "KeyD"
+    ],
+    "か": [
+      "KeyF"
+    ],
+    "ち": [
+      "KeyG"
+    ],
+    "ほ": [
+      "KeyZ"
+    ],
+    "ひ": [
+      "KeyX"
+    ],
+    "は": [
+      "KeyC"
+    ],
+    "こ": [
+      "KeyV"
+    ],
+    "そ": [
+      "KeyB"
+    ],
+    "あ": [
+      "KeyJ"
+    ],
+    "い": [
+      "KeyK"
+    ],
+    "う": [
+      "KeyL"
+    ],
+    "え": [
+      "KeyO"
+    ],
+    "お": [
+      "KeyN"
+    ],
+    "や": [
+      "KeyH"
+    ],
+    "ゆ": [
+      "KeyP"
+    ],
+    "よ": [
+      "KeyI"
+    ],
+    "わ": [
+      "Period"
+    ],
+    "り": [
+      "KeyE"
+    ],
+    "み": [
+      "KeyS"
+    ],
+    "に": [
+      "KeyD"
+    ]
+  },
+  "layers": {
+    "single": {
+      "KeyW": "き",
+      "KeyE": "て",
+      "KeyR": "し",
+      "KeyI": "る",
+      "KeyO": "す",
+      "KeyP": "へ",
+      "KeyA": "ろ",
+      "KeyS": "け",
+      "KeyD": "と",
+      "KeyF": "か",
+      "KeyG": "っ",
+      "KeyH": "く",
+      "KeyJ": "あ",
+      "KeyK": "い",
+      "KeyL": "う",
+      "Semicolon": "ー",
+      "Quote": ":",
+      "KeyZ": "ほ",
+      "KeyX": "ひ",
+      "KeyC": "は",
+      "KeyV": "こ",
+      "KeyB": "そ",
+      "KeyN": "た",
+      "KeyM": "な",
+      "Comma": "ん",
+      "Period": "ら",
+      "Slash": "れ"
+    },
+    "centerShift": {
+      "KeyW": "ね",
+      "KeyE": "り",
+      "KeyR": "め",
+      "KeyU": "さ",
+      "KeyI": "よ",
+      "KeyO": "え",
+      "KeyP": "ゆ",
+      "KeyA": "せ",
+      "KeyS": "み",
+      "KeyD": "に",
+      "KeyF": "ま",
+      "KeyG": "ち",
+      "KeyH": "や",
+      "KeyJ": "の",
+      "KeyK": "も",
+      "KeyL": "つ",
+      "Semicolon": "ふ",
+      "KeyZ": "ほ",
+      "KeyX": "ひ",
+      "KeyC": "を",
+      "KeyV": "、Enter",
+      "KeyB": "ぬ",
+      "KeyN": "お",
+      "KeyM": "。Enter",
+      "Comma": "む",
+      "Period": "わ",
+      "Slash": "れ"
+    }
+  },
+  "combos": [
+    {
+      "keys": [
+        "KeyT"
+      ],
+      "text": "",
+      "action": "arrowLeft",
+      "display": "←",
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyY"
+      ],
+      "text": "",
+      "action": "arrowRight",
+      "display": "→",
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyU"
+      ],
+      "text": "",
+      "action": "backspace",
+      "display": "BS",
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyT"
+      ],
+      "text": "",
+      "action": "arrowLeft",
+      "display": "←",
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyY"
+      ],
+      "text": "",
+      "action": "arrowRight",
+      "display": "→",
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyU"
+      ],
+      "text": "ざ",
+      "display": "ざ",
+      "kind": "combo",
+      "source": {
+        "line": 103
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyO"
+      ],
+      "text": "ず",
+      "display": "ず",
+      "kind": "combo",
+      "source": {
+        "line": 103
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyP"
+      ],
+      "text": "べ",
+      "display": "べ",
+      "kind": "combo",
+      "source": {
+        "line": 103
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH"
+      ],
+      "text": "ぐ",
+      "display": "ぐ",
+      "kind": "combo",
+      "source": {
+        "line": 104
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL"
+      ],
+      "text": "づ",
+      "display": "づ",
+      "kind": "combo",
+      "source": {
+        "line": 104
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "Semicolon"
+      ],
+      "text": "ぶ",
+      "display": "ぶ",
+      "kind": "combo",
+      "source": {
+        "line": 104
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyN"
+      ],
+      "text": "だ",
+      "display": "だ",
+      "kind": "combo",
+      "source": {
+        "line": 105
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyF"
+      ],
+      "text": "ざ",
+      "display": "ざ",
+      "kind": "combo",
+      "source": {
+        "line": 112
+      }
+    },
+    {
+      "keys": [
+        "KeyO",
+        "KeyF"
+      ],
+      "text": "ず",
+      "display": "ず",
+      "kind": "combo",
+      "source": {
+        "line": 118
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyF"
+      ],
+      "text": "べ",
+      "display": "べ",
+      "kind": "combo",
+      "source": {
+        "line": 124
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyF"
+      ],
+      "text": "ぐ",
+      "display": "ぐ",
+      "kind": "combo",
+      "source": {
+        "line": 130
+      }
+    },
+    {
+      "keys": [
+        "KeyL",
+        "KeyF"
+      ],
+      "text": "づ",
+      "display": "づ",
+      "kind": "combo",
+      "source": {
+        "line": 136
+      }
+    },
+    {
+      "keys": [
+        "Semicolon",
+        "KeyF"
+      ],
+      "text": "ぶ",
+      "display": "ぶ",
+      "kind": "combo",
+      "source": {
+        "line": 142
+      }
+    },
+    {
+      "keys": [
+        "KeyN",
+        "KeyF"
+      ],
+      "text": "だ",
+      "display": "だ",
+      "kind": "combo",
+      "source": {
+        "line": 148
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyW"
+      ],
+      "text": "ぎ",
+      "display": "ぎ",
+      "kind": "combo",
+      "source": {
+        "line": 155
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyE"
+      ],
+      "text": "で",
+      "display": "で",
+      "kind": "combo",
+      "source": {
+        "line": 155
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyR"
+      ],
+      "text": "じ",
+      "display": "じ",
+      "kind": "combo",
+      "source": {
+        "line": 155
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyA"
+      ],
+      "text": "ぜ",
+      "display": "ぜ",
+      "kind": "combo",
+      "source": {
+        "line": 156
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyS"
+      ],
+      "text": "げ",
+      "display": "げ",
+      "kind": "combo",
+      "source": {
+        "line": 156
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyD"
+      ],
+      "text": "ど",
+      "display": "ど",
+      "kind": "combo",
+      "source": {
+        "line": 156
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyF"
+      ],
+      "text": "が",
+      "display": "が",
+      "kind": "combo",
+      "source": {
+        "line": 156
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyG"
+      ],
+      "text": "ぢ",
+      "display": "ぢ",
+      "kind": "combo",
+      "source": {
+        "line": 156
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyZ"
+      ],
+      "text": "ぼ",
+      "display": "ぼ",
+      "kind": "combo",
+      "source": {
+        "line": 157
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyX"
+      ],
+      "text": "び",
+      "display": "び",
+      "kind": "combo",
+      "source": {
+        "line": 157
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyC"
+      ],
+      "text": "ば",
+      "display": "ば",
+      "kind": "combo",
+      "source": {
+        "line": 157
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyV"
+      ],
+      "text": "ご",
+      "display": "ご",
+      "kind": "combo",
+      "source": {
+        "line": 157
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyB"
+      ],
+      "text": "ぞ",
+      "display": "ぞ",
+      "kind": "combo",
+      "source": {
+        "line": 157
+      }
+    },
+    {
+      "keys": [
+        "KeyW",
+        "KeyJ"
+      ],
+      "text": "ぎ",
+      "display": "ぎ",
+      "kind": "combo",
+      "source": {
+        "line": 164
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyJ"
+      ],
+      "text": "で",
+      "display": "で",
+      "kind": "combo",
+      "source": {
+        "line": 170
+      }
+    },
+    {
+      "keys": [
+        "KeyR",
+        "KeyJ"
+      ],
+      "text": "じ",
+      "display": "じ",
+      "kind": "combo",
+      "source": {
+        "line": 176
+      }
+    },
+    {
+      "keys": [
+        "KeyA",
+        "KeyJ"
+      ],
+      "text": "ぜ",
+      "display": "ぜ",
+      "kind": "combo",
+      "source": {
+        "line": 182
+      }
+    },
+    {
+      "keys": [
+        "KeyS",
+        "KeyJ"
+      ],
+      "text": "げ",
+      "display": "げ",
+      "kind": "combo",
+      "source": {
+        "line": 188
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyJ"
+      ],
+      "text": "ど",
+      "display": "ど",
+      "kind": "combo",
+      "source": {
+        "line": 194
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyJ"
+      ],
+      "text": "が",
+      "display": "が",
+      "kind": "combo",
+      "source": {
+        "line": 200
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "KeyJ"
+      ],
+      "text": "ぢ",
+      "display": "ぢ",
+      "kind": "combo",
+      "source": {
+        "line": 206
+      }
+    },
+    {
+      "keys": [
+        "KeyZ",
+        "KeyJ"
+      ],
+      "text": "ぼ",
+      "display": "ぼ",
+      "kind": "combo",
+      "source": {
+        "line": 212
+      }
+    },
+    {
+      "keys": [
+        "KeyX",
+        "KeyJ"
+      ],
+      "text": "び",
+      "display": "び",
+      "kind": "combo",
+      "source": {
+        "line": 218
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyJ"
+      ],
+      "text": "ば",
+      "display": "ば",
+      "kind": "combo",
+      "source": {
+        "line": 224
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyJ"
+      ],
+      "text": "ご",
+      "display": "ご",
+      "kind": "combo",
+      "source": {
+        "line": 230
+      }
+    },
+    {
+      "keys": [
+        "KeyB",
+        "KeyJ"
+      ],
+      "text": "ぞ",
+      "display": "ぞ",
+      "kind": "combo",
+      "source": {
+        "line": 236
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyP"
+      ],
+      "text": "ぺ",
+      "display": "ぺ",
+      "kind": "combo",
+      "source": {
+        "line": 245
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon"
+      ],
+      "text": "ぷ",
+      "display": "ぷ",
+      "kind": "combo",
+      "source": {
+        "line": 246
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyV"
+      ],
+      "text": "ぺ",
+      "display": "ぺ",
+      "kind": "combo",
+      "source": {
+        "line": 254
+      }
+    },
+    {
+      "keys": [
+        "Semicolon",
+        "KeyV"
+      ],
+      "text": "ぷ",
+      "display": "ぷ",
+      "kind": "combo",
+      "source": {
+        "line": 260
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyZ"
+      ],
+      "text": "ぽ",
+      "display": "ぽ",
+      "kind": "combo",
+      "source": {
+        "line": 268
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyX"
+      ],
+      "text": "ぴ",
+      "display": "ぴ",
+      "kind": "combo",
+      "source": {
+        "line": 268
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyC"
+      ],
+      "text": "ぱ",
+      "display": "ぱ",
+      "kind": "combo",
+      "source": {
+        "line": 268
+      }
+    },
+    {
+      "keys": [
+        "KeyZ",
+        "KeyM"
+      ],
+      "text": "ぽ",
+      "display": "ぽ",
+      "kind": "combo",
+      "source": {
+        "line": 275
+      }
+    },
+    {
+      "keys": [
+        "KeyX",
+        "KeyM"
+      ],
+      "text": "ぴ",
+      "display": "ぴ",
+      "kind": "combo",
+      "source": {
+        "line": 281
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyM"
+      ],
+      "text": "ぱ",
+      "display": "ぱ",
+      "kind": "combo",
+      "source": {
+        "line": 287
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyI"
+      ],
+      "text": "ょ",
+      "display": "ょ",
+      "kind": "combo",
+      "source": {
+        "line": 294
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyO"
+      ],
+      "text": "ぇ",
+      "display": "ぇ",
+      "kind": "combo",
+      "source": {
+        "line": 294
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyP"
+      ],
+      "text": "ゅ",
+      "display": "ゅ",
+      "kind": "combo",
+      "source": {
+        "line": 294
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyS"
+      ],
+      "text": "ヶ",
+      "display": "ヶ",
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyF"
+      ],
+      "text": "ヵ",
+      "display": "ヵ",
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyH"
+      ],
+      "text": "ゃ",
+      "display": "ゃ",
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyJ"
+      ],
+      "text": "ぁ",
+      "display": "ぁ",
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyK"
+      ],
+      "text": "ぃ",
+      "display": "ぃ",
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyL"
+      ],
+      "text": "ぅ",
+      "display": "ぅ",
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyN"
+      ],
+      "text": "ぉ",
+      "display": "ぉ",
+      "kind": "combo",
+      "source": {
+        "line": 296
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "Period"
+      ],
+      "text": "ゎ",
+      "display": "ゎ",
+      "kind": "combo",
+      "source": {
+        "line": 296
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyQ"
+      ],
+      "text": "ぁ",
+      "display": "ぁ",
+      "kind": "combo",
+      "source": {
+        "line": 302
+      }
+    },
+    {
+      "keys": [
+        "KeyK",
+        "KeyQ"
+      ],
+      "text": "ぃ",
+      "display": "ぃ",
+      "kind": "combo",
+      "source": {
+        "line": 308
+      }
+    },
+    {
+      "keys": [
+        "KeyL",
+        "KeyQ"
+      ],
+      "text": "ぅ",
+      "display": "ぅ",
+      "kind": "combo",
+      "source": {
+        "line": 314
+      }
+    },
+    {
+      "keys": [
+        "KeyO",
+        "KeyQ"
+      ],
+      "text": "ぇ",
+      "display": "ぇ",
+      "kind": "combo",
+      "source": {
+        "line": 320
+      }
+    },
+    {
+      "keys": [
+        "KeyN",
+        "KeyQ"
+      ],
+      "text": "ぉ",
+      "display": "ぉ",
+      "kind": "combo",
+      "source": {
+        "line": 326
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyQ"
+      ],
+      "text": "ゃ",
+      "display": "ゃ",
+      "kind": "combo",
+      "source": {
+        "line": 332
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyQ"
+      ],
+      "text": "ゅ",
+      "display": "ゅ",
+      "kind": "combo",
+      "source": {
+        "line": 338
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyQ"
+      ],
+      "text": "ょ",
+      "display": "ょ",
+      "kind": "combo",
+      "source": {
+        "line": 344
+      }
+    },
+    {
+      "keys": [
+        "Period",
+        "KeyQ"
+      ],
+      "text": "ゎ",
+      "display": "ゎ",
+      "kind": "combo",
+      "source": {
+        "line": 350
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyW"
+      ],
+      "text": "きゃ",
+      "display": "きゃ",
+      "kind": "combo",
+      "source": {
+        "line": 362
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyE"
+      ],
+      "text": "りゃ",
+      "display": "りゃ",
+      "kind": "combo",
+      "source": {
+        "line": 362
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyR"
+      ],
+      "text": "しゃ",
+      "display": "しゃ",
+      "kind": "combo",
+      "source": {
+        "line": 362
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyS"
+      ],
+      "text": "みゃ",
+      "display": "みゃ",
+      "kind": "combo",
+      "source": {
+        "line": 363
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyD"
+      ],
+      "text": "にゃ",
+      "display": "にゃ",
+      "kind": "combo",
+      "source": {
+        "line": 363
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyG"
+      ],
+      "text": "ちゃ",
+      "display": "ちゃ",
+      "kind": "combo",
+      "source": {
+        "line": 363
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyX"
+      ],
+      "text": "ひゃ",
+      "display": "ひゃ",
+      "kind": "combo",
+      "source": {
+        "line": 364
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyW"
+      ],
+      "text": "きゅ",
+      "display": "きゅ",
+      "kind": "combo",
+      "source": {
+        "line": 368
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyE"
+      ],
+      "text": "りゅ",
+      "display": "りゅ",
+      "kind": "combo",
+      "source": {
+        "line": 368
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyR"
+      ],
+      "text": "しゅ",
+      "display": "しゅ",
+      "kind": "combo",
+      "source": {
+        "line": 368
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyS"
+      ],
+      "text": "みゅ",
+      "display": "みゅ",
+      "kind": "combo",
+      "source": {
+        "line": 369
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyD"
+      ],
+      "text": "にゅ",
+      "display": "にゅ",
+      "kind": "combo",
+      "source": {
+        "line": 369
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyG"
+      ],
+      "text": "ちゅ",
+      "display": "ちゅ",
+      "kind": "combo",
+      "source": {
+        "line": 369
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyX"
+      ],
+      "text": "ひゅ",
+      "display": "ひゅ",
+      "kind": "combo",
+      "source": {
+        "line": 370
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyW"
+      ],
+      "text": "きょ",
+      "display": "きょ",
+      "kind": "combo",
+      "source": {
+        "line": 374
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyE"
+      ],
+      "text": "りょ",
+      "display": "りょ",
+      "kind": "combo",
+      "source": {
+        "line": 374
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyR"
+      ],
+      "text": "しょ",
+      "display": "しょ",
+      "kind": "combo",
+      "source": {
+        "line": 374
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyS"
+      ],
+      "text": "みょ",
+      "display": "みょ",
+      "kind": "combo",
+      "source": {
+        "line": 375
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyD"
+      ],
+      "text": "にょ",
+      "display": "にょ",
+      "kind": "combo",
+      "source": {
+        "line": 375
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyG"
+      ],
+      "text": "ちょ",
+      "display": "ちょ",
+      "kind": "combo",
+      "source": {
+        "line": 375
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyX"
+      ],
+      "text": "ひょ",
+      "display": "ひょ",
+      "kind": "combo",
+      "source": {
+        "line": 376
+      }
+    },
+    {
+      "keys": [
+        "KeyW",
+        "KeyI"
+      ],
+      "text": "きょ",
+      "display": "きょ",
+      "kind": "combo",
+      "source": {
+        "line": 381
+      }
+    },
+    {
+      "keys": [
+        "KeyW",
+        "KeyP"
+      ],
+      "text": "きゅ",
+      "display": "きゅ",
+      "kind": "combo",
+      "source": {
+        "line": 381
+      }
+    },
+    {
+      "keys": [
+        "KeyW",
+        "KeyH"
+      ],
+      "text": "きゃ",
+      "display": "きゃ",
+      "kind": "combo",
+      "source": {
+        "line": 382
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyI"
+      ],
+      "text": "りょ",
+      "display": "りょ",
+      "kind": "combo",
+      "source": {
+        "line": 387
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyP"
+      ],
+      "text": "りゅ",
+      "display": "りゅ",
+      "kind": "combo",
+      "source": {
+        "line": 387
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyH"
+      ],
+      "text": "りゃ",
+      "display": "りゃ",
+      "kind": "combo",
+      "source": {
+        "line": 388
+      }
+    },
+    {
+      "keys": [
+        "KeyR",
+        "KeyI"
+      ],
+      "text": "しょ",
+      "display": "しょ",
+      "kind": "combo",
+      "source": {
+        "line": 393
+      }
+    },
+    {
+      "keys": [
+        "KeyR",
+        "KeyP"
+      ],
+      "text": "しゅ",
+      "display": "しゅ",
+      "kind": "combo",
+      "source": {
+        "line": 393
+      }
+    },
+    {
+      "keys": [
+        "KeyR",
+        "KeyH"
+      ],
+      "text": "しゃ",
+      "display": "しゃ",
+      "kind": "combo",
+      "source": {
+        "line": 394
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyI"
+      ],
+      "text": "にょ",
+      "display": "にょ",
+      "kind": "combo",
+      "source": {
+        "line": 399
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyP"
+      ],
+      "text": "にゅ",
+      "display": "にゅ",
+      "kind": "combo",
+      "source": {
+        "line": 399
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyH"
+      ],
+      "text": "にゃ",
+      "display": "にゃ",
+      "kind": "combo",
+      "source": {
+        "line": 400
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "KeyI"
+      ],
+      "text": "ちょ",
+      "display": "ちょ",
+      "kind": "combo",
+      "source": {
+        "line": 405
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "KeyP"
+      ],
+      "text": "ちゅ",
+      "display": "ちゅ",
+      "kind": "combo",
+      "source": {
+        "line": 405
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "KeyH"
+      ],
+      "text": "ちゃ",
+      "display": "ちゃ",
+      "kind": "combo",
+      "source": {
+        "line": 406
+      }
+    },
+    {
+      "keys": [
+        "KeyX",
+        "KeyI"
+      ],
+      "text": "ひょ",
+      "display": "ひょ",
+      "kind": "combo",
+      "source": {
+        "line": 411
+      }
+    },
+    {
+      "keys": [
+        "KeyX",
+        "KeyP"
+      ],
+      "text": "ひゅ",
+      "display": "ひゅ",
+      "kind": "combo",
+      "source": {
+        "line": 411
+      }
+    },
+    {
+      "keys": [
+        "KeyX",
+        "KeyH"
+      ],
+      "text": "ひゃ",
+      "display": "ひゃ",
+      "kind": "combo",
+      "source": {
+        "line": 412
+      }
+    },
+    {
+      "keys": [
+        "KeyS",
+        "KeyI"
+      ],
+      "text": "みょ",
+      "display": "みょ",
+      "kind": "combo",
+      "source": {
+        "line": 417
+      }
+    },
+    {
+      "keys": [
+        "KeyS",
+        "KeyP"
+      ],
+      "text": "みゅ",
+      "display": "みゅ",
+      "kind": "combo",
+      "source": {
+        "line": 417
+      }
+    },
+    {
+      "keys": [
+        "KeyS",
+        "KeyH"
+      ],
+      "text": "みゃ",
+      "display": "みゃ",
+      "kind": "combo",
+      "source": {
+        "line": 418
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyH",
+        "KeyW"
+      ],
+      "text": "ぎゃ",
+      "display": "ぎゃ",
+      "kind": "combo",
+      "source": {
+        "line": 425
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyH",
+        "KeyR"
+      ],
+      "text": "じゃ",
+      "display": "じゃ",
+      "kind": "combo",
+      "source": {
+        "line": 425
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyH",
+        "KeyG"
+      ],
+      "text": "ぢゃ",
+      "display": "ぢゃ",
+      "kind": "combo",
+      "source": {
+        "line": 426
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyH",
+        "KeyX"
+      ],
+      "text": "びゃ",
+      "display": "びゃ",
+      "kind": "combo",
+      "source": {
+        "line": 427
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyP",
+        "KeyW"
+      ],
+      "text": "ぎゅ",
+      "display": "ぎゅ",
+      "kind": "combo",
+      "source": {
+        "line": 431
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyP",
+        "KeyR"
+      ],
+      "text": "じゅ",
+      "display": "じゅ",
+      "kind": "combo",
+      "source": {
+        "line": 431
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyP",
+        "KeyG"
+      ],
+      "text": "ぢゅ",
+      "display": "ぢゅ",
+      "kind": "combo",
+      "source": {
+        "line": 432
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyP",
+        "KeyX"
+      ],
+      "text": "びゅ",
+      "display": "びゅ",
+      "kind": "combo",
+      "source": {
+        "line": 433
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyI",
+        "KeyW"
+      ],
+      "text": "ぎょ",
+      "display": "ぎょ",
+      "kind": "combo",
+      "source": {
+        "line": 437
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyI",
+        "KeyR"
+      ],
+      "text": "じょ",
+      "display": "じょ",
+      "kind": "combo",
+      "source": {
+        "line": 437
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyI",
+        "KeyG"
+      ],
+      "text": "ぢょ",
+      "display": "ぢょ",
+      "kind": "combo",
+      "source": {
+        "line": 438
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyI",
+        "KeyX"
+      ],
+      "text": "びょ",
+      "display": "びょ",
+      "kind": "combo",
+      "source": {
+        "line": 439
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyR",
+        "KeyI"
+      ],
+      "text": "じょ",
+      "display": "じょ",
+      "kind": "combo",
+      "source": {
+        "line": 445
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyR",
+        "KeyP"
+      ],
+      "text": "じゅ",
+      "display": "じゅ",
+      "kind": "combo",
+      "source": {
+        "line": 445
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyR",
+        "KeyH"
+      ],
+      "text": "じゃ",
+      "display": "じゃ",
+      "kind": "combo",
+      "source": {
+        "line": 446
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyW",
+        "KeyI"
+      ],
+      "text": "ぎょ",
+      "display": "ぎょ",
+      "kind": "combo",
+      "source": {
+        "line": 451
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyW",
+        "KeyP"
+      ],
+      "text": "ぎゅ",
+      "display": "ぎゅ",
+      "kind": "combo",
+      "source": {
+        "line": 451
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyW",
+        "KeyH"
+      ],
+      "text": "ぎゃ",
+      "display": "ぎゃ",
+      "kind": "combo",
+      "source": {
+        "line": 452
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyG",
+        "KeyI"
+      ],
+      "text": "ぢょ",
+      "display": "ぢょ",
+      "kind": "combo",
+      "source": {
+        "line": 457
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyG",
+        "KeyP"
+      ],
+      "text": "ぢゅ",
+      "display": "ぢゅ",
+      "kind": "combo",
+      "source": {
+        "line": 457
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyG",
+        "KeyH"
+      ],
+      "text": "ぢゃ",
+      "display": "ぢゃ",
+      "kind": "combo",
+      "source": {
+        "line": 458
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyX",
+        "KeyI"
+      ],
+      "text": "びょ",
+      "display": "びょ",
+      "kind": "combo",
+      "source": {
+        "line": 463
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyX",
+        "KeyP"
+      ],
+      "text": "びゅ",
+      "display": "びゅ",
+      "kind": "combo",
+      "source": {
+        "line": 463
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyX",
+        "KeyH"
+      ],
+      "text": "びゃ",
+      "display": "びゃ",
+      "kind": "combo",
+      "source": {
+        "line": 464
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyX",
+        "KeyI"
+      ],
+      "text": "ぴょ",
+      "display": "ぴょ",
+      "kind": "combo",
+      "source": {
+        "line": 472
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyX",
+        "KeyP"
+      ],
+      "text": "ぴゅ",
+      "display": "ぴゅ",
+      "kind": "combo",
+      "source": {
+        "line": 472
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyX",
+        "KeyH"
+      ],
+      "text": "ぴゃ",
+      "display": "ぴゃ",
+      "kind": "combo",
+      "source": {
+        "line": 473
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyH",
+        "KeyX"
+      ],
+      "text": "ぴゃ",
+      "display": "ぴゃ",
+      "kind": "combo",
+      "source": {
+        "line": 481
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyP",
+        "KeyX"
+      ],
+      "text": "ぴゅ",
+      "display": "ぴゅ",
+      "kind": "combo",
+      "source": {
+        "line": 487
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyI",
+        "KeyX"
+      ],
+      "text": "ぴょ",
+      "display": "ぴょ",
+      "kind": "combo",
+      "source": {
+        "line": 493
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyE",
+        "KeyP"
+      ],
+      "text": "てゅ",
+      "display": "てゅ",
+      "kind": "combo",
+      "source": {
+        "line": 507
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyE",
+        "KeyK"
+      ],
+      "text": "てぃ",
+      "display": "てぃ",
+      "kind": "combo",
+      "source": {
+        "line": 508
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyK",
+        "KeyE"
+      ],
+      "text": "てぃ",
+      "display": "てぃ",
+      "kind": "combo",
+      "source": {
+        "line": 513
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyP",
+        "KeyE"
+      ],
+      "text": "てゅ",
+      "display": "てゅ",
+      "kind": "combo",
+      "source": {
+        "line": 519
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyE",
+        "KeyP"
+      ],
+      "text": "でゅ",
+      "display": "でゅ",
+      "kind": "combo",
+      "source": {
+        "line": 525
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyE",
+        "KeyK"
+      ],
+      "text": "でぃ",
+      "display": "でぃ",
+      "kind": "combo",
+      "source": {
+        "line": 526
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyE"
+      ],
+      "text": "でぃ",
+      "display": "でぃ",
+      "kind": "combo",
+      "source": {
+        "line": 531
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyP",
+        "KeyE"
+      ],
+      "text": "でゅ",
+      "display": "でゅ",
+      "kind": "combo",
+      "source": {
+        "line": 537
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyD",
+        "KeyL"
+      ],
+      "text": "とぅ",
+      "display": "とぅ",
+      "kind": "combo",
+      "source": {
+        "line": 546
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyL",
+        "KeyD"
+      ],
+      "text": "とぅ",
+      "display": "とぅ",
+      "kind": "combo",
+      "source": {
+        "line": 552
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyD",
+        "KeyL"
+      ],
+      "text": "どぅ",
+      "display": "どぅ",
+      "kind": "combo",
+      "source": {
+        "line": 558
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyL",
+        "KeyD"
+      ],
+      "text": "どぅ",
+      "display": "どぅ",
+      "kind": "combo",
+      "source": {
+        "line": 564
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyR",
+        "KeyO"
+      ],
+      "text": "しぇ",
+      "display": "しぇ",
+      "kind": "combo",
+      "source": {
+        "line": 571
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyG",
+        "KeyO"
+      ],
+      "text": "ちぇ",
+      "display": "ちぇ",
+      "kind": "combo",
+      "source": {
+        "line": 577
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyO",
+        "KeyR"
+      ],
+      "text": "しぇ",
+      "display": "しぇ",
+      "kind": "combo",
+      "source": {
+        "line": 583
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyO",
+        "KeyG"
+      ],
+      "text": "ちぇ",
+      "display": "ちぇ",
+      "kind": "combo",
+      "source": {
+        "line": 584
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyR",
+        "KeyO"
+      ],
+      "text": "じぇ",
+      "display": "じぇ",
+      "kind": "combo",
+      "source": {
+        "line": 589
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyG",
+        "KeyO"
+      ],
+      "text": "ぢぇ",
+      "display": "ぢぇ",
+      "kind": "combo",
+      "source": {
+        "line": 595
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyO",
+        "KeyR"
+      ],
+      "text": "じぇ",
+      "display": "じぇ",
+      "kind": "combo",
+      "source": {
+        "line": 601
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyO",
+        "KeyG"
+      ],
+      "text": "ぢぇ",
+      "display": "ぢぇ",
+      "kind": "combo",
+      "source": {
+        "line": 602
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon",
+        "KeyO"
+      ],
+      "text": "ふぇ",
+      "display": "ふぇ",
+      "kind": "combo",
+      "source": {
+        "line": 610
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon",
+        "KeyP"
+      ],
+      "text": "ふゅ",
+      "display": "ふゅ",
+      "kind": "combo",
+      "source": {
+        "line": 610
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon",
+        "KeyJ"
+      ],
+      "text": "ふぁ",
+      "display": "ふぁ",
+      "kind": "combo",
+      "source": {
+        "line": 611
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon",
+        "KeyK"
+      ],
+      "text": "ふぃ",
+      "display": "ふぃ",
+      "kind": "combo",
+      "source": {
+        "line": 611
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon",
+        "KeyN"
+      ],
+      "text": "ふぉ",
+      "display": "ふぉ",
+      "kind": "combo",
+      "source": {
+        "line": 612
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyJ",
+        "Semicolon"
+      ],
+      "text": "ふぁ",
+      "display": "ふぁ",
+      "kind": "combo",
+      "source": {
+        "line": 617
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyK",
+        "Semicolon"
+      ],
+      "text": "ふぃ",
+      "display": "ふぃ",
+      "kind": "combo",
+      "source": {
+        "line": 623
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyO",
+        "Semicolon"
+      ],
+      "text": "ふぇ",
+      "display": "ふぇ",
+      "kind": "combo",
+      "source": {
+        "line": 629
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyN",
+        "Semicolon"
+      ],
+      "text": "ふぉ",
+      "display": "ふぉ",
+      "kind": "combo",
+      "source": {
+        "line": 635
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyP",
+        "Semicolon"
+      ],
+      "text": "ふゅ",
+      "display": "ふゅ",
+      "kind": "combo",
+      "source": {
+        "line": 641
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "KeyO"
+      ],
+      "text": "ヴぇ",
+      "display": "ヴぇ",
+      "kind": "combo",
+      "source": {
+        "line": 650
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "KeyP"
+      ],
+      "text": "ヴゅ",
+      "display": "ヴゅ",
+      "kind": "combo",
+      "source": {
+        "line": 650
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "KeyJ"
+      ],
+      "text": "ヴぁ",
+      "display": "ヴぁ",
+      "kind": "combo",
+      "source": {
+        "line": 651
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "KeyK"
+      ],
+      "text": "ヴぃ",
+      "display": "ヴぃ",
+      "kind": "combo",
+      "source": {
+        "line": 651
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "Semicolon"
+      ],
+      "text": "ヴ",
+      "display": "ヴ",
+      "kind": "combo",
+      "source": {
+        "line": 651
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "KeyN"
+      ],
+      "text": "ヴぉ",
+      "display": "ヴぉ",
+      "kind": "combo",
+      "source": {
+        "line": 652
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyJ",
+        "KeyL"
+      ],
+      "text": "ヴぁ",
+      "display": "ヴぁ",
+      "kind": "combo",
+      "source": {
+        "line": 657
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyK",
+        "KeyL"
+      ],
+      "text": "ヴぃ",
+      "display": "ヴぃ",
+      "kind": "combo",
+      "source": {
+        "line": 663
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "Semicolon",
+        "KeyL"
+      ],
+      "text": "ヴ",
+      "display": "ヴ",
+      "kind": "combo",
+      "source": {
+        "line": 669
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyO",
+        "KeyL"
+      ],
+      "text": "ヴぇ",
+      "display": "ヴぇ",
+      "kind": "combo",
+      "source": {
+        "line": 675
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyN",
+        "KeyL"
+      ],
+      "text": "ヴぉ",
+      "display": "ヴぉ",
+      "kind": "combo",
+      "source": {
+        "line": 681
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyP",
+        "KeyL"
+      ],
+      "text": "ヴゅ",
+      "display": "ヴゅ",
+      "kind": "combo",
+      "source": {
+        "line": 687
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyL",
+        "KeyO"
+      ],
+      "text": "うぇ",
+      "display": "うぇ",
+      "kind": "combo",
+      "source": {
+        "line": 693
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyL",
+        "KeyK"
+      ],
+      "text": "うぃ",
+      "display": "うぃ",
+      "kind": "combo",
+      "source": {
+        "line": 694
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyL",
+        "KeyN"
+      ],
+      "text": "うぉ",
+      "display": "うぉ",
+      "kind": "combo",
+      "source": {
+        "line": 695
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyK",
+        "KeyO"
+      ],
+      "text": "いぇ",
+      "display": "いぇ",
+      "kind": "combo",
+      "source": {
+        "line": 699
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyK",
+        "KeyL"
+      ],
+      "text": "うぃ",
+      "display": "うぃ",
+      "kind": "combo",
+      "source": {
+        "line": 700
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyO",
+        "KeyK"
+      ],
+      "text": "いぇ",
+      "display": "いぇ",
+      "kind": "combo",
+      "source": {
+        "line": 706
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyO",
+        "KeyL"
+      ],
+      "text": "うぇ",
+      "display": "うぇ",
+      "kind": "combo",
+      "source": {
+        "line": 706
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyN",
+        "KeyL"
+      ],
+      "text": "うぉ",
+      "display": "うぉ",
+      "kind": "combo",
+      "source": {
+        "line": 712
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyL",
+        "KeyJ"
+      ],
+      "text": "つぁ",
+      "display": "つぁ",
+      "kind": "combo",
+      "source": {
+        "line": 719
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyJ",
+        "KeyL"
+      ],
+      "text": "つぁ",
+      "display": "つぁ",
+      "kind": "combo",
+      "source": {
+        "line": 725
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyH",
+        "KeyO"
+      ],
+      "text": "くぇ",
+      "display": "くぇ",
+      "kind": "combo",
+      "source": {
+        "line": 732
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyH",
+        "KeyJ"
+      ],
+      "text": "くぁ",
+      "display": "くぁ",
+      "kind": "combo",
+      "source": {
+        "line": 733
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyH",
+        "KeyK"
+      ],
+      "text": "くぃ",
+      "display": "くぃ",
+      "kind": "combo",
+      "source": {
+        "line": 733
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyH",
+        "KeyN"
+      ],
+      "text": "くぉ",
+      "display": "くぉ",
+      "kind": "combo",
+      "source": {
+        "line": 734
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyH",
+        "Period"
+      ],
+      "text": "くゎ",
+      "display": "くゎ",
+      "kind": "combo",
+      "source": {
+        "line": 734
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyJ",
+        "KeyH"
+      ],
+      "text": "くぁ",
+      "display": "くぁ",
+      "kind": "combo",
+      "source": {
+        "line": 739
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyK",
+        "KeyH"
+      ],
+      "text": "くぃ",
+      "display": "くぃ",
+      "kind": "combo",
+      "source": {
+        "line": 745
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyO",
+        "KeyH"
+      ],
+      "text": "くぇ",
+      "display": "くぇ",
+      "kind": "combo",
+      "source": {
+        "line": 751
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyN",
+        "KeyH"
+      ],
+      "text": "くぉ",
+      "display": "くぉ",
+      "kind": "combo",
+      "source": {
+        "line": 757
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Period",
+        "KeyH"
+      ],
+      "text": "くゎ",
+      "display": "くゎ",
+      "kind": "combo",
+      "source": {
+        "line": 763
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH",
+        "KeyO"
+      ],
+      "text": "ぐぇ",
+      "display": "ぐぇ",
+      "kind": "combo",
+      "source": {
+        "line": 770
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH",
+        "KeyJ"
+      ],
+      "text": "ぐぁ",
+      "display": "ぐぁ",
+      "kind": "combo",
+      "source": {
+        "line": 771
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH",
+        "KeyK"
+      ],
+      "text": "ぐぃ",
+      "display": "ぐぃ",
+      "kind": "combo",
+      "source": {
+        "line": 771
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH",
+        "KeyN"
+      ],
+      "text": "ぐぉ",
+      "display": "ぐぉ",
+      "kind": "combo",
+      "source": {
+        "line": 772
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH",
+        "Period"
+      ],
+      "text": "ぐゎ",
+      "display": "ぐゎ",
+      "kind": "combo",
+      "source": {
+        "line": 772
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyJ",
+        "KeyH"
+      ],
+      "text": "ぐぁ",
+      "display": "ぐぁ",
+      "kind": "combo",
+      "source": {
+        "line": 777
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyK",
+        "KeyH"
+      ],
+      "text": "ぐぃ",
+      "display": "ぐぃ",
+      "kind": "combo",
+      "source": {
+        "line": 783
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyO",
+        "KeyH"
+      ],
+      "text": "ぐぇ",
+      "display": "ぐぇ",
+      "kind": "combo",
+      "source": {
+        "line": 789
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyN",
+        "KeyH"
+      ],
+      "text": "ぐぉ",
+      "display": "ぐぉ",
+      "kind": "combo",
+      "source": {
+        "line": 795
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "Period",
+        "KeyH"
+      ],
+      "text": "ぐゎ",
+      "display": "ぐゎ",
+      "kind": "combo",
+      "source": {
+        "line": 801
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "Space",
+        "KeyH",
+        "KeyJ"
+      ],
+      "text": "",
+      "action": "vkF2",
+      "display": "vkF2",
+      "kind": "combo",
+      "source": {
+        "line": 819
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "Space",
+        "KeyG",
+        "KeyF"
+      ],
+      "text": "",
+      "action": "vk1D",
+      "display": "vk1D",
+      "kind": "combo",
+      "source": {
+        "line": 825
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Space",
+        "KeyV",
+        "KeyM"
+      ],
+      "text": "",
+      "action": "enter",
+      "display": "Enter",
+      "kind": "combo",
+      "source": {
+        "line": 834
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyY"
+      ],
+      "text": "",
+      "action": "home",
+      "display": "Home",
+      "kind": "combo",
+      "source": {
+        "line": 848
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyU"
+      ],
+      "text": "EndBS",
+      "display": "EndBS",
+      "kind": "combo",
+      "source": {
+        "line": 848
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyI"
+      ],
+      "text": "",
+      "action": "vk1Csc079",
+      "display": "vk1Csc079",
+      "kind": "combo",
+      "source": {
+        "line": 848
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyO"
+      ],
+      "text": "",
+      "action": "delete",
+      "display": "Del",
+      "kind": "combo",
+      "source": {
+        "line": 848
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyP"
+      ],
+      "text": "Esc3",
+      "display": "Esc3",
+      "kind": "combo",
+      "source": {
+        "line": 848
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyH"
+      ],
+      "text": "EnterEnd",
+      "display": "EnterEnd",
+      "kind": "combo",
+      "source": {
+        "line": 849
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyJ"
+      ],
+      "text": "",
+      "action": "arrowUp",
+      "display": "↑",
+      "kind": "combo",
+      "source": {
+        "line": 849
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyK"
+      ],
+      "text": "",
+      "action": "arrowUp",
+      "display": "↑",
+      "kind": "combo",
+      "source": {
+        "line": 849
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyL"
+      ],
+      "text": "↑7",
+      "display": "↑7",
+      "kind": "combo",
+      "source": {
+        "line": 849
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "Semicolon"
+      ],
+      "text": "^i",
+      "display": "^i",
+      "kind": "combo",
+      "source": {
+        "line": 849
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyN"
+      ],
+      "text": "",
+      "action": "end",
+      "display": "End",
+      "kind": "combo",
+      "source": {
+        "line": 850
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyM"
+      ],
+      "text": "",
+      "action": "arrowDown",
+      "display": "↓",
+      "kind": "combo",
+      "source": {
+        "line": 850
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "Comma"
+      ],
+      "text": "",
+      "action": "arrowDown",
+      "display": "↓",
+      "kind": "combo",
+      "source": {
+        "line": 850
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "Period"
+      ],
+      "text": "↓7",
+      "display": "↓7",
+      "kind": "combo",
+      "source": {
+        "line": 850
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "Slash"
+      ],
+      "text": "^u",
+      "display": "^u",
+      "kind": "combo",
+      "source": {
+        "line": 850
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyQ"
+      ],
+      "text": "^End",
+      "display": "^End",
+      "kind": "combo",
+      "source": {
+        "line": 856
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyW"
+      ],
+      "text": "／改行",
+      "display": "／改行",
+      "kind": "combo",
+      "source": {
+        "line": 856
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyE"
+      ],
+      "text": "/*ディ*/",
+      "display": "/*ディ*/",
+      "kind": "combo",
+      "source": {
+        "line": 856
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyR"
+      ],
+      "text": "^s",
+      "display": "^s",
+      "kind": "combo",
+      "source": {
+        "line": 856
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyT"
+      ],
+      "text": "・",
+      "display": "・",
+      "kind": "combo",
+      "source": {
+        "line": 856
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyA"
+      ],
+      "text": "……改行",
+      "display": "……改行",
+      "kind": "combo",
+      "source": {
+        "line": 857
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyS"
+      ],
+      "text": "『改行",
+      "display": "『改行",
+      "kind": "combo",
+      "source": {
+        "line": 857
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyD"
+      ],
+      "text": "？改行",
+      "display": "？改行",
+      "kind": "combo",
+      "source": {
+        "line": 857
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyF"
+      ],
+      "text": "「改行",
+      "display": "「改行",
+      "kind": "combo",
+      "source": {
+        "line": 857
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyG"
+      ],
+      "text": "(改行",
+      "display": "(改行",
+      "kind": "combo",
+      "source": {
+        "line": 857
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyZ"
+      ],
+      "text": "――改行",
+      "display": "――改行",
+      "kind": "combo",
+      "source": {
+        "line": 858
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyX"
+      ],
+      "text": "』改行",
+      "display": "』改行",
+      "kind": "combo",
+      "source": {
+        "line": 858
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyC"
+      ],
+      "text": "！改行",
+      "display": "！改行",
+      "kind": "combo",
+      "source": {
+        "line": 858
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyV"
+      ],
+      "text": "」改行",
+      "display": "」改行",
+      "kind": "combo",
+      "source": {
+        "line": 858
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyB"
+      ],
+      "text": ")改行",
+      "display": ")改行",
+      "kind": "combo",
+      "source": {
+        "line": 858
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyY"
+      ],
+      "text": "",
+      "action": "home",
+      "display": "Home",
+      "kind": "combo",
+      "source": {
+        "line": 866
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyU"
+      ],
+      "text": "^x",
+      "display": "^x",
+      "kind": "combo",
+      "source": {
+        "line": 866
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyI"
+      ],
+      "text": "",
+      "action": "vk1Csc079",
+      "display": "vk1Csc079",
+      "kind": "combo",
+      "source": {
+        "line": 866
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyO"
+      ],
+      "text": "^v",
+      "display": "^v",
+      "kind": "combo",
+      "source": {
+        "line": 866
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyP"
+      ],
+      "text": "^z",
+      "display": "^z",
+      "kind": "combo",
+      "source": {
+        "line": 866
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyH"
+      ],
+      "text": "^c",
+      "display": "^c",
+      "kind": "combo",
+      "source": {
+        "line": 867
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyJ"
+      ],
+      "text": "",
+      "action": "arrowLeft",
+      "display": "←",
+      "kind": "combo",
+      "source": {
+        "line": 867
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyK"
+      ],
+      "text": "",
+      "action": "arrowRight",
+      "display": "→",
+      "kind": "combo",
+      "source": {
+        "line": 867
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyL"
+      ],
+      "text": "←7",
+      "display": "←7",
+      "kind": "combo",
+      "source": {
+        "line": 867
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "Semicolon"
+      ],
+      "text": "→7",
+      "display": "→7",
+      "kind": "combo",
+      "source": {
+        "line": 867
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyN"
+      ],
+      "text": "",
+      "action": "end",
+      "display": "End",
+      "kind": "combo",
+      "source": {
+        "line": 868
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyM"
+      ],
+      "text": "",
+      "action": "arrowLeft",
+      "display": "←",
+      "kind": "combo",
+      "source": {
+        "line": 868
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "Comma"
+      ],
+      "text": "",
+      "action": "arrowRight",
+      "display": "→",
+      "kind": "combo",
+      "source": {
+        "line": 868
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "Period"
+      ],
+      "text": "End+Home",
+      "display": "End+Home",
+      "kind": "combo",
+      "source": {
+        "line": 868
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "Slash"
+      ],
+      "text": "^y",
+      "display": "^y",
+      "kind": "combo",
+      "source": {
+        "line": 868
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyQ"
+      ],
+      "text": "｜改行",
+      "display": "｜改行",
+      "kind": "combo",
+      "source": {
+        "line": 873
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyW"
+      ],
+      "text": "×××改行2",
+      "display": "×××改行2",
+      "kind": "combo",
+      "source": {
+        "line": 873
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyE"
+      ],
+      "text": "Home→EndDel2←",
+      "display": "Home→EndDel2←",
+      "kind": "combo",
+      "source": {
+        "line": 873
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyR"
+      ],
+      "text": "Home改行Space1←",
+      "display": "Home改行Space1←",
+      "kind": "combo",
+      "source": {
+        "line": 873
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyT"
+      ],
+      "text": "○改行",
+      "display": "○改行",
+      "kind": "combo",
+      "source": {
+        "line": 873
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyA"
+      ],
+      "text": "《改行",
+      "display": "《改行",
+      "kind": "combo",
+      "source": {
+        "line": 874
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyS"
+      ],
+      "text": "【改行",
+      "display": "【改行",
+      "kind": "combo",
+      "source": {
+        "line": 874
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyD"
+      ],
+      "text": "Home→EndDel4←",
+      "display": "Home→EndDel4←",
+      "kind": "combo",
+      "source": {
+        "line": 874
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyF"
+      ],
+      "text": "Home改行Space3←",
+      "display": "Home改行Space3←",
+      "kind": "combo",
+      "source": {
+        "line": 874
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyG"
+      ],
+      "text": "Space3",
+      "display": "Space3",
+      "kind": "combo",
+      "source": {
+        "line": 874
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyZ"
+      ],
+      "text": "》改行",
+      "display": "》改行",
+      "kind": "combo",
+      "source": {
+        "line": 875
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyX"
+      ],
+      "text": "】改行",
+      "display": "】改行",
+      "kind": "combo",
+      "source": {
+        "line": 875
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyC"
+      ],
+      "text": "」改行改行",
+      "display": "」改行改行",
+      "kind": "combo",
+      "source": {
+        "line": 875
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyV"
+      ],
+      "text": "」改行改行「改行",
+      "display": "」改行改行「改行",
+      "kind": "combo",
+      "source": {
+        "line": 875
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyB"
+      ],
+      "text": "」改行改行Space",
+      "display": "」改行改行Space",
+      "kind": "combo",
+      "source": {
+        "line": 875
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyW"
+      ],
+      "text": "狂天寺",
+      "display": "狂天寺",
+      "kind": "combo",
+      "source": {
+        "line": 885
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyR"
+      ],
+      "text": "詩織",
+      "display": "詩織",
+      "kind": "combo",
+      "source": {
+        "line": 885
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyA"
+      ],
+      "text": "水村",
+      "display": "水村",
+      "kind": "combo",
+      "source": {
+        "line": 886
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyS"
+      ],
+      "text": "弥勒",
+      "display": "弥勒",
+      "kind": "combo",
+      "source": {
+        "line": 886
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyD"
+      ],
+      "text": "トシ",
+      "display": "トシ",
+      "kind": "combo",
+      "source": {
+        "line": 886
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyF"
+      ],
+      "text": "上條",
+      "display": "上條",
+      "kind": "combo",
+      "source": {
+        "line": 886
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyX"
+      ],
+      "text": "ヒロシ",
+      "display": "ヒロシ",
+      "kind": "combo",
+      "source": {
+        "line": 887
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyR",
+        "KeyP"
+      ],
+      "text": "ユカ",
+      "display": "ユカ",
+      "kind": "combo",
+      "source": {
+        "line": 893
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyR",
+        "KeyJ"
+      ],
+      "text": "悪魔",
+      "display": "悪魔",
+      "kind": "combo",
+      "source": {
+        "line": 894
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyR",
+        "KeyN"
+      ],
+      "text": "田中",
+      "display": "田中",
+      "kind": "combo",
+      "source": {
+        "line": 895
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyJ"
+      ],
+      "text": "",
+      "action": "imeOn",
+      "display": "IME ON",
+      "kind": "control",
+      "source": {
+        "section": "IME ON/OFF"
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "KeyF"
+      ],
+      "text": "",
+      "action": "imeOff",
+      "display": "IME OFF",
+      "kind": "control",
+      "source": {
+        "section": "IME ON/OFF"
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyM"
+      ],
+      "text": "",
+      "action": "enter",
+      "display": "Enter",
+      "kind": "control",
+      "source": {
+        "section": "Enter"
+      }
+    }
+  ],
+  "entries": [
+    {
+      "keys": [
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "き",
+        "display": "き"
+      },
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "て",
+        "display": "て"
+      },
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "し",
+        "display": "し"
+      },
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyT"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowLeft",
+        "display": "←"
+      },
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyY"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowRight",
+        "display": "→"
+      },
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyU"
+      ],
+      "output": {
+        "type": "action",
+        "value": "backspace",
+        "display": "BS"
+      },
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "る",
+        "display": "る"
+      },
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "す",
+        "display": "す"
+      },
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "へ",
+        "display": "へ"
+      },
+      "kind": "single",
+      "source": {
+        "line": 76
+      }
+    },
+    {
+      "keys": [
+        "KeyA"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ろ",
+        "display": "ろ"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "KeyS"
+      ],
+      "output": {
+        "type": "text",
+        "value": "け",
+        "display": "け"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "と",
+        "display": "と"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "か",
+        "display": "か"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "っ",
+        "display": "っ"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "く",
+        "display": "く"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "あ",
+        "display": "あ"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "い",
+        "display": "い"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "う",
+        "display": "う"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ー",
+        "display": "ー"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "Quote"
+      ],
+      "output": {
+        "type": "text",
+        "value": ":",
+        "display": ":"
+      },
+      "kind": "single",
+      "source": {
+        "line": 77
+      }
+    },
+    {
+      "keys": [
+        "KeyZ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ほ",
+        "display": "ほ"
+      },
+      "kind": "single",
+      "source": {
+        "line": 78
+      }
+    },
+    {
+      "keys": [
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ひ",
+        "display": "ひ"
+      },
+      "kind": "single",
+      "source": {
+        "line": 78
+      }
+    },
+    {
+      "keys": [
+        "KeyC"
+      ],
+      "output": {
+        "type": "text",
+        "value": "は",
+        "display": "は"
+      },
+      "kind": "single",
+      "source": {
+        "line": 78
+      }
+    },
+    {
+      "keys": [
+        "KeyV"
+      ],
+      "output": {
+        "type": "text",
+        "value": "こ",
+        "display": "こ"
+      },
+      "kind": "single",
+      "source": {
+        "line": 78
+      }
+    },
+    {
+      "keys": [
+        "KeyB"
+      ],
+      "output": {
+        "type": "text",
+        "value": "そ",
+        "display": "そ"
+      },
+      "kind": "single",
+      "source": {
+        "line": 78
+      }
+    },
+    {
+      "keys": [
+        "KeyN"
+      ],
+      "output": {
+        "type": "text",
+        "value": "た",
+        "display": "た"
+      },
+      "kind": "single",
+      "source": {
+        "line": 78
+      }
+    },
+    {
+      "keys": [
+        "KeyM"
+      ],
+      "output": {
+        "type": "text",
+        "value": "な",
+        "display": "な"
+      },
+      "kind": "single",
+      "source": {
+        "line": 78
+      }
+    },
+    {
+      "keys": [
+        "Comma"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ん",
+        "display": "ん"
+      },
+      "kind": "single",
+      "source": {
+        "line": 78
+      }
+    },
+    {
+      "keys": [
+        "Period"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ら",
+        "display": "ら"
+      },
+      "kind": "single",
+      "source": {
+        "line": 78
+      }
+    },
+    {
+      "keys": [
+        "Slash"
+      ],
+      "output": {
+        "type": "text",
+        "value": "れ",
+        "display": "れ"
+      },
+      "kind": "single",
+      "source": {
+        "line": 78
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ね",
+        "display": "ね"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "り",
+        "display": "り"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "め",
+        "display": "め"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyT"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowLeft",
+        "display": "←"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyY"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowRight",
+        "display": "→"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyU"
+      ],
+      "output": {
+        "type": "text",
+        "value": "さ",
+        "display": "さ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "よ",
+        "display": "よ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "え",
+        "display": "え"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ゆ",
+        "display": "ゆ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 84
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyA"
+      ],
+      "output": {
+        "type": "text",
+        "value": "せ",
+        "display": "せ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 85
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyS"
+      ],
+      "output": {
+        "type": "text",
+        "value": "み",
+        "display": "み"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 85
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "に",
+        "display": "に"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 85
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ま",
+        "display": "ま"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 85
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ち",
+        "display": "ち"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 85
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "や",
+        "display": "や"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 85
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "の",
+        "display": "の"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 85
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "も",
+        "display": "も"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 85
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "つ",
+        "display": "つ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 85
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふ",
+        "display": "ふ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 85
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyZ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ほ",
+        "display": "ほ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 86
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ひ",
+        "display": "ひ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 86
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyC"
+      ],
+      "output": {
+        "type": "text",
+        "value": "を",
+        "display": "を"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 86
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyV"
+      ],
+      "output": {
+        "type": "text",
+        "value": "、Enter",
+        "display": "、Enter"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 86
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyB"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぬ",
+        "display": "ぬ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 86
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyN"
+      ],
+      "output": {
+        "type": "text",
+        "value": "お",
+        "display": "お"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 86
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "KeyM"
+      ],
+      "output": {
+        "type": "text",
+        "value": "。Enter",
+        "display": "。Enter"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 86
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "Comma"
+      ],
+      "output": {
+        "type": "text",
+        "value": "む",
+        "display": "む"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 86
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "Period"
+      ],
+      "output": {
+        "type": "text",
+        "value": "わ",
+        "display": "わ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 86
+      }
+    },
+    {
+      "keys": [
+        "Space",
+        "Slash"
+      ],
+      "output": {
+        "type": "text",
+        "value": "れ",
+        "display": "れ"
+      },
+      "kind": "center-shift",
+      "source": {
+        "line": 86
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyU"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ざ",
+        "display": "ざ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 103
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ず",
+        "display": "ず"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 103
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "べ",
+        "display": "べ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 103
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐ",
+        "display": "ぐ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 104
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "づ",
+        "display": "づ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 104
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぶ",
+        "display": "ぶ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 104
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyN"
+      ],
+      "output": {
+        "type": "text",
+        "value": "だ",
+        "display": "だ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 105
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ざ",
+        "display": "ざ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 112
+      }
+    },
+    {
+      "keys": [
+        "KeyO",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ず",
+        "display": "ず"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 118
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "べ",
+        "display": "べ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 124
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐ",
+        "display": "ぐ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 130
+      }
+    },
+    {
+      "keys": [
+        "KeyL",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "づ",
+        "display": "づ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 136
+      }
+    },
+    {
+      "keys": [
+        "Semicolon",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぶ",
+        "display": "ぶ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 142
+      }
+    },
+    {
+      "keys": [
+        "KeyN",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "だ",
+        "display": "だ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 148
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぎ",
+        "display": "ぎ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 155
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "で",
+        "display": "で"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 155
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "じ",
+        "display": "じ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 155
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyA"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぜ",
+        "display": "ぜ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 156
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyS"
+      ],
+      "output": {
+        "type": "text",
+        "value": "げ",
+        "display": "げ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 156
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ど",
+        "display": "ど"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 156
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "が",
+        "display": "が"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 156
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぢ",
+        "display": "ぢ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 156
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyZ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぼ",
+        "display": "ぼ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 157
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "び",
+        "display": "び"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 157
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyC"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ば",
+        "display": "ば"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 157
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyV"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ご",
+        "display": "ご"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 157
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyB"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぞ",
+        "display": "ぞ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 157
+      }
+    },
+    {
+      "keys": [
+        "KeyW",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぎ",
+        "display": "ぎ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 164
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "で",
+        "display": "で"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 170
+      }
+    },
+    {
+      "keys": [
+        "KeyR",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "じ",
+        "display": "じ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 176
+      }
+    },
+    {
+      "keys": [
+        "KeyA",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぜ",
+        "display": "ぜ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 182
+      }
+    },
+    {
+      "keys": [
+        "KeyS",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "げ",
+        "display": "げ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 188
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ど",
+        "display": "ど"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 194
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "が",
+        "display": "が"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 200
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぢ",
+        "display": "ぢ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 206
+      }
+    },
+    {
+      "keys": [
+        "KeyZ",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぼ",
+        "display": "ぼ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 212
+      }
+    },
+    {
+      "keys": [
+        "KeyX",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "び",
+        "display": "び"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 218
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ば",
+        "display": "ば"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 224
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ご",
+        "display": "ご"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 230
+      }
+    },
+    {
+      "keys": [
+        "KeyB",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぞ",
+        "display": "ぞ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 236
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぺ",
+        "display": "ぺ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 245
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぷ",
+        "display": "ぷ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 246
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyV"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぺ",
+        "display": "ぺ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 254
+      }
+    },
+    {
+      "keys": [
+        "Semicolon",
+        "KeyV"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぷ",
+        "display": "ぷ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 260
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyZ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぽ",
+        "display": "ぽ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 268
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぴ",
+        "display": "ぴ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 268
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyC"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぱ",
+        "display": "ぱ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 268
+      }
+    },
+    {
+      "keys": [
+        "KeyZ",
+        "KeyM"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぽ",
+        "display": "ぽ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 275
+      }
+    },
+    {
+      "keys": [
+        "KeyX",
+        "KeyM"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぴ",
+        "display": "ぴ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 281
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyM"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぱ",
+        "display": "ぱ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 287
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ょ",
+        "display": "ょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 294
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぇ",
+        "display": "ぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 294
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ゅ",
+        "display": "ゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 294
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyS"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヶ",
+        "display": "ヶ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヵ",
+        "display": "ヵ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ゃ",
+        "display": "ゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぁ",
+        "display": "ぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぃ",
+        "display": "ぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぅ",
+        "display": "ぅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 295
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "KeyN"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぉ",
+        "display": "ぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 296
+      }
+    },
+    {
+      "keys": [
+        "KeyQ",
+        "Period"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ゎ",
+        "display": "ゎ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 296
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぁ",
+        "display": "ぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 302
+      }
+    },
+    {
+      "keys": [
+        "KeyK",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぃ",
+        "display": "ぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 308
+      }
+    },
+    {
+      "keys": [
+        "KeyL",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぅ",
+        "display": "ぅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 314
+      }
+    },
+    {
+      "keys": [
+        "KeyO",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぇ",
+        "display": "ぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 320
+      }
+    },
+    {
+      "keys": [
+        "KeyN",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぉ",
+        "display": "ぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 326
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ゃ",
+        "display": "ゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 332
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ゅ",
+        "display": "ゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 338
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ょ",
+        "display": "ょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 344
+      }
+    },
+    {
+      "keys": [
+        "Period",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ゎ",
+        "display": "ゎ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 350
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "きゃ",
+        "display": "きゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 362
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "りゃ",
+        "display": "りゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 362
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "しゃ",
+        "display": "しゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 362
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyS"
+      ],
+      "output": {
+        "type": "text",
+        "value": "みゃ",
+        "display": "みゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 363
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "にゃ",
+        "display": "にゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 363
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ちゃ",
+        "display": "ちゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 363
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ひゃ",
+        "display": "ひゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 364
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "きゅ",
+        "display": "きゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 368
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "りゅ",
+        "display": "りゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 368
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "しゅ",
+        "display": "しゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 368
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyS"
+      ],
+      "output": {
+        "type": "text",
+        "value": "みゅ",
+        "display": "みゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 369
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "にゅ",
+        "display": "にゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 369
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ちゅ",
+        "display": "ちゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 369
+      }
+    },
+    {
+      "keys": [
+        "KeyP",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ひゅ",
+        "display": "ひゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 370
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "きょ",
+        "display": "きょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 374
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "りょ",
+        "display": "りょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 374
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "しょ",
+        "display": "しょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 374
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyS"
+      ],
+      "output": {
+        "type": "text",
+        "value": "みょ",
+        "display": "みょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 375
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "にょ",
+        "display": "にょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 375
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ちょ",
+        "display": "ちょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 375
+      }
+    },
+    {
+      "keys": [
+        "KeyI",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ひょ",
+        "display": "ひょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 376
+      }
+    },
+    {
+      "keys": [
+        "KeyW",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "きょ",
+        "display": "きょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 381
+      }
+    },
+    {
+      "keys": [
+        "KeyW",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "きゅ",
+        "display": "きゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 381
+      }
+    },
+    {
+      "keys": [
+        "KeyW",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "きゃ",
+        "display": "きゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 382
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "りょ",
+        "display": "りょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 387
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "りゅ",
+        "display": "りゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 387
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "りゃ",
+        "display": "りゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 388
+      }
+    },
+    {
+      "keys": [
+        "KeyR",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "しょ",
+        "display": "しょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 393
+      }
+    },
+    {
+      "keys": [
+        "KeyR",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "しゅ",
+        "display": "しゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 393
+      }
+    },
+    {
+      "keys": [
+        "KeyR",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "しゃ",
+        "display": "しゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 394
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "にょ",
+        "display": "にょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 399
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "にゅ",
+        "display": "にゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 399
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "にゃ",
+        "display": "にゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 400
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ちょ",
+        "display": "ちょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 405
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ちゅ",
+        "display": "ちゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 405
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ちゃ",
+        "display": "ちゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 406
+      }
+    },
+    {
+      "keys": [
+        "KeyX",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ひょ",
+        "display": "ひょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 411
+      }
+    },
+    {
+      "keys": [
+        "KeyX",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ひゅ",
+        "display": "ひゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 411
+      }
+    },
+    {
+      "keys": [
+        "KeyX",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ひゃ",
+        "display": "ひゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 412
+      }
+    },
+    {
+      "keys": [
+        "KeyS",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "みょ",
+        "display": "みょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 417
+      }
+    },
+    {
+      "keys": [
+        "KeyS",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "みゅ",
+        "display": "みゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 417
+      }
+    },
+    {
+      "keys": [
+        "KeyS",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "みゃ",
+        "display": "みゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 418
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyH",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぎゃ",
+        "display": "ぎゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 425
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyH",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "じゃ",
+        "display": "じゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 425
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyH",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぢゃ",
+        "display": "ぢゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 426
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyH",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "びゃ",
+        "display": "びゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 427
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyP",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぎゅ",
+        "display": "ぎゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 431
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyP",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "じゅ",
+        "display": "じゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 431
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyP",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぢゅ",
+        "display": "ぢゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 432
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyP",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "びゅ",
+        "display": "びゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 433
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyI",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぎょ",
+        "display": "ぎょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 437
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyI",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "じょ",
+        "display": "じょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 437
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyI",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぢょ",
+        "display": "ぢょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 438
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyI",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "びょ",
+        "display": "びょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 439
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyR",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "じょ",
+        "display": "じょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 445
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyR",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "じゅ",
+        "display": "じゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 445
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyR",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "じゃ",
+        "display": "じゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 446
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyW",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぎょ",
+        "display": "ぎょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 451
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyW",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぎゅ",
+        "display": "ぎゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 451
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyW",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぎゃ",
+        "display": "ぎゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 452
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyG",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぢょ",
+        "display": "ぢょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 457
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyG",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぢゅ",
+        "display": "ぢゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 457
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyG",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぢゃ",
+        "display": "ぢゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 458
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyX",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "びょ",
+        "display": "びょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 463
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyX",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "びゅ",
+        "display": "びゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 463
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyX",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "びゃ",
+        "display": "びゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 464
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyX",
+        "KeyI"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぴょ",
+        "display": "ぴょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 472
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyX",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぴゅ",
+        "display": "ぴゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 472
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyX",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぴゃ",
+        "display": "ぴゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 473
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyH",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぴゃ",
+        "display": "ぴゃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 481
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyP",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぴゅ",
+        "display": "ぴゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 487
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyI",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぴょ",
+        "display": "ぴょ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 493
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyE",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "てゅ",
+        "display": "てゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 507
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyE",
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "てぃ",
+        "display": "てぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 508
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyK",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "てぃ",
+        "display": "てぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 513
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyP",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "てゅ",
+        "display": "てゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 519
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyE",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "でゅ",
+        "display": "でゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 525
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyE",
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "でぃ",
+        "display": "でぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 526
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "でぃ",
+        "display": "でぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 531
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyP",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "でゅ",
+        "display": "でゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 537
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyD",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "とぅ",
+        "display": "とぅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 546
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyL",
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "とぅ",
+        "display": "とぅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 552
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyD",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "どぅ",
+        "display": "どぅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 558
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyL",
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "どぅ",
+        "display": "どぅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 564
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyR",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "しぇ",
+        "display": "しぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 571
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyG",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ちぇ",
+        "display": "ちぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 577
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyO",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "しぇ",
+        "display": "しぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 583
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "KeyO",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ちぇ",
+        "display": "ちぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 584
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyR",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "じぇ",
+        "display": "じぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 589
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyG",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぢぇ",
+        "display": "ぢぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 595
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyO",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "じぇ",
+        "display": "じぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 601
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyO",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぢぇ",
+        "display": "ぢぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 602
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふぇ",
+        "display": "ふぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 610
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふゅ",
+        "display": "ふゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 610
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふぁ",
+        "display": "ふぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 611
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon",
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふぃ",
+        "display": "ふぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 611
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Semicolon",
+        "KeyN"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふぉ",
+        "display": "ふぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 612
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyJ",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふぁ",
+        "display": "ふぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 617
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyK",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふぃ",
+        "display": "ふぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 623
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyO",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふぇ",
+        "display": "ふぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 629
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyN",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふぉ",
+        "display": "ふぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 635
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyP",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ふゅ",
+        "display": "ふゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 641
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴぇ",
+        "display": "ヴぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 650
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴゅ",
+        "display": "ヴゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 650
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴぁ",
+        "display": "ヴぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 651
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴぃ",
+        "display": "ヴぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 651
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴ",
+        "display": "ヴ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 651
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyL",
+        "KeyN"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴぉ",
+        "display": "ヴぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 652
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyJ",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴぁ",
+        "display": "ヴぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 657
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyK",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴぃ",
+        "display": "ヴぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 663
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "Semicolon",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴ",
+        "display": "ヴ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 669
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyO",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴぇ",
+        "display": "ヴぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 675
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyN",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴぉ",
+        "display": "ヴぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 681
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyP",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヴゅ",
+        "display": "ヴゅ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 687
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyL",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "うぇ",
+        "display": "うぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 693
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyL",
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "うぃ",
+        "display": "うぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 694
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyL",
+        "KeyN"
+      ],
+      "output": {
+        "type": "text",
+        "value": "うぉ",
+        "display": "うぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 695
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyK",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "いぇ",
+        "display": "いぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 699
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyK",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "うぃ",
+        "display": "うぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 700
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyO",
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "いぇ",
+        "display": "いぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 706
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyO",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "うぇ",
+        "display": "うぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 706
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyN",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "うぉ",
+        "display": "うぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 712
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyL",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "つぁ",
+        "display": "つぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 719
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyJ",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "つぁ",
+        "display": "つぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 725
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyH",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "くぇ",
+        "display": "くぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 732
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyH",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "くぁ",
+        "display": "くぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 733
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyH",
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "くぃ",
+        "display": "くぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 733
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyH",
+        "KeyN"
+      ],
+      "output": {
+        "type": "text",
+        "value": "くぉ",
+        "display": "くぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 734
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyH",
+        "Period"
+      ],
+      "output": {
+        "type": "text",
+        "value": "くゎ",
+        "display": "くゎ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 734
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyJ",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "くぁ",
+        "display": "くぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 739
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyK",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "くぃ",
+        "display": "くぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 745
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyO",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "くぇ",
+        "display": "くぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 751
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyN",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "くぉ",
+        "display": "くぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 757
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Period",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "くゎ",
+        "display": "くゎ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 763
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐぇ",
+        "display": "ぐぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 770
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐぁ",
+        "display": "ぐぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 771
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH",
+        "KeyK"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐぃ",
+        "display": "ぐぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 771
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH",
+        "KeyN"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐぉ",
+        "display": "ぐぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 772
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyH",
+        "Period"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐゎ",
+        "display": "ぐゎ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 772
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyJ",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐぁ",
+        "display": "ぐぁ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 777
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyK",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐぃ",
+        "display": "ぐぃ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 783
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyO",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐぇ",
+        "display": "ぐぇ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 789
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "KeyN",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐぉ",
+        "display": "ぐぉ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 795
+      }
+    },
+    {
+      "keys": [
+        "KeyF",
+        "Period",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ぐゎ",
+        "display": "ぐゎ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 801
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "Space",
+        "KeyH",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "action",
+        "value": "vkF2",
+        "display": "vkF2"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 819
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "Space",
+        "KeyG",
+        "KeyF"
+      ],
+      "output": {
+        "type": "action",
+        "value": "vk1D",
+        "display": "vk1D"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 825
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "Space",
+        "KeyV",
+        "KeyM"
+      ],
+      "output": {
+        "type": "action",
+        "value": "enter",
+        "display": "Enter"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 834
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyY"
+      ],
+      "output": {
+        "type": "action",
+        "value": "home",
+        "display": "Home"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 848
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyU"
+      ],
+      "output": {
+        "type": "text",
+        "value": "EndBS",
+        "display": "EndBS"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 848
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyI"
+      ],
+      "output": {
+        "type": "action",
+        "value": "vk1Csc079",
+        "display": "vk1Csc079"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 848
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyO"
+      ],
+      "output": {
+        "type": "action",
+        "value": "delete",
+        "display": "Del"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 848
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "Esc3",
+        "display": "Esc3"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 848
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "EnterEnd",
+        "display": "EnterEnd"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 849
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowUp",
+        "display": "↑"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 849
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyK"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowUp",
+        "display": "↑"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 849
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "↑7",
+        "display": "↑7"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 849
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "^i",
+        "display": "^i"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 849
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyN"
+      ],
+      "output": {
+        "type": "action",
+        "value": "end",
+        "display": "End"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 850
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "KeyM"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowDown",
+        "display": "↓"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 850
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "Comma"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowDown",
+        "display": "↓"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 850
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "Period"
+      ],
+      "output": {
+        "type": "text",
+        "value": "↓7",
+        "display": "↓7"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 850
+      }
+    },
+    {
+      "keys": [
+        "KeyD",
+        "KeyF",
+        "Slash"
+      ],
+      "output": {
+        "type": "text",
+        "value": "^u",
+        "display": "^u"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 850
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "^End",
+        "display": "^End"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 856
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "／改行",
+        "display": "／改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 856
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "/*ディ*/",
+        "display": "/*ディ*/"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 856
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "^s",
+        "display": "^s"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 856
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyT"
+      ],
+      "output": {
+        "type": "text",
+        "value": "・",
+        "display": "・"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 856
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyA"
+      ],
+      "output": {
+        "type": "text",
+        "value": "……改行",
+        "display": "……改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 857
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyS"
+      ],
+      "output": {
+        "type": "text",
+        "value": "『改行",
+        "display": "『改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 857
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "？改行",
+        "display": "？改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 857
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "「改行",
+        "display": "「改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 857
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "(改行",
+        "display": "(改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 857
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyZ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "――改行",
+        "display": "――改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 858
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "』改行",
+        "display": "』改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 858
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyC"
+      ],
+      "output": {
+        "type": "text",
+        "value": "！改行",
+        "display": "！改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 858
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyV"
+      ],
+      "output": {
+        "type": "text",
+        "value": "」改行",
+        "display": "」改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 858
+      }
+    },
+    {
+      "keys": [
+        "KeyJ",
+        "KeyK",
+        "KeyB"
+      ],
+      "output": {
+        "type": "text",
+        "value": ")改行",
+        "display": ")改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 858
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyY"
+      ],
+      "output": {
+        "type": "action",
+        "value": "home",
+        "display": "Home"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 866
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyU"
+      ],
+      "output": {
+        "type": "text",
+        "value": "^x",
+        "display": "^x"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 866
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyI"
+      ],
+      "output": {
+        "type": "action",
+        "value": "vk1Csc079",
+        "display": "vk1Csc079"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 866
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyO"
+      ],
+      "output": {
+        "type": "text",
+        "value": "^v",
+        "display": "^v"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 866
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "^z",
+        "display": "^z"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 866
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyH"
+      ],
+      "output": {
+        "type": "text",
+        "value": "^c",
+        "display": "^c"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 867
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowLeft",
+        "display": "←"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 867
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyK"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowRight",
+        "display": "→"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 867
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyL"
+      ],
+      "output": {
+        "type": "text",
+        "value": "←7",
+        "display": "←7"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 867
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "Semicolon"
+      ],
+      "output": {
+        "type": "text",
+        "value": "→7",
+        "display": "→7"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 867
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyN"
+      ],
+      "output": {
+        "type": "action",
+        "value": "end",
+        "display": "End"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 868
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "KeyM"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowLeft",
+        "display": "←"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 868
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "Comma"
+      ],
+      "output": {
+        "type": "action",
+        "value": "arrowRight",
+        "display": "→"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 868
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "Period"
+      ],
+      "output": {
+        "type": "text",
+        "value": "End+Home",
+        "display": "End+Home"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 868
+      }
+    },
+    {
+      "keys": [
+        "KeyC",
+        "KeyV",
+        "Slash"
+      ],
+      "output": {
+        "type": "text",
+        "value": "^y",
+        "display": "^y"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 868
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyQ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "｜改行",
+        "display": "｜改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 873
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "×××改行2",
+        "display": "×××改行2"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 873
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyE"
+      ],
+      "output": {
+        "type": "text",
+        "value": "Home→EndDel2←",
+        "display": "Home→EndDel2←"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 873
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "Home改行Space1←",
+        "display": "Home改行Space1←"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 873
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyT"
+      ],
+      "output": {
+        "type": "text",
+        "value": "○改行",
+        "display": "○改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 873
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyA"
+      ],
+      "output": {
+        "type": "text",
+        "value": "《改行",
+        "display": "《改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 874
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyS"
+      ],
+      "output": {
+        "type": "text",
+        "value": "【改行",
+        "display": "【改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 874
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "Home→EndDel4←",
+        "display": "Home→EndDel4←"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 874
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "Home改行Space3←",
+        "display": "Home改行Space3←"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 874
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyG"
+      ],
+      "output": {
+        "type": "text",
+        "value": "Space3",
+        "display": "Space3"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 874
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyZ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "》改行",
+        "display": "》改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 875
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "】改行",
+        "display": "】改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 875
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyC"
+      ],
+      "output": {
+        "type": "text",
+        "value": "」改行改行",
+        "display": "」改行改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 875
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyV"
+      ],
+      "output": {
+        "type": "text",
+        "value": "」改行改行「改行",
+        "display": "」改行改行「改行"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 875
+      }
+    },
+    {
+      "keys": [
+        "KeyM",
+        "Comma",
+        "KeyB"
+      ],
+      "output": {
+        "type": "text",
+        "value": "」改行改行Space",
+        "display": "」改行改行Space"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 875
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyW"
+      ],
+      "output": {
+        "type": "text",
+        "value": "狂天寺",
+        "display": "狂天寺"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 885
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyR"
+      ],
+      "output": {
+        "type": "text",
+        "value": "詩織",
+        "display": "詩織"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 885
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyA"
+      ],
+      "output": {
+        "type": "text",
+        "value": "水村",
+        "display": "水村"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 886
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyS"
+      ],
+      "output": {
+        "type": "text",
+        "value": "弥勒",
+        "display": "弥勒"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 886
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyD"
+      ],
+      "output": {
+        "type": "text",
+        "value": "トシ",
+        "display": "トシ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 886
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyF"
+      ],
+      "output": {
+        "type": "text",
+        "value": "上條",
+        "display": "上條"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 886
+      }
+    },
+    {
+      "keys": [
+        "KeyU",
+        "KeyI",
+        "KeyX"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ヒロシ",
+        "display": "ヒロシ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 887
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyR",
+        "KeyP"
+      ],
+      "output": {
+        "type": "text",
+        "value": "ユカ",
+        "display": "ユカ"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 893
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyR",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "text",
+        "value": "悪魔",
+        "display": "悪魔"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 894
+      }
+    },
+    {
+      "keys": [
+        "KeyE",
+        "KeyR",
+        "KeyN"
+      ],
+      "output": {
+        "type": "text",
+        "value": "田中",
+        "display": "田中"
+      },
+      "kind": "combo",
+      "source": {
+        "line": 895
+      }
+    },
+    {
+      "keys": [
+        "KeyH",
+        "KeyJ"
+      ],
+      "output": {
+        "type": "action",
+        "value": "imeOn",
+        "display": "IME ON"
+      },
+      "kind": "control",
+      "source": {
+        "section": "IME ON/OFF"
+      }
+    },
+    {
+      "keys": [
+        "KeyG",
+        "KeyF"
+      ],
+      "output": {
+        "type": "action",
+        "value": "imeOff",
+        "display": "IME OFF"
+      },
+      "kind": "control",
+      "source": {
+        "section": "IME ON/OFF"
+      }
+    },
+    {
+      "keys": [
+        "KeyV",
+        "KeyM"
+      ],
+      "output": {
+        "type": "action",
+        "value": "enter",
+        "display": "Enter"
+      },
+      "kind": "control",
+      "source": {
+        "section": "Enter"
+      }
+    }
+  ]
+}

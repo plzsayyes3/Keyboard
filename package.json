@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build:layout": "node scripts/build-naginata-layout.mjs",
     "test": "node --test"
   }
 }

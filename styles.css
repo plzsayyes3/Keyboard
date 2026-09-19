@@ -31,5 +31,11 @@ button.secondary { background: #eaf4f9; border-color: #b9d9e9; color: #266687; }
 .key-shift { color: #80909d; font-size: 9px; font-weight: 700; margin-top: 3px; }
 .key-row:last-child .key { flex: 0 0 44%; margin: 0 auto; } .key.expected-key { background: #fff4c9; border-color: #e6c65c; color: #795d00; } .key.held-key { transform: translateY(2px); background: #bfe6f4; border-color: #5aa5c7; color: #14506c; }
 .hint { color: #7e8d9a; font-size: 11px; line-height: 1.45; margin: 12px 0 0; } .fatal { padding: 24px; }
+.sources { margin-top: 12px; padding: 10px 14px; color: #687889; font-size: 11px; }
+.sources summary { cursor: pointer; color: #3478a5; font-weight: 800; }
+.source-list { display: grid; gap: 6px; margin-top: 9px; }
+.source-row { display: flex; flex-wrap: wrap; gap: 4px 12px; justify-content: space-between; border-top: 1px solid #edf1f4; padding-top: 6px; }
+.source-title { color: #266687; font-weight: 700; }
+.source-row a { color: inherit; }
 @media (max-height: 720px) and (min-width: 761px) { #app { padding-top: 10px; padding-bottom: 12px; } .hero { margin-bottom: 8px; } h1 { font-size: 28px; } .subtitle { font-size: 11px; } .task-panel, .keyboard-panel { padding: 11px; } .task-text { margin-top: 10px; font-size: 42px; } .keyboard { margin-top: 9px; } .key { min-height: 30px; font-size: 12px; } .hint { margin-top: 7px; } }
 @media (max-width: 760px) { #app { padding: 14px 10px 24px; } .hero { align-items: flex-start; flex-direction: column; gap: 7px; } .source-note { text-align: left; } .practice-grid { grid-template-columns: 1fr; } .task-panel, .keyboard-panel { padding: 13px; } .key { min-height: 32px; font-size: 12px; } }
