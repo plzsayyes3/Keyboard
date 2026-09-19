@@ -63,10 +63,10 @@ test('uses the base kana key plus the やゆよ key for clean youon', () => {
 
 test('preserves official combo order when the same keys have two meanings', () => {
   const engine = new NaginataEngine(createLayoutIndex(naginataLayout));
-  assert.equal(engine.convert(['KeyF', 'KeyU']).text, 'が');
-  assert.equal(engine.convert(['KeyU', 'KeyF']).text, 'が');
-  assert.equal(engine.convert(['KeyR', 'KeyU']).text, 'じ');
-  assert.equal(engine.convert(['KeyU', 'KeyR']).text, 'ざ');
+  assert.equal(engine.convert(['KeyJ', 'KeyF']).text, 'が');
+  assert.equal(engine.convert(['KeyF', 'KeyJ']).text, 'が');
+  assert.equal(engine.convert(['KeyJ', 'KeyR']).text, 'じ');
+  assert.equal(engine.convert(['KeyF', 'KeyU']).text, 'ざ');
 });
 
 test('tokenizes words around multi-character kana combos', () => {

@@ -5,7 +5,7 @@ import { PracticeSession } from './engine/session.js';
 import { createInputController } from './engine/input-controller.js';
 import { renderApp, renderTask } from './ui.js?v=20260919-logic5';
 
-const root = document.querySelector('#app'); const layoutPaths = ['data/layouts/naginata-v18.json?v=20260919-logic5', 'data/layouts/user-current.json?v=20260919-logic5']; const lessonPaths = ['data/lessons/basic.json', 'data/lessons/words.json', 'data/lessons/sentences.json'];
+const root = document.querySelector('#app'); const layoutPaths = ['data/layouts/naginata-v18.json?v=20260919-logic6', 'data/layouts/user-current.json?v=20260919-logic6']; const lessonPaths = ['data/lessons/basic.json', 'data/lessons/words.json', 'data/lessons/sentences.json'];
 async function loadJson(path) { const response = await fetch(path); if (!response.ok) throw new Error(`読み込み失敗: ${path}`); return response.json(); }
 
 async function boot() {
