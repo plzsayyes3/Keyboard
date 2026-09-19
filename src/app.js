@@ -3,7 +3,7 @@ import { mergeLayout } from './engine/layout-loader.js';
 import { NaginataEngine } from './engine/naginata-engine.js';
 import { PracticeSession } from './engine/session.js';
 import { createInputController } from './engine/input-controller.js';
-import { renderApp, renderTask } from './ui.js';
+import { renderApp, renderTask } from './ui.js?v=021916b';
 
 const root = document.querySelector('#app'); const layoutPaths = ['data/layouts/naginata-v18.json', 'data/layouts/user-current.json']; const lessonPaths = ['data/lessons/basic.json', 'data/lessons/words.json', 'data/lessons/sentences.json'];
 async function loadJson(path) { const response = await fetch(path); if (!response.ok) throw new Error(`読み込み失敗: ${path}`); return response.json(); }
