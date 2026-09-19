@@ -48,7 +48,7 @@ test('uses the official physical keys for しょ', () => {
   const index = createLayoutIndex(naginataLayout);
   const engine = new NaginataEngine(index);
 
-  assert.deepEqual(resolveExpectedKeys(index, 'しょ'), [['KeyI', 'KeyR']]);
+  assert.deepEqual(resolveExpectedKeys(index, 'しょ'), [['KeyR', 'KeyI'], ['KeyI', 'KeyR']]);
   assert.equal(engine.convert(['KeyR', 'KeyI']).text, 'しょ');
   assert.notEqual(engine.convert(['KeyW', 'KeyI']).text, 'しょ');
 });
@@ -59,4 +59,12 @@ test('uses the base kana key plus the やゆよ key for clean youon', () => {
   assert.equal(engine.convert(['KeyR', 'KeyP']).text, 'しゅ');
   assert.equal(engine.convert(['KeyW', 'KeyI']).text, 'きょ');
   assert.equal(engine.convert(['KeyG', 'KeyI']).text, 'ちょ');
+});
+
+test('preserves official combo order when the same keys have two meanings', () => {
+  const engine = new NaginataEngine(createLayoutIndex(naginataLayout));
+  assert.equal(engine.convert(['KeyF', 'KeyU']).text, 'が');
+  assert.equal(engine.convert(['KeyU', 'KeyF']).text, 'が');
+  assert.equal(engine.convert(['KeyR', 'KeyU']).text, 'じ');
+  assert.equal(engine.convert(['KeyU', 'KeyR']).text, 'ざ');
 });

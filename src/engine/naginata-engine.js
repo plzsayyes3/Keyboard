@@ -1,5 +1,3 @@
-import { sortedKeyId } from './layout.js';
-
 export class NaginataEngine {
   constructor(index) {
     this.index = index;
@@ -19,7 +17,7 @@ export class NaginataEngine {
       if (text) return { text, keys: [...normalized].sort(), kind: 'center-shift' };
     }
 
-    const combo = this.index.combos.get(sortedKeyId(normalized));
+    const combo = this.index.combos.get(normalized.join('+'));
     if (combo) return { text: combo.text, keys: [...combo.keys], kind: combo.kind ?? 'combo' };
 
     if (normalized.length === 1) {

@@ -2,12 +2,21 @@ function sortedKeyId(keys) {
   return [...new Set(keys)].sort().join('+');
 }
 
+function orderedKeyId(keys) {
+  return [...new Set(keys)].join('+');
+}
+
 export function createLayoutIndex(layout) {
   const single = new Map(Object.entries(layout.layers?.single ?? {}));
   const shifted = new Map(Object.entries(layout.layers?.centerShift ?? {}));
   const combos = new Map();
   for (const combo of layout.combos ?? []) {
-    combos.set(sortedKeyId(combo.keys), { ...combo, keys: [...combo.keys].sort() });
+    combos.set(orderedKeyId(combo.keys), { ...combo, keys: [...combo.keys] });
+  }
+  for (const combo of layout.combos ?? []) {
+    const reverse = [...combo.keys].reverse();
+    const reverseId = orderedKeyId(reverse);
+    if (!combos.has(reverseId)) combos.set(reverseId, { ...combo, keys: reverse });
   }
   return {
     single,
