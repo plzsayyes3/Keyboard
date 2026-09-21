@@ -9,6 +9,23 @@ test('A mode forwards converted text output', () => {
   assert.deepEqual(outputs, ['し']);
 });
 
+test('A mode accepts converted kana from KeyboardEvent.key', () => {
+  const outputs = [];
+  const controller = createInputController({ mode: 'converted', onOutput: (value) => outputs.push(value) });
+  controller.handleKeyDown({ key: 'じょ', code: 'KeyI', isComposing: false, target: { id: 'other' } });
+  controller.handleKeyDown({ key: 'Process', code: 'KeyI', isComposing: true, target: { id: 'other' } });
+  assert.deepEqual(outputs, ['じょ']);
+});
+
+test('A mode accepts input-event text from a focused capture field', () => {
+  const outputs = [];
+  const target = { id: 'converted-input', value: 'が' };
+  const controller = createInputController({ mode: 'converted', onOutput: (value) => outputs.push(value) });
+  controller.handleInput({ data: 'が', target });
+  assert.deepEqual(outputs, ['が']);
+  assert.equal(target.value, '');
+});
+
 test('B mode converts pressed physical codes on keyup', () => {
   const outputs = [];
   const engine = { convert: (keys) => ({ text: keys.sort().join(','), keys, kind: 'test' }) };

@@ -1,5 +1,6 @@
 :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; color: #1d2633; background: #edf2f6; }
 * { box-sizing: border-box; }
+.converted-capture { position: fixed; width: 1px; height: 1px; opacity: 0; pointer-events: none; border: 0; padding: 0; }
 body { margin: 0; min-width: 320px; }
 #app { max-width: 1180px; margin: 0 auto; padding: 16px 16px 24px; }
 .hero { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-bottom: 12px; }

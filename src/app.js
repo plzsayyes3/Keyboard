@@ -3,9 +3,9 @@ import { mergeLayout } from './engine/layout-loader.js';
 import { NaginataEngine } from './engine/naginata-engine.js';
 import { PracticeSession } from './engine/session.js';
 import { createInputController } from './engine/input-controller.js';
-import { renderApp, renderTask } from './ui.js?v=20260921-chord1';
+import { renderApp, renderTask } from './ui.js?v=20260921-input2';
 
-const root = document.querySelector('#app'); const layoutPaths = ['data/layouts/naginata-v18.generated.json?v=20260921-chord1', 'data/layouts/user-current.json?v=20260921-chord1']; const lessonPaths = ['data/lessons/basic.json', 'data/lessons/words.json', 'data/lessons/sentences.json'];
+const root = document.querySelector('#app'); const layoutPaths = ['data/layouts/naginata-v18.generated.json?v=20260921-input2', 'data/layouts/user-current.json?v=20260921-input2']; const lessonPaths = ['data/lessons/basic.json', 'data/lessons/words.json', 'data/lessons/sentences.json'];
 async function loadJson(path) { const response = await fetch(path); if (!response.ok) throw new Error(`読み込み失敗: ${path}`); return response.json(); }
 
 async function boot() {
@@ -22,9 +22,10 @@ function createSession(state) { const index = createLayoutIndex(state.layout); r
 function expectedKeysFor(state) { return resolveExpectedKeys(createLayoutIndex(state.layout), state.session.currentUnit ?? ''); }
 function resetSession(state, message) { state.session = createSession(state); state.feedback = message; state.feedbackKind = ''; state.heldKeys = []; state.expectedKeys = expectedKeysFor(state); renderTask(root, state); }
 function attachInput(state) {
-  if (state.controller) { window.removeEventListener('keydown', state.controller.handleKeyDown); window.removeEventListener('keyup', state.controller.handleKeyUp); window.removeEventListener('beforeinput', state.controller.handleBeforeInput); }
+  if (state.controller) { window.removeEventListener('keydown', state.controller.handleKeyDown); window.removeEventListener('keyup', state.controller.handleKeyUp); window.removeEventListener('beforeinput', state.controller.handleBeforeInput); window.removeEventListener('input', state.controller.handleInput); }
   const engine = new NaginataEngine(createLayoutIndex(state.layout)); state.controller = createInputController({ mode: state.mode, engine, onHeldKeys: (keys) => { state.heldKeys = keys; renderTask(root, state); }, onOutput: (value) => { const result = state.session.submit(value); state.feedback = result.correct ? `○ ${value}　正解` : `× ${value || '未定義'}　正しくは ${result.expected}`; state.feedbackKind = result.correct ? 'success' : 'error'; state.expectedKeys = result.completed ? [] : expectedKeysFor(state); renderTask(root, state); } });
-  window.addEventListener('keydown', state.controller.handleKeyDown); window.addEventListener('keyup', state.controller.handleKeyUp); window.addEventListener('beforeinput', state.controller.handleBeforeInput);
+  window.addEventListener('keydown', state.controller.handleKeyDown); window.addEventListener('keyup', state.controller.handleKeyUp); window.addEventListener('beforeinput', state.controller.handleBeforeInput); window.addEventListener('input', state.controller.handleInput);
+  if (state.mode === 'converted') root.querySelector('#converted-input')?.focus();
 }
 boot().catch((error) => { root.innerHTML = `<section class="panel fatal"><h1>読み込みできませんでした</h1><p>${error.message}</p><p>ローカルサーバー経由で開いてください。</p></section>`; });
 export { boot };

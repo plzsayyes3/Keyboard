@@ -17,13 +17,29 @@ export function createInputController({ mode = 'site', engine, onOutput = () => 
     return Boolean(code) && !ignoredModifierCodes.has(code);
   }
 
+  function emitConvertedText(value, event = {}) {
+    if (mode !== 'converted' || !value || event.isComposing || event.key === 'Process') return;
+    onOutput(value, { text: value, kind: 'converted', source: event.type ?? 'converted' });
+  }
+
   return {
     mode,
     handleBeforeInput(event) {
       if (mode !== 'converted' || !event?.data) return;
-      onOutput(event.data, { text: event.data, kind: 'converted' });
+      if (event.target?.id === 'converted-input') return;
+      emitConvertedText(event.data, { ...event, type: 'beforeinput' });
+    },
+    handleInput(event) {
+      if (mode !== 'converted' || !event?.data) return;
+      emitConvertedText(event.data, { ...event, type: 'input' });
+      if (event.target?.id === 'converted-input') event.target.value = '';
     },
     handleKeyDown(event) {
+      if (mode === 'converted') {
+        if (event?.target?.id === 'converted-input') return;
+        emitConvertedText(event?.key, { ...event, type: 'keydown' });
+        return;
+      }
       if (mode !== 'site' || !isPhysicalCode(event?.code) || event.repeat) return;
       if (chordLatched) return;
       pressed.add(event.code);
