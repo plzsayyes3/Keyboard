@@ -34,7 +34,32 @@
         </div>
         <div class="legend">
           <span><i class="dot"></i>変更あり</span>
+          <span><i class="dot test-ok-dot"></i>検査済み</span>
+          <span><i class="dot test-current-dot"></i>今押しているキー</span>
           <span>キー内の小文字はRK設定上のK番号</span>
+        </div>
+
+        <div class="keytest">
+          <div class="keytestHead">
+            <div>
+              <div class="sectionTitle keytestTitle">KEY TEST</div>
+              <div id="testSummary" class="testSummary">検査モードOFF</div>
+            </div>
+            <div class="row keytestActions">
+              <button class="btn primary" id="toggleTest">検査を開始</button>
+              <button class="btn" id="resetTest">検査結果をリセット</button>
+              <button class="btn" id="copyTest">検査結果をコピー</button>
+            </div>
+          </div>
+          <div class="testProgress"><span id="testProgressBar"></span></div>
+          <div class="testStats">
+            <span>認識 <strong id="testCount">0</strong></span>
+            <span>対象 <strong id="testTotal">0</strong></span>
+            <span>残り <strong id="testRemaining">0</strong></span>
+          </div>
+          <div id="lastEvent" class="lastEvent">キーを押すと code / key / keyCode を表示します。</div>
+          <div id="unmatchedEvent" class="unmatchedEvent" hidden></div>
+          <p class="note">検査中はページ上のショートカット動作をできるだけ抑止します。Fnは通常ブラウザへ単独キーとして届かないため、検査対象から除外します。</p>
         </div>
 
         <div class="sectionTitle">Protocol tools</div>
