@@ -31,21 +31,30 @@ PID 01F7 は公式Web App `https://drive.rkgaming.com` の対応対象ですが�
 USB HIDのJIS International key名称はQMKのBasic Keycodes / USB HID Usageに対応させています。
 
 
-## キー検査モード
+## ガイド式キー検査モード
 
-RK65の物理キーを1つずつ押し、ブラウザに届いた `KeyboardEvent.code` を物理配列上で照合できます。
+RK65側がすでにリマップ済みでも検査できるよう、入力コードから物理位置を逆引きしません。
 
-- 認識したキーを緑表示
-- 押下中キーを明るく表示
-- 認識数 / 対象数 / 残数を表示
-- `code / key / keyCode / location` を記録
-- 想定外のイベントは「未割当イベント」として記録
-- 結果をJSON形式でクリップボードへコピー可能
-- 検査結果はlocalStorageへ保存
-- Fnは通常のブラウザKeyboardEventに単独では現れないため対象外
+1. 画面が「次に押す物理キー」を指定
+2. 次に届いた `KeyboardEvent` を、その物理キーの実測値として保存
+3. 既定値との一致 / 不一致 / 無反応を分けて記録
+4. キーを離すと次の物理キーへ自動で進む
 
-JIS固有キーの期待値:
-- ¥: `IntlYen`
-- 無変換: `NonConvert`
-- 変換: `Convert`
-- かな: `KanaMode`
+たとえば物理的な左Altが現在Metaへ書き換えられていても、
+
+`physical: LAlt / expected: AltLeft / observed: MetaLeft / mismatch`
+
+として正しく記録できます。
+
+### 記録内容
+
+- physicalKeyId / physicalLabel / bIndex
+- 期待する `event.code`
+- 既定のRK firmware code / VK
+- 実測 `code / key / keyCode / location`
+- Ctrl / Shift / Alt / Meta状態
+- status: `match / mismatch / no-event / untested`
+
+「反応なしで記録」も用意しており、macOSでKeyboardEvent自体が発生しないJISキーの確認にも使えます。
+
+Fnは通常のブラウザKeyboardEventに単独では現れないため対象外です。
