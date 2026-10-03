@@ -60,10 +60,10 @@
 
         <div class="sectionTitle">RAW firmware code</div>
         <div class="raw">
-          <input id="rawCode" placeholder="0x00000400" autocomplete="off" spellcheck="false" />
+          <input id="rawCode" placeholder="0x00000400 / hid:0x04" autocomplete="off" spellcheck="false" />
           <button class="btn primary" id="applyRaw" disabled>反映</button>
         </div>
-        <p class="note">16進数は <code>0x</code> 付き、または10進数で入力。これはまずブラウザ内のキーマップに反映されます。</p>
+        <p class="note">RK firmware codeは <code>0x00000400</code>、USB HID Usageは <code>hid:0x04</code> のように直接入力できます。まずブラウザ内のキーマップに反映されます。</p>
 
         <div class="sectionTitle">割り当て候補</div>
         <input id="targetSearch" class="search" placeholder="A / Ctrl / 無変換 / 0x8B00…" />
