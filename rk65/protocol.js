@@ -10,6 +10,17 @@ export function formatHex(value, width = 8) {
 export function parseFirmwareCode(value) {
   const raw = String(value ?? "").trim();
   if (!raw) throw new Error("キーコードが空です");
+
+  const hidMatch = raw.match(/^(?:hid|usage)\s*:\s*(.+)$/i);
+  if (hidMatch) {
+    const part = hidMatch[1].trim();
+    const usage = /^0x/i.test(part) ? Number.parseInt(part.slice(2), 16) : Number.parseInt(part, 10);
+    if (!Number.isFinite(usage) || usage < 0 || usage > 0xff) {
+      throw new Error("HID Usage は 0x00〜0xFF の範囲で入力してください");
+    }
+    return (usage << 8) >>> 0;
+  }
+
   const n = /^0x/i.test(raw) ? Number.parseInt(raw.slice(2), 16) : Number.parseInt(raw, 10);
   if (!Number.isFinite(n) || n < 0 || n > 0xffffffff) {
     throw new Error("0x00000000〜0xFFFFFFFF の範囲で入力してください");
