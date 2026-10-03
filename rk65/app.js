@@ -16,10 +16,12 @@ const state = {
   overrides: {},
   device: null,
   testMode: false,
+  testIndex: 0,
   testedKeys: {},
   pressedCodes: new Set(),
   testEvents: [],
-  unmatchedEvents: []
+  unmatchedEvents: [],
+  waitingForRelease: false
 };
 
 const TARGETS = buildTargets();
@@ -143,6 +145,8 @@ function bind() {
   $("#exportBtn").addEventListener("click", exportMappings);
   $("#importInput").addEventListener("change", importMappings);
   $("#toggleTest").addEventListener("click", toggleTestMode);
+  $("#prevTest").addEventListener("click", previousTestKey);
+  $("#noEventTest").addEventListener("click", recordNoEvent);
   $("#resetTest").addEventListener("click", resetTest);
   $("#copyTest").addEventListener("click", copyTestResults);
   window.addEventListener("keydown", handleTestKeyDown, true);
@@ -176,9 +180,13 @@ function renderKeyboard() {
     if (String(state.selected?.id) === key.id) btn.classList.add("selected");
     if (Object.prototype.hasOwnProperty.call(state.overrides, key.bIndex)) btn.classList.add("changed");
     const expectedCode = expectedEventCode(key);
+    const testResult = state.testedKeys[key.id];
+    const guideKey = currentGuideKey();
     if (state.testMode) btn.classList.add("testing");
-    if (state.testedKeys[key.id]) btn.classList.add("tested");
-    if (expectedCode && state.pressedCodes.has(expectedCode)) btn.classList.add("pressed");
+    if (testResult?.status === "match") btn.classList.add("tested-match");
+    if (testResult?.status === "mismatch") btn.classList.add("tested-mismatch");
+    if (testResult?.status === "no-event") btn.classList.add("tested-no-event");
+    if (guideKey?.id === key.id) btn.classList.add("guide-current");
     if (key.id === "K61") btn.classList.add("browser-excluded");
     btn.style.left = (l/width*100) + "%";
     btn.style.top = (t/height*100) + "%";
@@ -238,74 +246,110 @@ function expectedEventCode(key) {
 }
 
 function testableKeys() {
-  return state.profile.keys.filter(key => !key.hidden && key.id !== "K61" && expectedEventCode(key));
+  return state.profile.keys.filter(key => !key.hidden && key.id !== "K61");
 }
 
-function keyForEventCode(code) {
-  return testableKeys().find(key => expectedEventCode(key) === code) || null;
+function currentGuideKey() {
+  if (!state.profile) return null;
+  const keys = testableKeys();
+  if (!keys.length) return null;
+  return keys[Math.max(0, Math.min(state.testIndex, keys.length - 1))] || null;
+}
+
+function firstIncompleteIndex() {
+  const keys = testableKeys();
+  const idx = keys.findIndex(key => !state.testedKeys[key.id]);
+  return idx >= 0 ? idx : 0;
+}
+
+function setTestIndex(index) {
+  const keys = testableKeys();
+  if (!keys.length) {
+    state.testIndex = 0;
+    return;
+  }
+  state.testIndex = Math.max(0, Math.min(index, keys.length - 1));
+  state.waitingForRelease = false;
+  state.pressedCodes.clear();
+  renderKeyboard();
+  updateTestUI();
 }
 
 function toggleTestMode() {
   state.testMode = !state.testMode;
   state.pressedCodes.clear();
+  state.waitingForRelease = false;
   document.body.classList.toggle("key-test-mode", state.testMode);
-  renderKeyboard();
-  updateTestUI();
+
   if (state.testMode) {
-    showToast("キー検査を開始しました");
+    state.testIndex = firstIncompleteIndex();
+    showToast("ガイド式キー検査を開始しました");
     window.focus();
   } else {
     showToast("キー検査を終了しました");
   }
+
+  renderKeyboard();
+  updateTestUI();
 }
 
 function handleTestKeyDown(event) {
   if (!state.testMode) return;
-  if (event.repeat) {
+  if (event.repeat || state.waitingForRelease) {
     event.preventDefault();
+    event.stopPropagation();
     return;
   }
 
   event.preventDefault();
   event.stopPropagation();
 
-  const code = event.code || "(no code)";
-  state.pressedCodes.add(code);
-  const key = keyForEventCode(code);
+  const physical = currentGuideKey();
+  if (!physical) return;
+
+  const expected = expectedEventCode(physical);
+  const observedCode = event.code || "(no code)";
+  const status = expected && observedCode === expected ? "match" : "mismatch";
 
   const record = {
     at: new Date().toISOString(),
-    code,
-    key: event.key,
-    keyCode: event.keyCode,
-    which: event.which,
-    location: event.location,
-    targetKeyId: key?.id || null,
-    targetLabel: key?.label || null
+    physicalKeyId: physical.id,
+    physicalLabel: physical.label,
+    bIndex: physical.bIndex,
+    expected: {
+      eventCode: expected,
+      defaultFw: physical.defaultFw,
+      vk: physical.vk
+    },
+    observed: {
+      code: observedCode,
+      key: event.key,
+      keyCode: event.keyCode,
+      which: event.which,
+      location: event.location,
+      ctrlKey: event.ctrlKey,
+      shiftKey: event.shiftKey,
+      altKey: event.altKey,
+      metaKey: event.metaKey
+    },
+    status
   };
 
+  state.testedKeys[physical.id] = record;
   state.testEvents.push(record);
-  state.testEvents = state.testEvents.slice(-200);
+  state.testEvents = state.testEvents.slice(-250);
+  state.pressedCodes.add(observedCode);
+  state.waitingForRelease = true;
+  saveTestState();
 
-  if (key) {
-    state.testedKeys[key.id] = {
-      at: record.at,
-      code: record.code,
-      key: record.key,
-      keyCode: record.keyCode,
-      location: record.location
-    };
-    $("#unmatchedEvent").hidden = true;
-  } else {
-    state.unmatchedEvents.push(record);
-    state.unmatchedEvents = state.unmatchedEvents.slice(-50);
-    $("#unmatchedEvent").hidden = false;
-    $("#unmatchedEvent").textContent = `未割当イベント: code=${code} / key=${event.key} / keyCode=${event.keyCode}`;
+  $("#lastEvent").textContent =
+    `物理: ${physical.label} (${physical.id}) / 期待: ${expected || "未定義"} / 実測: ${observedCode} / key=${event.key} / ${status === "match" ? "一致" : "不一致"}`;
+  $("#unmatchedEvent").hidden = status === "match";
+  if (status !== "match") {
+    $("#unmatchedEvent").textContent =
+      `不一致を記録: ${physical.label} は現在 ${observedCode} を送信しています。既存リマップやMacモードの影響でも正常に記録できます。`;
   }
 
-  saveTestState();
-  $("#lastEvent").textContent =
-    `code=${code} / key=${event.key} / keyCode=${event.keyCode} / location=${event.location}`;
   renderKeyboard();
   updateTestUI();
 }
@@ -315,7 +359,65 @@ function handleTestKeyUp(event) {
   event.preventDefault();
   event.stopPropagation();
   state.pressedCodes.delete(event.code);
+
+  if (state.waitingForRelease) {
+    state.waitingForRelease = false;
+    const keys = testableKeys();
+    if (state.testIndex < keys.length - 1) {
+      state.testIndex += 1;
+    }
+  }
+
   renderKeyboard();
+  updateTestUI();
+}
+
+function previousTestKey() {
+  if (!state.testMode) {
+    showToast("先に検査を開始してください", true);
+    return;
+  }
+  setTestIndex(state.testIndex - 1);
+}
+
+function recordNoEvent() {
+  if (!state.testMode) {
+    showToast("先に検査を開始してください", true);
+    return;
+  }
+
+  const physical = currentGuideKey();
+  if (!physical) return;
+
+  const record = {
+    at: new Date().toISOString(),
+    physicalKeyId: physical.id,
+    physicalLabel: physical.label,
+    bIndex: physical.bIndex,
+    expected: {
+      eventCode: expectedEventCode(physical),
+      defaultFw: physical.defaultFw,
+      vk: physical.vk
+    },
+    observed: null,
+    status: "no-event"
+  };
+
+  state.testedKeys[physical.id] = record;
+  state.testEvents.push(record);
+  state.testEvents = state.testEvents.slice(-250);
+  saveTestState();
+
+  $("#lastEvent").textContent =
+    `物理: ${physical.label} (${physical.id}) / 反応なしとして記録`;
+  $("#unmatchedEvent").hidden = false;
+  $("#unmatchedEvent").textContent =
+    `KeyboardEventが来ないキーとして保存しました。MacのJISキーなどではこの結果自体が重要です。`;
+
+  const keys = testableKeys();
+  if (state.testIndex < keys.length - 1) state.testIndex += 1;
+  renderKeyboard();
+  updateTestUI();
 }
 
 function resetTest() {
@@ -323,8 +425,10 @@ function resetTest() {
   state.testEvents = [];
   state.unmatchedEvents = [];
   state.pressedCodes.clear();
+  state.waitingForRelease = false;
+  state.testIndex = 0;
   saveTestState();
-  $("#lastEvent").textContent = "キーを押すと code / key / keyCode を表示します。";
+  $("#lastEvent").textContent = "検査を開始すると、指定した物理キーに次のKeyboardEventを紐づけます。";
   $("#unmatchedEvent").hidden = true;
   renderKeyboard();
   updateTestUI();
@@ -333,42 +437,80 @@ function resetTest() {
 
 function updateTestUI() {
   if (!state.profile) return;
+
   const targets = testableKeys();
-  const tested = targets.filter(k => state.testedKeys[k.id]).length;
+  const records = targets.map(k => state.testedKeys[k.id]).filter(Boolean);
+  const tested = records.length;
+  const matches = records.filter(r => r.status === "match").length;
+  const mismatches = records.filter(r => r.status === "mismatch").length;
+  const noEvents = records.filter(r => r.status === "no-event").length;
   const total = targets.length;
   const remain = Math.max(0, total - tested);
   const percent = total ? Math.round((tested / total) * 100) : 0;
+  const guide = currentGuideKey();
 
   $("#testCount").textContent = tested;
   $("#testTotal").textContent = total;
   $("#testRemaining").textContent = remain;
+  $("#testMatch").textContent = matches;
+  $("#testMismatch").textContent = mismatches;
+  $("#testNoEvent").textContent = noEvents;
   $("#testProgressBar").style.width = percent + "%";
+
   $("#testSummary").textContent = state.testMode
     ? `検査中 · ${tested}/${total} (${percent}%)`
     : `検査モードOFF · 前回 ${tested}/${total}`;
+
   $("#toggleTest").textContent = state.testMode ? "検査を終了" : "検査を開始";
   $("#toggleTest").classList.toggle("activeTest", state.testMode);
+  $("#prevTest").disabled = !state.testMode || state.testIndex <= 0;
+  $("#noEventTest").disabled = !state.testMode;
+
+  if (state.testMode && guide) {
+    $("#guideKeyLabel").textContent = guide.label;
+    $("#guideKeyMeta").textContent =
+      `${guide.id} / bIndex ${guide.bIndex} / 期待 ${expectedEventCode(guide) || "未定義"} / default ${guide.defaultFw}`;
+  } else {
+    $("#guideKeyLabel").textContent = "—";
+    $("#guideKeyMeta").textContent = "検査開始後、ここに押す物理キーを表示します。";
+  }
 }
 
 async function copyTestResults() {
   const targets = testableKeys();
   const result = {
-    format: "rk65-jis-key-test-v1",
+    format: "rk65-jis-guided-key-test-v2",
     profile: state.profile.id,
     generatedAt: new Date().toISOString(),
-    expected: targets.map(key => ({
-      id: key.id,
-      label: key.label,
-      eventCode: expectedEventCode(key),
-      recognized: !!state.testedKeys[key.id],
-      observed: state.testedKeys[key.id] || null
-    })),
-    excluded: [{id:"K61", label:"Fn", reason:"通常ブラウザへ単独KeyboardEventとして届かない"}],
-    unmatchedEvents: state.unmatchedEvents,
-    recentEvents: state.testEvents.slice(-100)
+    method: "guided-physical-key-capture",
+    results: targets.map(key => {
+      const record = state.testedKeys[key.id] || null;
+      return {
+        physicalKeyId: key.id,
+        physicalLabel: key.label,
+        bIndex: key.bIndex,
+        expected: {
+          eventCode: expectedEventCode(key),
+          defaultFw: key.defaultFw,
+          vk: key.vk
+        },
+        observed: record?.observed ?? null,
+        status: record?.status ?? "untested",
+        recordedAt: record?.at ?? null
+      };
+    }),
+    excluded: [
+      {
+        physicalKeyId: "K61",
+        physicalLabel: "Fn",
+        reason: "通常ブラウザへ単独KeyboardEventとして届かないためガイド式KeyboardEvent検査の対象外"
+      }
+    ],
+    recentEvents: state.testEvents.slice(-150)
   };
+
   await navigator.clipboard.writeText(JSON.stringify(result, null, 2));
-  showToast("キー検査結果をコピーしました");
+  showToast("ガイド式キー検査結果をコピーしました");
 }
 
 
