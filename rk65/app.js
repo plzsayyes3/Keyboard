@@ -14,7 +14,12 @@ const state = {
   profile: null,
   selected: null,
   overrides: {},
-  device: null
+  device: null,
+  testMode: false,
+  testedKeys: {},
+  pressedCodes: new Set(),
+  testEvents: [],
+  unmatchedEvents: []
 };
 
 const TARGETS = buildTargets();
@@ -78,6 +83,7 @@ function buildTargets() {
 async function init() {
   state.profile = await fetch("./profiles/r65-jis-01f7.json").then(r => r.json());
   loadLocal();
+  loadTestState();
   renderKeyboard();
   renderTargets();
   updateInspector();
@@ -101,6 +107,31 @@ function saveLocal() {
   setTimeout(() => $("#saved").textContent = "", 1200);
 }
 
+function testStorageKey() {
+  return "rk65_keytest_" + state.profile.id;
+}
+
+function loadTestState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(testStorageKey()) || "{}");
+    state.testedKeys = saved.testedKeys && typeof saved.testedKeys === "object" ? saved.testedKeys : {};
+    state.testEvents = Array.isArray(saved.testEvents) ? saved.testEvents.slice(-200) : [];
+    state.unmatchedEvents = Array.isArray(saved.unmatchedEvents) ? saved.unmatchedEvents.slice(-50) : [];
+  } catch {
+    state.testedKeys = {};
+    state.testEvents = [];
+    state.unmatchedEvents = [];
+  }
+}
+
+function saveTestState() {
+  localStorage.setItem(testStorageKey(), JSON.stringify({
+    testedKeys: state.testedKeys,
+    testEvents: state.testEvents.slice(-200),
+    unmatchedEvents: state.unmatchedEvents.slice(-50)
+  }));
+}
+
 function bind() {
   $("#connect").addEventListener("click", connect);
   $("#targetSearch").addEventListener("input", renderTargets);
@@ -111,6 +142,16 @@ function bind() {
   $("#copyPackets").addEventListener("click", copyPackets);
   $("#exportBtn").addEventListener("click", exportMappings);
   $("#importInput").addEventListener("change", importMappings);
+  $("#toggleTest").addEventListener("click", toggleTestMode);
+  $("#resetTest").addEventListener("click", resetTest);
+  $("#copyTest").addEventListener("click", copyTestResults);
+  window.addEventListener("keydown", handleTestKeyDown, true);
+  window.addEventListener("keyup", handleTestKeyUp, true);
+  window.addEventListener("blur", () => {
+    if (!state.testMode) return;
+    state.pressedCodes.clear();
+    renderKeyboard();
+  });
 }
 
 function updateSupport() {
@@ -134,13 +175,20 @@ function renderKeyboard() {
     btn.className = "key";
     if (String(state.selected?.id) === key.id) btn.classList.add("selected");
     if (Object.prototype.hasOwnProperty.call(state.overrides, key.bIndex)) btn.classList.add("changed");
+    const expectedCode = expectedEventCode(key);
+    if (state.testMode) btn.classList.add("testing");
+    if (state.testedKeys[key.id]) btn.classList.add("tested");
+    if (expectedCode && state.pressedCodes.has(expectedCode)) btn.classList.add("pressed");
+    if (key.id === "K61") btn.classList.add("browser-excluded");
     btn.style.left = (l/width*100) + "%";
     btn.style.top = (t/height*100) + "%";
     btn.style.width = ((r-l)/width*100) + "%";
     btn.style.height = ((b-t)/height*100) + "%";
     btn.innerHTML = `<span>${escapeHtml(key.label)}</span><small>${key.id}</small>`;
-    btn.title = `${key.label} · bIndex ${key.bIndex} · default ${key.defaultFw}`;
+    btn.title = `${key.label} · bIndex ${key.bIndex} · default ${key.defaultFw}` +
+      (expectedCode ? ` · event.code ${expectedCode}` : "");
     btn.addEventListener("click", () => {
+      if (state.testMode) return;
       state.selected = key;
       renderKeyboard();
       updateInspector();
@@ -148,6 +196,181 @@ function renderKeyboard() {
     box.appendChild(btn);
   }
 }
+
+
+const HID_USAGE_TO_EVENT_CODE = {
+  0x28:"Enter", 0x29:"Escape", 0x2a:"Backspace", 0x2b:"Tab", 0x2c:"Space",
+  0x2d:"Minus", 0x2e:"Equal", 0x2f:"BracketLeft", 0x30:"BracketRight",
+  0x31:"Backslash", 0x32:"IntlHash", 0x33:"Semicolon", 0x34:"Quote",
+  0x35:"Backquote", 0x36:"Comma", 0x37:"Period", 0x38:"Slash", 0x39:"CapsLock",
+  0x46:"PrintScreen", 0x47:"ScrollLock", 0x48:"Pause", 0x49:"Insert",
+  0x4a:"Home", 0x4b:"PageUp", 0x4c:"Delete", 0x4d:"End", 0x4e:"PageDown",
+  0x4f:"ArrowRight", 0x50:"ArrowLeft", 0x51:"ArrowDown", 0x52:"ArrowUp",
+  0x87:"IntlRo", 0x88:"KanaMode", 0x89:"IntlYen", 0x8a:"Convert", 0x8b:"NonConvert"
+};
+
+for (let i = 0; i < 26; i++) HID_USAGE_TO_EVENT_CODE[0x04 + i] = "Key" + String.fromCharCode(65 + i);
+for (let i = 1; i <= 9; i++) HID_USAGE_TO_EVENT_CODE[0x1d + i] = "Digit" + i;
+HID_USAGE_TO_EVENT_CODE[0x27] = "Digit0";
+for (let i = 1; i <= 12; i++) HID_USAGE_TO_EVENT_CODE[0x39 + i] = "F" + i;
+
+const SPECIAL_EVENT_CODES_BY_KEY_ID = {
+  K43:"ShiftLeft",
+  K54:"ShiftRight",
+  K56:"ControlLeft",
+  K57:"MetaLeft",
+  K58:"AltLeft",
+  K60:"AltRight"
+};
+
+function expectedEventCode(key) {
+  if (!key || key.id === "K61") return null;
+  if (SPECIAL_EVENT_CODES_BY_KEY_ID[key.id]) return SPECIAL_EVENT_CODES_BY_KEY_ID[key.id];
+
+  const fw = parseFirmwareCode(key.defaultFw);
+  if ((fw & 0xff) === 0 && fw <= 0xffff) {
+    const usage = (fw >>> 8) & 0xff;
+    return HID_USAGE_TO_EVENT_CODE[usage] || null;
+  }
+
+  if (key.id === "K71") return "AudioVolumeMute";
+  return null;
+}
+
+function testableKeys() {
+  return state.profile.keys.filter(key => !key.hidden && key.id !== "K61" && expectedEventCode(key));
+}
+
+function keyForEventCode(code) {
+  return testableKeys().find(key => expectedEventCode(key) === code) || null;
+}
+
+function toggleTestMode() {
+  state.testMode = !state.testMode;
+  state.pressedCodes.clear();
+  document.body.classList.toggle("key-test-mode", state.testMode);
+  renderKeyboard();
+  updateTestUI();
+  if (state.testMode) {
+    showToast("キー検査を開始しました");
+    window.focus();
+  } else {
+    showToast("キー検査を終了しました");
+  }
+}
+
+function handleTestKeyDown(event) {
+  if (!state.testMode) return;
+  if (event.repeat) {
+    event.preventDefault();
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  const code = event.code || "(no code)";
+  state.pressedCodes.add(code);
+  const key = keyForEventCode(code);
+
+  const record = {
+    at: new Date().toISOString(),
+    code,
+    key: event.key,
+    keyCode: event.keyCode,
+    which: event.which,
+    location: event.location,
+    targetKeyId: key?.id || null,
+    targetLabel: key?.label || null
+  };
+
+  state.testEvents.push(record);
+  state.testEvents = state.testEvents.slice(-200);
+
+  if (key) {
+    state.testedKeys[key.id] = {
+      at: record.at,
+      code: record.code,
+      key: record.key,
+      keyCode: record.keyCode,
+      location: record.location
+    };
+    $("#unmatchedEvent").hidden = true;
+  } else {
+    state.unmatchedEvents.push(record);
+    state.unmatchedEvents = state.unmatchedEvents.slice(-50);
+    $("#unmatchedEvent").hidden = false;
+    $("#unmatchedEvent").textContent = `未割当イベント: code=${code} / key=${event.key} / keyCode=${event.keyCode}`;
+  }
+
+  saveTestState();
+  $("#lastEvent").textContent =
+    `code=${code} / key=${event.key} / keyCode=${event.keyCode} / location=${event.location}`;
+  renderKeyboard();
+  updateTestUI();
+}
+
+function handleTestKeyUp(event) {
+  if (!state.testMode) return;
+  event.preventDefault();
+  event.stopPropagation();
+  state.pressedCodes.delete(event.code);
+  renderKeyboard();
+}
+
+function resetTest() {
+  state.testedKeys = {};
+  state.testEvents = [];
+  state.unmatchedEvents = [];
+  state.pressedCodes.clear();
+  saveTestState();
+  $("#lastEvent").textContent = "キーを押すと code / key / keyCode を表示します。";
+  $("#unmatchedEvent").hidden = true;
+  renderKeyboard();
+  updateTestUI();
+  showToast("キー検査結果をリセットしました");
+}
+
+function updateTestUI() {
+  if (!state.profile) return;
+  const targets = testableKeys();
+  const tested = targets.filter(k => state.testedKeys[k.id]).length;
+  const total = targets.length;
+  const remain = Math.max(0, total - tested);
+  const percent = total ? Math.round((tested / total) * 100) : 0;
+
+  $("#testCount").textContent = tested;
+  $("#testTotal").textContent = total;
+  $("#testRemaining").textContent = remain;
+  $("#testProgressBar").style.width = percent + "%";
+  $("#testSummary").textContent = state.testMode
+    ? `検査中 · ${tested}/${total} (${percent}%)`
+    : `検査モードOFF · 前回 ${tested}/${total}`;
+  $("#toggleTest").textContent = state.testMode ? "検査を終了" : "検査を開始";
+  $("#toggleTest").classList.toggle("activeTest", state.testMode);
+}
+
+async function copyTestResults() {
+  const targets = testableKeys();
+  const result = {
+    format: "rk65-jis-key-test-v1",
+    profile: state.profile.id,
+    generatedAt: new Date().toISOString(),
+    expected: targets.map(key => ({
+      id: key.id,
+      label: key.label,
+      eventCode: expectedEventCode(key),
+      recognized: !!state.testedKeys[key.id],
+      observed: state.testedKeys[key.id] || null
+    })),
+    excluded: [{id:"K61", label:"Fn", reason:"通常ブラウザへ単独KeyboardEventとして届かない"}],
+    unmatchedEvents: state.unmatchedEvents,
+    recentEvents: state.testEvents.slice(-100)
+  };
+  await navigator.clipboard.writeText(JSON.stringify(result, null, 2));
+  showToast("キー検査結果をコピーしました");
+}
+
 
 function currentCode(key) {
   if (!key) return null;
@@ -170,6 +393,7 @@ function updateInspector() {
   $("#writeState").textContent = "HARDWARE WRITE: LOCKED";
   $("#writeState").title = "実機のPIDと公式Web Appの書き込みプロトコル確認後に解除します";
   renderTargets();
+  updateTestUI();
 }
 
 function renderTargets() {
