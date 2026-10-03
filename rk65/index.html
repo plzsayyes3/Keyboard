@@ -42,24 +42,40 @@
         <div class="keytest">
           <div class="keytestHead">
             <div>
-              <div class="sectionTitle keytestTitle">KEY TEST</div>
+              <div class="sectionTitle keytestTitle">GUIDED KEY TEST</div>
               <div id="testSummary" class="testSummary">検査モードOFF</div>
             </div>
             <div class="row keytestActions">
               <button class="btn primary" id="toggleTest">検査を開始</button>
+              <button class="btn" id="prevTest">前のキー</button>
+              <button class="btn" id="noEventTest">反応なしで記録</button>
               <button class="btn" id="resetTest">検査結果をリセット</button>
               <button class="btn" id="copyTest">検査結果をコピー</button>
             </div>
           </div>
+
+          <div class="guidePrompt">
+            <div class="guideEyebrow">NEXT PHYSICAL KEY</div>
+            <div id="guideKeyLabel" class="guideKeyLabel">—</div>
+            <div id="guideKeyMeta" class="guideKeyMeta">検査開始後、ここに押す物理キーを表示します。</div>
+          </div>
+
           <div class="testProgress"><span id="testProgressBar"></span></div>
           <div class="testStats">
-            <span>認識 <strong id="testCount">0</strong></span>
+            <span>記録 <strong id="testCount">0</strong></span>
             <span>対象 <strong id="testTotal">0</strong></span>
             <span>残り <strong id="testRemaining">0</strong></span>
+            <span>一致 <strong id="testMatch">0</strong></span>
+            <span>不一致 <strong id="testMismatch">0</strong></span>
+            <span>無反応 <strong id="testNoEvent">0</strong></span>
           </div>
-          <div id="lastEvent" class="lastEvent">キーを押すと code / key / keyCode を表示します。</div>
+
+          <div id="lastEvent" class="lastEvent">検査を開始すると、指定した物理キーに次のKeyboardEventを紐づけます。</div>
           <div id="unmatchedEvent" class="unmatchedEvent" hidden></div>
-          <p class="note">検査中はページ上のショートカット動作をできるだけ抑止します。Fnは通常ブラウザへ単独キーとして届かないため、検査対象から除外します。</p>
+          <p class="note">
+            この検査は現在のRK65の設定内容に依存しません。画面が指定した<strong>物理キー</strong>へ、その瞬間に届いた実測イベントを保存します。
+            すでにリマップ済みでも「物理: 左Alt → 実測: MetaLeft」のように記録できます。Fnは通常のKeyboardEventでは単独取得できないため対象外です。
+          </p>
         </div>
 
         <div class="sectionTitle">Protocol tools</div>
