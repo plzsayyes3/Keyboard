@@ -3,126 +3,83 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>RK65 JIS Mapper — Device Probe</title>
-  <style>
-    :root { color-scheme: light dark; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-    body { margin:0; background:#111; color:#eee; min-height:100vh; }
-    main { max-width:900px; margin:0 auto; padding:32px 20px 64px; }
-    h1 { font-size:28px; margin:0 0 8px; }
-    p { color:#aaa; line-height:1.7; }
-    .card { border:1px solid #333; border-radius:16px; padding:18px; margin-top:18px; background:#181818; }
-    button { appearance:none; border:0; border-radius:12px; padding:12px 18px; font-weight:700; font-size:16px; cursor:pointer; background:#eee; color:#111; }
-    button:disabled { opacity:.45; cursor:not-allowed; }
-    pre { white-space:pre-wrap; word-break:break-word; background:#0c0c0c; border-radius:12px; padding:14px; overflow:auto; font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace; }
-    .ok { color:#9fe3a5; } .warn { color:#ffd37a; } .bad { color:#ff9a9a; }
-    code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
-  </style>
+  <meta name="theme-color" content="#0b0d10" />
+  <title>RK65 JIS Mapper</title>
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-<main>
-  <h1>RK65 JIS Mapper</h1>
-  <p>Step 1: RK65 のUSB/HID情報を確認します。このページは読み取り専用で、キーマップやファームウェアを書き換えません。</p>
+  <main class="shell">
+    <header class="top">
+      <div>
+        <h1>RK65 JIS Mapper</h1>
+        <p class="sub">RK65 日本語配列を、物理キーから直感的に編集。通常キーに加えてJISキーとRAW firmware codeを直接指定できます。</p>
+      </div>
+      <div class="actions">
+        <button class="btn primary" id="connect">RK65を接続</button>
+        <button class="btn" id="exportBtn">JSON保存</button>
+        <label class="fileLabel">JSON読込<input type="file" id="importInput" accept="application/json,.json" /></label>
+      </div>
+    </header>
 
-  <div class="card">
-    <div id="support"></div>
-    <p>RK65をUSBで接続し、Chrome / Edge / Operaで「デバイスを選択」を押してください。</p>
-    <button id="pick">デバイスを選択</button>
-    <button id="copy" disabled>結果をコピー</button>
-  </div>
+    <div id="support" class="status"></div>
+    <div id="device" class="status">未接続。PC版 Chrome / Edge / Opera から接続情報を取得できます。</div>
+    <div id="saved" class="meta"></div>
+    <pre id="fatal" hidden></pre>
 
-  <div class="card">
-    <strong>検出結果</strong>
-    <pre id="out">まだ接続していません。</pre>
-  </div>
-</main>
-<script>
-const out = document.querySelector('#out');
-const pick = document.querySelector('#pick');
-const copy = document.querySelector('#copy');
-const support = document.querySelector('#support');
+    <div class="grid">
+      <section class="card">
+        <h2>RK-R65 JIS · PID 01F7 candidate</h2>
+        <div class="keyboardWrap">
+          <div id="keyboard" class="keyboard" aria-label="RK65 JIS keyboard layout"></div>
+        </div>
+        <div class="legend">
+          <span><i class="dot"></i>変更あり</span>
+          <span>キー内の小文字はRK設定上のK番号</span>
+        </div>
 
-function hex(n, width=4) {
-  return '0x' + Number(n ?? 0).toString(16).padStart(width, '0');
-}
+        <div class="sectionTitle">Protocol tools</div>
+        <div class="row">
+          <button class="btn" id="copyPackets">9レポートをコピー</button>
+          <button class="btn" id="copyDiag">診断情報をコピー</button>
+          <button class="btn" id="resetAll">変更を全初期化</button>
+        </div>
+        <p class="note">
+          9レポートは既知のRK legacy keymap形式の<strong>プレビュー生成のみ</strong>です。
+          公式Web Appがこの個体に使う実通信を確認するまではキーボードへ送信しません。
+        </p>
+      </section>
 
-function simplifyCollection(c) {
-  return {
-    usagePage: hex(c.usagePage),
-    usage: hex(c.usage),
-    type: c.type ?? null,
-    children: (c.children || []).map(simplifyCollection),
-    inputReports: (c.inputReports || []).map(r => ({
-      reportId: r.reportId,
-      items: (r.items || []).map(i => ({
-        reportSize: i.reportSize,
-        reportCount: i.reportCount,
-        usageMinimum: i.usageMinimum,
-        usageMaximum: i.usageMaximum,
-        isAbsolute: i.isAbsolute,
-        isArray: i.isArray
-      }))
-    })),
-    outputReports: (c.outputReports || []).map(r => ({
-      reportId: r.reportId,
-      items: (r.items || []).map(i => ({
-        reportSize: i.reportSize,
-        reportCount: i.reportCount
-      }))
-    })),
-    featureReports: (c.featureReports || []).map(r => ({
-      reportId: r.reportId,
-      items: (r.items || []).map(i => ({
-        reportSize: i.reportSize,
-        reportCount: i.reportCount
-      }))
-    }))
-  };
-}
+      <aside class="card">
+        <div id="selectedName" class="inspectorTitle">キーを選択</div>
+        <div id="selectedMeta" class="meta">左のキーボードから変更したいキーを押してください。</div>
 
-if (!('hid' in navigator)) {
-  support.innerHTML = '<span class="bad">WebHID非対応ブラウザです。デスクトップ版Chrome / Edge / Operaを使ってください。</span>';
-  pick.disabled = true;
-} else {
-  support.innerHTML = '<span class="ok">WebHID対応ブラウザです。</span>';
-}
+        <div class="codes">
+          <div class="codebox"><small>DEFAULT</small><code id="defaultCode">—</code></div>
+          <div class="codebox"><small>CURRENT</small><code id="currentCode">—</code></div>
+        </div>
 
-let lastText = '';
+        <div class="sectionTitle">RAW firmware code</div>
+        <div class="raw">
+          <input id="rawCode" placeholder="0x00000400" autocomplete="off" spellcheck="false" />
+          <button class="btn primary" id="applyRaw" disabled>反映</button>
+        </div>
+        <p class="note">16進数は <code>0x</code> 付き、または10進数で入力。これはまずブラウザ内のキーマップに反映されます。</p>
 
-pick.addEventListener('click', async () => {
-  try {
-    const devices = await navigator.hid.requestDevice({ filters: [] });
-    if (!devices.length) {
-      out.textContent = 'デバイスが選択されませんでした。';
-      return;
-    }
+        <div class="sectionTitle">割り当て候補</div>
+        <input id="targetSearch" class="search" placeholder="A / Ctrl / 無変換 / 0x8B00…" />
+        <div id="targets" class="targets"></div>
 
-    const rows = [];
-    for (const d of devices) {
-      const info = {
-        productName: d.productName,
-        vendorId: hex(d.vendorId),
-        productId: hex(d.productId),
-        opened: d.opened,
-        collections: (d.collections || []).map(simplifyCollection)
-      };
-      rows.push(info);
-    }
+        <div class="row">
+          <button class="btn" id="resetKey" disabled>このキーを既定値へ</button>
+        </div>
 
-    lastText = JSON.stringify(rows, null, 2);
-    out.textContent = lastText;
-    copy.disabled = false;
-  } catch (e) {
-    out.textContent = 'ERROR\n' + (e?.stack || e);
-  }
-});
+        <div id="writeState" class="locked">HARDWARE WRITE: LOCKED</div>
+        <p class="note">解除条件: 実機VID/PID確認 + 公式 <code>drive.rkgaming.com</code> のR65書き込み方式との照合。</p>
+      </aside>
+    </div>
+  </main>
 
-copy.addEventListener('click', async () => {
-  if (!lastText) return;
-  await navigator.clipboard.writeText(lastText);
-  const old = copy.textContent;
-  copy.textContent = 'コピーしました';
-  setTimeout(() => copy.textContent = old, 1200);
-});
-</script>
+  <div id="toast" class="toast"></div>
+  <script type="module" src="./app.js"></script>
 </body>
 </html>
