@@ -23,6 +23,7 @@ function hidFw(usage) { return (usage & 0xff) << 8; }
 function buildTargets() {
   const out = [];
   const add = (label, fw, group="基本") => out.push({label, fw, group});
+  add("無効 / No key", 0x00000000, "基本");
   add("Esc", hidFw(0x29)); add("Tab", hidFw(0x2b)); add("Enter", hidFw(0x28));
   add("Backspace", hidFw(0x2a)); add("Space", hidFw(0x2c)); add("Delete", hidFw(0x4c));
   add("Insert", hidFw(0x49)); add("Home", hidFw(0x4a)); add("End", hidFw(0x4d));
@@ -43,6 +44,18 @@ function buildTargets() {
   add("Right Alt", 0x400000, "修飾");
   add("Right Win / Cmd", 0x800000, "修飾");
   add("Fn", 0x0000b000, "RK");
+
+  add("- / _", hidFw(0x2d), "記号");
+  add("= / +", hidFw(0x2e), "記号");
+  add("[ / {", hidFw(0x2f), "記号");
+  add("] / }", hidFw(0x30), "記号");
+  add("\\ / |", hidFw(0x31), "記号");
+  add("; / :", hidFw(0x33), "記号");
+  add("' / \"", hidFw(0x34), "記号");
+  add("` / ~", hidFw(0x35), "記号");
+  add(", / <", hidFw(0x36), "記号");
+  add(". / >", hidFw(0x37), "記号");
+  add("/ / ?", hidFw(0x38), "記号");
 
   add("JIS \\ / _ (INT1)", hidFw(0x87), "JIS");
   add("かな / Katakana-Hiragana (INT2)", hidFw(0x88), "JIS");
