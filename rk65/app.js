@@ -110,7 +110,7 @@ function saveLocal() {
 }
 
 function testStorageKey() {
-  return "rk65_keytest_" + state.profile.id;
+  return "rk65_keytest_v2_" + state.profile.id;
 }
 
 function loadTestState() {
