@@ -29,3 +29,23 @@ PID 01F7 は公式Web App `https://drive.rkgaming.com` の対応対象ですが�
 候補プロファイルの物理位置・bIndexは、Kludge Knightに収録されているRK公式ソフト由来の `public/rk/Dev/01F7/KB.ini` を調査して作成しています。
 
 USB HIDのJIS International key名称はQMKのBasic Keycodes / USB HID Usageに対応させています。
+
+
+## キー検査モード
+
+RK65の物理キーを1つずつ押し、ブラウザに届いた `KeyboardEvent.code` を物理配列上で照合できます。
+
+- 認識したキーを緑表示
+- 押下中キーを明るく表示
+- 認識数 / 対象数 / 残数を表示
+- `code / key / keyCode / location` を記録
+- 想定外のイベントは「未割当イベント」として記録
+- 結果をJSON形式でクリップボードへコピー可能
+- 検査結果はlocalStorageへ保存
+- Fnは通常のブラウザKeyboardEventに単独では現れないため対象外
+
+JIS固有キーの期待値:
+- ¥: `IntlYen`
+- 無変換: `NonConvert`
+- 変換: `Convert`
+- かな: `KanaMode`
