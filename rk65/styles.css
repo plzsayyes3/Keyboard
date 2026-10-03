@@ -75,6 +75,7 @@ h1{font-size:27px;margin:0 0 6px}
 .guideEyebrow{font-size:10px;letter-spacing:.12em;color:var(--accent);font-weight:800}
 .guideKeyLabel{font-size:28px;font-weight:800;margin-top:4px}
 .guideKeyMeta{font:11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);margin-top:5px}
+.fnReportTest{margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#11161b}
 .key.tested-match{background:#183b2f;border-color:#65d5aa}
 .key.tested-mismatch{background:#3a2b16;border-color:#d9a64f}
 .key.tested-no-event{background:#2a2d31;border-color:#78818a;border-style:dashed}

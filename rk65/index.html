@@ -72,9 +72,15 @@
 
           <div id="lastEvent" class="lastEvent">検査を開始すると、指定した物理キーに次のKeyboardEventを紐づけます。</div>
           <div id="unmatchedEvent" class="unmatchedEvent" hidden></div>
+          <div class="fnReportTest">
+            <div class="row">
+              <button class="btn" id="toggleFnReport" disabled>Fnの入力レポート読取を開始</button>
+              <span id="fnReportStatus" class="meta">RK65接続後、Fnを単独で押して入力レポートを確認できます。</span>
+            </div>
+          </div>
           <p class="note">
             この検査は現在のRK65の設定内容に依存しません。画面が指定した<strong>物理キー</strong>へ、その瞬間に届いた実測イベントを保存します。
-            すでにリマップ済みでも「物理: 左Alt → 実測: MetaLeft」のように記録できます。Fnは通常のKeyboardEventでは単独取得できないため対象外です。
+            すでにリマップ済みでも「物理: 左Alt → 実測: MetaLeft」のように記録できます。Fnは通常イベントに加え、接続済みRK65から入力レポートを読み取って確認できます。
           </p>
         </div>
 

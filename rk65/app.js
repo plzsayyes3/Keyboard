@@ -21,7 +21,9 @@ const state = {
   pressedCodes: new Set(),
   testEvents: [],
   unmatchedEvents: [],
-  waitingForRelease: false
+  waitingForRelease: false,
+  fnReportCapture: null,
+  fnBrowserEvents: []
 };
 
 const TARGETS = buildTargets();
@@ -91,6 +93,7 @@ async function init() {
   updateInspector();
   updateSupport();
   bind();
+  updateFnReportUI();
 }
 
 function storageKey() {
@@ -119,6 +122,10 @@ function loadTestState() {
     state.testedKeys = saved.testedKeys && typeof saved.testedKeys === "object" ? saved.testedKeys : {};
     state.testEvents = Array.isArray(saved.testEvents) ? saved.testEvents.slice(-200) : [];
     state.unmatchedEvents = Array.isArray(saved.unmatchedEvents) ? saved.unmatchedEvents.slice(-50) : [];
+    state.fnReportCapture = saved.fnReportCapture && typeof saved.fnReportCapture === "object"
+      ? {...saved.fnReportCapture, active: false, status: saved.fnReportCapture.active ? "interrupted" : saved.fnReportCapture.status}
+      : null;
+    state.fnBrowserEvents = Array.isArray(saved.fnBrowserEvents) ? saved.fnBrowserEvents.slice(-20) : [];
   } catch {
     state.testedKeys = {};
     state.testEvents = [];
@@ -130,7 +137,9 @@ function saveTestState() {
   localStorage.setItem(testStorageKey(), JSON.stringify({
     testedKeys: state.testedKeys,
     testEvents: state.testEvents.slice(-200),
-    unmatchedEvents: state.unmatchedEvents.slice(-50)
+    unmatchedEvents: state.unmatchedEvents.slice(-50),
+    fnReportCapture: state.fnReportCapture,
+    fnBrowserEvents: state.fnBrowserEvents.slice(-20)
   }));
 }
 
@@ -149,6 +158,8 @@ function bind() {
   $("#noEventTest").addEventListener("click", recordNoEvent);
   $("#resetTest").addEventListener("click", resetTest);
   $("#copyTest").addEventListener("click", copyTestResults);
+  $("#toggleFnReport").addEventListener("click", toggleFnReportCapture);
+  window.addEventListener("keydown", captureFnKeyboardEvent, true);
   window.addEventListener("keydown", handleTestKeyDown, true);
   window.addEventListener("keyup", handleTestKeyUp, true);
   window.addEventListener("blur", () => {
@@ -295,6 +306,11 @@ function toggleTestMode() {
 
 function handleTestKeyDown(event) {
   if (!state.testMode) return;
+  if (state.fnReportCapture?.active) {
+    event.preventDefault();
+    event.stopPropagation();
+    return;
+  }
   if (event.repeat || state.waitingForRelease) {
     event.preventDefault();
     event.stopPropagation();
@@ -352,6 +368,87 @@ function handleTestKeyDown(event) {
 
   renderKeyboard();
   updateTestUI();
+}
+
+function captureFnKeyboardEvent(event) {
+  if (!state.fnReportCapture?.active || state.fnBrowserEvents.length >= 20) return;
+  state.fnBrowserEvents.push({
+    at: new Date().toISOString(),
+    code: event.code || "",
+    key: event.key || "",
+    keyCode: event.keyCode,
+    location: event.location
+  });
+  state.fnReportCapture.keyboardEventObserved = true;
+  saveTestState();
+  updateFnReportUI();
+}
+
+function handleFnInputReport(event) {
+  if (!state.fnReportCapture?.active) return;
+  const bytes = Array.from(new Uint8Array(event.data.buffer, event.data.byteOffset, event.data.byteLength));
+  state.fnReportCapture.reports.push({
+    at: new Date().toISOString(),
+    reportId: event.reportId,
+    dataHex: bytes.map(value => value.toString(16).padStart(2, "0")).join(" ").toUpperCase(),
+    byteLength: bytes.length
+  });
+  state.fnReportCapture.reports = state.fnReportCapture.reports.slice(-20);
+  saveTestState();
+  updateFnReportUI();
+}
+
+function toggleFnReportCapture() {
+  if (state.fnReportCapture?.active) {
+    state.device?.removeEventListener("inputreport", handleFnInputReport);
+    state.fnReportCapture.active = false;
+    state.fnReportCapture.finishedAt = new Date().toISOString();
+    state.fnReportCapture.status = state.fnReportCapture.reports.length
+      ? "input-report-seen"
+      : state.fnBrowserEvents.length
+        ? "keyboard-event-seen"
+        : "no-report";
+  } else {
+    if (!state.device?.opened) {
+      showToast("先にRK65を接続してください", true);
+      return;
+    }
+    state.fnBrowserEvents = [];
+    state.fnReportCapture = {
+      startedAt: new Date().toISOString(),
+      active: true,
+      status: "listening",
+      reports: [],
+      keyboardEventObserved: false,
+      inputReportInterfaces: (state.device.collections || []).reduce((total, collection) =>
+        total + (collection.inputReports || []).length, 0)
+    };
+    state.device.addEventListener("inputreport", handleFnInputReport);
+  }
+  saveTestState();
+  updateFnReportUI();
+}
+
+function updateFnReportUI() {
+  const button = $("#toggleFnReport");
+  const status = $("#fnReportStatus");
+  if (!button || !status) return;
+  const capture = state.fnReportCapture;
+  button.disabled = !capture?.active && !state.device?.opened;
+  button.textContent = capture?.active ? "Fn入力レポート読取を終了" : "Fnの入力レポート読取を開始";
+  if (capture?.active) {
+    status.textContent = `Fnを単独で押してください · 入力レポート ${capture.reports.length}件 / KeyboardEvent ${state.fnBrowserEvents.length}件`;
+  } else if (capture?.status === "input-report-seen") {
+    status.textContent = `読取完了 · 入力レポート ${capture.reports.length}件 / KeyboardEvent ${state.fnBrowserEvents.length}件。Fnを押した間に届いたデータを保存しました。`;
+  } else if (capture?.status === "keyboard-event-seen") {
+    status.textContent = `KeyboardEvent ${state.fnBrowserEvents.length}件を保存しました。入力レポートは届いていません。`;
+  } else if (capture?.status === "no-report") {
+    status.textContent = "読取中にイベントは届きませんでした。Fnが独立レポートを送らない可能性があります。";
+  } else if (capture?.status === "interrupted") {
+    status.textContent = "前回のFn読取はページ再読み込みで中断しました。結果はJSONに保持されています。";
+  } else if (!state.device?.opened) {
+    status.textContent = "RK65接続後、Fnを単独で押して入力レポートを確認できます。";
+  }
 }
 
 function handleTestKeyUp(event) {
@@ -427,11 +524,15 @@ function resetTest() {
   state.pressedCodes.clear();
   state.waitingForRelease = false;
   state.testIndex = 0;
+  if (state.fnReportCapture?.active) state.device?.removeEventListener("inputreport", handleFnInputReport);
+  state.fnReportCapture = null;
+  state.fnBrowserEvents = [];
   saveTestState();
   $("#lastEvent").textContent = "検査を開始すると、指定した物理キーに次のKeyboardEventを紐づけます。";
   $("#unmatchedEvent").hidden = true;
   renderKeyboard();
   updateTestUI();
+  updateFnReportUI();
   showToast("キー検査結果をリセットしました");
 }
 
@@ -483,7 +584,7 @@ async function copyTestResults() {
     profile: state.profile.id,
     generatedAt: new Date().toISOString(),
     method: "guided-physical-key-capture",
-    results: targets.map(key => {
+    results: [ ...targets.map(key => {
       const record = state.testedKeys[key.id] || null;
       return {
         physicalKeyId: key.id,
@@ -498,14 +599,17 @@ async function copyTestResults() {
         status: record?.status ?? "untested",
         recordedAt: record?.at ?? null
       };
-    }),
-    excluded: [
-      {
-        physicalKeyId: "K61",
-        physicalLabel: "Fn",
-        reason: "通常ブラウザへ単独KeyboardEventとして届かないためガイド式KeyboardEvent検査の対象外"
-      }
-    ],
+    }), {
+      physicalKeyId: "K61",
+      physicalLabel: "Fn",
+      expected: { firmwareCode: "0x0000B000", eventCode: "Fn (platform-dependent)" },
+      observed: {
+        inputReports: state.fnReportCapture?.reports || [],
+        keyboardEvents: state.fnBrowserEvents
+      },
+      status: state.fnReportCapture?.status || (state.fnBrowserEvents.length ? "keyboard-event-seen" : "not-tested"),
+      reason: "WebHID inputreport と KeyboardEvent の読み取り結果"
+    }],
     recentEvents: state.testEvents.slice(-150)
   };
 
@@ -604,6 +708,7 @@ async function connect() {
       `${device.productName || "RK Keyboard"} / VID ${formatHex(device.vendorId,4)} / PID ${formatHex(device.productId,4)}` +
       (samePid ? " / 01F7候補一致" : " / 01F7とは別PID");
     $("#device").className = samePid ? "status ok" : "status warn";
+    updateFnReportUI();
     showToast("接続情報を取得しました。書き込みはまだロック中です。");
   } catch (e) {
     showToast(e?.message || String(e), true);
