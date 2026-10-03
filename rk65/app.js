@@ -666,22 +666,37 @@ function exactTargetDeviceStatus() {
   return {ok:true, reason:"258A:01F7 / report 0x0A確認"};
 }
 
+function nonMacWriteOverrides() {
+  const allowed = new Set([hidFw(0x90), hidFw(0x91)]);
+  return Object.entries(state.overrides).filter(([, value]) => {
+    try {
+      return !allowed.has(parseFirmwareCode(value));
+    } catch {
+      return true;
+    }
+  });
+}
+
 function updateWriteUI() {
   const button = $("#writeHardware");
   const stateBox = $("#writeState");
   const ack = !!$("#writeAck")?.checked;
   const target = exactTargetDeviceStatus();
   const changed = Object.keys(state.overrides).length;
+  const nonMac = nonMacWriteOverrides();
 
   if (!button || !stateBox) return;
 
-  button.disabled = !(target.ok && ack && changed > 0);
+  button.disabled = !(target.ok && ack && changed > 0 && nonMac.length === 0);
 
   if (!target.ok) {
     stateBox.textContent = "HARDWARE WRITE: LOCKED · " + target.reason;
     stateBox.className = "locked";
   } else if (!changed) {
     stateBox.textContent = "HARDWARE WRITE: READY · 変更なし";
+    stateBox.className = "locked";
+  } else if (nonMac.length) {
+    stateBox.textContent = `HARDWARE WRITE: LOCKED · LANG1/LANG2以外の変更 ${nonMac.length}件`;
     stateBox.className = "locked";
   } else if (!ack) {
     stateBox.textContent = `HARDWARE WRITE: READY · ${changed}キー変更 · 安全確認待ち`;
@@ -711,6 +726,13 @@ async function writeHardware() {
     return;
   }
 
+  const nonMac = nonMacWriteOverrides();
+  if (nonMac.length) {
+    showToast("今回はLANG1/LANG2以外の本体書き込みを禁止しています", true);
+    updateWriteUI();
+    return;
+  }
+
   const accepted = window.confirm(
     `RK-R65へ${changed}キー分の変更を含む全キーマップを送信します。\n\n` +
     "RK firmwareの仕様上、1キー変更でも全キーマップを書き込みます。\n" +
@@ -737,7 +759,7 @@ async function writeHardware() {
     $("#writeState").className = "status warn";
     showToast("書き込み失敗: " + (e?.message || String(e)), true);
   } finally {
-    button.textContent = "現在のキーマップを本体へ書き込む";
+    button.textContent = "かな / 英数の変更を本体へ書き込む";
     updateWriteUI();
   }
 }
