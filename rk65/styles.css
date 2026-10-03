@@ -46,3 +46,27 @@ h1{font-size:27px;margin:0 0 6px}
 @media(max-width:820px){
   .top{display:block}.actions{justify-content:flex-start;margin-top:14px}.grid{grid-template-columns:1fr}.targets{grid-template-columns:1fr 1fr}
 }
+
+.keytest{margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#0e1217}
+.keytestHead{display:flex;gap:14px;align-items:flex-start;justify-content:space-between}
+.keytestTitle{margin:0 0 4px}
+.keytestActions{margin-top:0;justify-content:flex-end}
+.testSummary{font-size:14px;font-weight:700}
+.testProgress{height:7px;background:#202832;border-radius:999px;overflow:hidden;margin:12px 0 8px}
+.testProgress span{display:block;width:0;height:100%;background:var(--accent);transition:width .15s}
+.testStats{display:flex;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+.testStats strong{color:var(--text)}
+.lastEvent,.unmatchedEvent{margin-top:10px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:#0a0d11;font:11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all}
+.unmatchedEvent{border-color:#725b2c;color:var(--warn)}
+.btn.activeTest{background:var(--warn);color:#171006;border-color:transparent}
+.key.tested{background:#183b2f;border-color:#65d5aa}
+.key.pressed{background:#d9fff0;color:#07110d;border-color:#d9fff0;outline:3px solid rgba(141,225,194,.35);z-index:4;transform:translateY(1px)}
+.key.pressed small{color:#34554a}
+.key.browser-excluded{border-style:dashed}
+.key-test-mode .key{cursor:default}
+.test-ok-dot{background:#183b2f;border-color:#65d5aa}
+.test-current-dot{background:#d9fff0;border-color:#d9fff0}
+@media(max-width:820px){
+  .keytestHead{display:block}
+  .keytestActions{justify-content:flex-start;margin-top:10px}
+}
