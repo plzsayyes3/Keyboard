@@ -53,6 +53,8 @@ function buildTargets() {
   add("Right Alt", 0x400000, "修飾");
   add("Right Win / Cmd", 0x800000, "修飾");
   add("Fn", 0x0000b000, "RK");
+  add("かな / LANG1 (macOS)", hidFw(0x90), "Mac");
+  add("英数 / LANG2 (macOS)", hidFw(0x91), "Mac");
 
   add("- / _", hidFw(0x2d), "記号");
   add("= / +", hidFw(0x2e), "記号");
@@ -159,6 +161,8 @@ function bind() {
   $("#resetTest").addEventListener("click", resetTest);
   $("#copyTest").addEventListener("click", copyTestResults);
   $("#toggleFnReport").addEventListener("click", toggleFnReportCapture);
+  $("#writeAck").addEventListener("change", updateWriteUI);
+  $("#writeHardware").addEventListener("click", writeHardware);
   window.addEventListener("keydown", captureFnKeyboardEvent, true);
   window.addEventListener("keydown", handleTestKeyDown, true);
   window.addEventListener("keyup", handleTestKeyUp, true);
@@ -636,10 +640,128 @@ function updateInspector() {
   $("#rawCode").value = key ? formatHex(parseFirmwareCode(currentCode(key))) : "";
   $("#applyRaw").disabled = !key;
   $("#resetKey").disabled = !key;
-  $("#writeState").textContent = "HARDWARE WRITE: LOCKED";
-  $("#writeState").title = "実機のPIDと公式Web Appの書き込みプロトコル確認後に解除します";
+  updateWriteUI();
   renderTargets();
   updateTestUI();
+}
+
+function exactTargetDeviceStatus() {
+  const device = state.device;
+  if (!device?.opened) return {ok:false, reason:"RK65未接続"};
+
+  const expectedVid = parseInt(state.profile.vendorId.slice(2), 16);
+  const expectedPid = parseInt(state.profile.productId.slice(2), 16);
+  if (device.vendorId !== expectedVid || device.productId !== expectedPid) {
+    return {ok:false, reason:`対象外 VID ${formatHex(device.vendorId,4)} / PID ${formatHex(device.productId,4)}`};
+  }
+
+  const configCollection = (device.collections || []).find(collection =>
+    collection.usagePage === CONFIG_USAGE_PAGE && collection.usage === CONFIG_USAGE
+  );
+  if (!configCollection) return {ok:false, reason:"RK設定用HID interface未検出"};
+
+  const hasReport0A = (configCollection.featureReports || []).some(report => report.reportId === 0x0a);
+  if (!hasReport0A) return {ok:false, reason:"Feature Report 0x0A未検出"};
+
+  return {ok:true, reason:"258A:01F7 / report 0x0A確認"};
+}
+
+function nonMacWriteOverrides() {
+  const allowed = new Set([hidFw(0x90), hidFw(0x91)]);
+  return Object.entries(state.overrides).filter(([, value]) => {
+    try {
+      return !allowed.has(parseFirmwareCode(value));
+    } catch {
+      return true;
+    }
+  });
+}
+
+function updateWriteUI() {
+  const button = $("#writeHardware");
+  const stateBox = $("#writeState");
+  const ack = !!$("#writeAck")?.checked;
+  const target = exactTargetDeviceStatus();
+  const changed = Object.keys(state.overrides).length;
+  const nonMac = nonMacWriteOverrides();
+
+  if (!button || !stateBox) return;
+
+  button.disabled = !(target.ok && ack && changed > 0 && nonMac.length === 0);
+
+  if (!target.ok) {
+    stateBox.textContent = "HARDWARE WRITE: LOCKED · " + target.reason;
+    stateBox.className = "locked";
+  } else if (!changed) {
+    stateBox.textContent = "HARDWARE WRITE: READY · 変更なし";
+    stateBox.className = "locked";
+  } else if (nonMac.length) {
+    stateBox.textContent = `HARDWARE WRITE: LOCKED · LANG1/LANG2以外の変更 ${nonMac.length}件`;
+    stateBox.className = "locked";
+  } else if (!ack) {
+    stateBox.textContent = `HARDWARE WRITE: READY · ${changed}キー変更 · 安全確認待ち`;
+    stateBox.className = "locked";
+  } else {
+    stateBox.textContent = `HARDWARE WRITE: READY · ${changed}キー変更`;
+    stateBox.className = "status ok";
+  }
+  stateBox.title = target.reason;
+}
+
+async function writeHardware() {
+  const target = exactTargetDeviceStatus();
+  if (!target.ok) {
+    showToast("書き込み不可: " + target.reason, true);
+    updateWriteUI();
+    return;
+  }
+  if (!$("#writeAck").checked) {
+    showToast("全キーマップ上書きの確認が必要です", true);
+    return;
+  }
+
+  const changed = Object.keys(state.overrides).length;
+  if (!changed) {
+    showToast("書き込む変更がありません", true);
+    return;
+  }
+
+  const nonMac = nonMacWriteOverrides();
+  if (nonMac.length) {
+    showToast("今回はLANG1/LANG2以外の本体書き込みを禁止しています", true);
+    updateWriteUI();
+    return;
+  }
+
+  const accepted = window.confirm(
+    `RK-R65へ${changed}キー分の変更を含む全キーマップを送信します。\n\n` +
+    "RK firmwareの仕様上、1キー変更でも全キーマップを書き込みます。\n" +
+    "このブラウザに記録されていない既存リマップは初期配列へ戻る可能性があります。\n\n" +
+    "続行しますか？"
+  );
+  if (!accepted) return;
+
+  const button = $("#writeHardware");
+  button.disabled = true;
+  button.textContent = "書き込み中…";
+
+  try {
+    const reports = buildLegacyReports(state.profile, state.overrides);
+    for (const report of reports) {
+      const reportId = report[0];
+      await state.device.sendFeatureReport(reportId, report.slice(1));
+    }
+    $("#writeState").textContent = `WRITE COMPLETE · ${changed}キー変更を送信`;
+    $("#writeState").className = "status ok";
+    showToast("RK-R65本体へキーマップを書き込みました");
+  } catch (e) {
+    $("#writeState").textContent = "WRITE FAILED";
+    $("#writeState").className = "status warn";
+    showToast("書き込み失敗: " + (e?.message || String(e)), true);
+  } finally {
+    button.textContent = "かな / 英数の変更を本体へ書き込む";
+    updateWriteUI();
+  }
 }
 
 function renderTargets() {
@@ -709,7 +831,8 @@ async function connect() {
       (samePid ? " / 01F7候補一致" : " / 01F7とは別PID");
     $("#device").className = samePid ? "status ok" : "status warn";
     updateFnReportUI();
-    showToast("接続情報を取得しました。書き込みはまだロック中です。");
+    updateWriteUI();
+    showToast(samePid ? "RK-R65 01F7を接続しました" : "接続しましたが01F7とは別PIDです", !samePid);
   } catch (e) {
     showToast(e?.message || String(e), true);
   }

@@ -12,7 +12,7 @@
     <header class="top">
       <div>
         <h1>RK65 JIS Mapper</h1>
-        <p class="sub">RK65 日本語配列を、物理キーから直感的に編集。通常キーに加えてJISキーとRAW firmware codeを直接指定できます。</p>
+        <p class="sub">RK65 日本語配列を、物理キーから直感的に編集。macOS向けの「かな / 英数（LANG1 / LANG2）」を任意キーへ割り当て、本体へ保存できます。</p>
       </div>
       <div class="actions">
         <button class="btn primary" id="connect">RK65を接続</button>
@@ -112,16 +112,35 @@
         </div>
         <p class="note">RK firmware codeは <code>0x00000400</code>、USB HID Usageは <code>hid:0x04</code> のように直接入力できます。まずブラウザ内のキーマップに反映されます。</p>
 
+        <div class="sectionTitle">macOS かな / 英数</div>
+        <p class="note">
+          <strong>かな</strong>は USB HID <code>LANG1 = 0x90</code>、
+          <strong>英数</strong>は <code>LANG2 = 0x91</code> として割り当てます。
+          下の候補から選択してください。
+        </p>
+
         <div class="sectionTitle">割り当て候補</div>
-        <input id="targetSearch" class="search" placeholder="A / Ctrl / 無変換 / 0x8B00…" />
+        <input id="targetSearch" class="search" placeholder="かな / 英数 / A / Ctrl / 0x9000…" />
         <div id="targets" class="targets"></div>
 
         <div class="row">
           <button class="btn" id="resetKey" disabled>このキーを既定値へ</button>
         </div>
 
-        <div id="writeState" class="locked">HARDWARE WRITE: LOCKED</div>
-        <p class="note">解除条件: 実機VID/PID確認 + 公式 <code>drive.rkgaming.com</code> のR65書き込み方式との照合。</p>
+        <div class="sectionTitle">本体へ書き込み</div>
+        <label class="note" style="display:block">
+          <input type="checkbox" id="writeAck" />
+          RKの仕様上、1キー変更でも全キーマップを書き込むことを理解しました。
+          このブラウザに記録されていない既存リマップは初期配列へ戻る可能性があります。
+        </label>
+        <div class="row">
+          <button class="btn primary" id="writeHardware" disabled>かな / 英数の変更を本体へ書き込む</button>
+        </div>
+        <div id="writeState" class="locked">HARDWARE WRITE: LOCKED · RK65未接続</div>
+        <p class="note">
+          書き込みは VID <code>0x258A</code> / PID <code>0x01F7</code>、
+          RK設定用HID interface、Feature Report <code>0x0A</code> がすべて一致し、変更内容が LANG1 / LANG2 のみの場合だけ有効になります。
+        </p>
       </aside>
     </div>
   </main>
