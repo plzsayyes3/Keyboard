@@ -1,0 +1,1017 @@
+{
+  "id": "rk-r65-jis-01f7",
+  "name": "RK-R65 JIS (candidate profile)",
+  "vendorId": "0x258A",
+  "productId": "0x01F7",
+  "source": {
+    "upstream": "vinc3m1/kludgeknight public/rk/Dev/01F7/KB.ini",
+    "upstreamDeviceName": "RK-R65 Keyboard",
+    "officialWebApp": "https://drive.rkgaming.com"
+  },
+  "status": "unverified-on-user-hardware",
+  "notes": [
+    "Physical positions and bIndex values are derived from the RK 01F7 configuration.",
+    "K67/K68/K69/K70 are interpreted as JIS Yen/Muhenkan/Henkan/Kana from their physical positions and USB HID International usages.",
+    "Hardware writes remain locked until the user's actual PID and protocol are confirmed."
+  ],
+  "canvas": {
+    "width": 820,
+    "height": 285
+  },
+  "keys": [
+    {
+      "id": "K1",
+      "label": "Esc",
+      "vk": "0x1B",
+      "bIndex": 1,
+      "defaultFw": "0x2900",
+      "rect": [
+        32,
+        38,
+        62,
+        72
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K2",
+      "label": "1",
+      "vk": "0x31",
+      "bIndex": 7,
+      "defaultFw": "0x1E00",
+      "rect": [
+        80,
+        37,
+        110,
+        71
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K3",
+      "label": "2",
+      "vk": "0x32",
+      "bIndex": 13,
+      "defaultFw": "0x1F00",
+      "rect": [
+        128,
+        38,
+        158,
+        72
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K4",
+      "label": "3",
+      "vk": "0x33",
+      "bIndex": 19,
+      "defaultFw": "0x2000",
+      "rect": [
+        177,
+        38,
+        207,
+        72
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K5",
+      "label": "4",
+      "vk": "0x34",
+      "bIndex": 25,
+      "defaultFw": "0x2100",
+      "rect": [
+        225,
+        38,
+        255,
+        72
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K6",
+      "label": "5",
+      "vk": "0x35",
+      "bIndex": 31,
+      "defaultFw": "0x2200",
+      "rect": [
+        273,
+        38,
+        303,
+        72
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K7",
+      "label": "6",
+      "vk": "0x36",
+      "bIndex": 37,
+      "defaultFw": "0x2300",
+      "rect": [
+        322,
+        39,
+        352,
+        73
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K8",
+      "label": "7",
+      "vk": "0x37",
+      "bIndex": 43,
+      "defaultFw": "0x2400",
+      "rect": [
+        369,
+        39,
+        399,
+        73
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K9",
+      "label": "8",
+      "vk": "0x38",
+      "bIndex": 49,
+      "defaultFw": "0x2500",
+      "rect": [
+        418,
+        39,
+        448,
+        73
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K10",
+      "label": "9",
+      "vk": "0x39",
+      "bIndex": 55,
+      "defaultFw": "0x2600",
+      "rect": [
+        466,
+        38,
+        496,
+        72
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K11",
+      "label": "0",
+      "vk": "0x30",
+      "bIndex": 61,
+      "defaultFw": "0x2700",
+      "rect": [
+        514,
+        38,
+        544,
+        72
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K12",
+      "label": "- / =",
+      "vk": "0xBD",
+      "bIndex": 67,
+      "defaultFw": "0x2D00",
+      "rect": [
+        562,
+        38,
+        592,
+        72
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K13",
+      "label": "^ / ~",
+      "vk": "0xBB",
+      "bIndex": 73,
+      "defaultFw": "0x2E00",
+      "rect": [
+        611,
+        38,
+        641,
+        72
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K14",
+      "label": "Backspace",
+      "vk": "0x08",
+      "bIndex": 85,
+      "defaultFw": "0x2A00",
+      "rect": [
+        707,
+        37,
+        739,
+        71
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K15",
+      "label": "Tab",
+      "vk": "0x09",
+      "bIndex": 2,
+      "defaultFw": "0x2B00",
+      "rect": [
+        32,
+        85,
+        86,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K16",
+      "label": "Q",
+      "vk": "0x51",
+      "bIndex": 8,
+      "defaultFw": "0x1400",
+      "rect": [
+        104,
+        85,
+        134,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K17",
+      "label": "W",
+      "vk": "0x57",
+      "bIndex": 14,
+      "defaultFw": "0x1A00",
+      "rect": [
+        152,
+        85,
+        182,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K18",
+      "label": "E",
+      "vk": "0x45",
+      "bIndex": 20,
+      "defaultFw": "0x0800",
+      "rect": [
+        201,
+        85,
+        231,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K19",
+      "label": "R",
+      "vk": "0x52",
+      "bIndex": 26,
+      "defaultFw": "0x1500",
+      "rect": [
+        249,
+        85,
+        279,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K20",
+      "label": "T",
+      "vk": "0x54",
+      "bIndex": 32,
+      "defaultFw": "0x1700",
+      "rect": [
+        297,
+        85,
+        327,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K21",
+      "label": "Y",
+      "vk": "0x59",
+      "bIndex": 38,
+      "defaultFw": "0x1C00",
+      "rect": [
+        345,
+        85,
+        375,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K22",
+      "label": "U",
+      "vk": "0x55",
+      "bIndex": 44,
+      "defaultFw": "0x1800",
+      "rect": [
+        394,
+        85,
+        424,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K23",
+      "label": "I",
+      "vk": "0x49",
+      "bIndex": 50,
+      "defaultFw": "0x0C00",
+      "rect": [
+        442,
+        85,
+        472,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K24",
+      "label": "O",
+      "vk": "0x4F",
+      "bIndex": 56,
+      "defaultFw": "0x1200",
+      "rect": [
+        490,
+        85,
+        520,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K25",
+      "label": "P",
+      "vk": "0x50",
+      "bIndex": 62,
+      "defaultFw": "0x1300",
+      "rect": [
+        539,
+        85,
+        569,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K26",
+      "label": "@ / `",
+      "vk": "0xDB",
+      "bIndex": 68,
+      "defaultFw": "0x2F00",
+      "rect": [
+        587,
+        85,
+        617,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K27",
+      "label": "[ / {",
+      "vk": "0xDD",
+      "bIndex": 74,
+      "defaultFw": "0x3000",
+      "rect": [
+        635,
+        85,
+        665,
+        119
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K28",
+      "label": "] / }",
+      "vk": "0xDC",
+      "bIndex": 75,
+      "defaultFw": "0x3100",
+      "rect": [
+        647,
+        134,
+        678,
+        168
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K29",
+      "label": "Delete",
+      "vk": "0x2E",
+      "bIndex": 92,
+      "defaultFw": "0x4C00",
+      "rect": [
+        756,
+        86,
+        786,
+        120
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K30",
+      "label": "CapsLock",
+      "vk": "0x14",
+      "bIndex": 3,
+      "defaultFw": "0x3900",
+      "rect": [
+        32,
+        133,
+        96,
+        167
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K31",
+      "label": "A",
+      "vk": "0x41",
+      "bIndex": 9,
+      "defaultFw": "0x0400",
+      "rect": [
+        116,
+        133,
+        146,
+        167
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K32",
+      "label": "S",
+      "vk": "0x53",
+      "bIndex": 15,
+      "defaultFw": "0x1600",
+      "rect": [
+        164,
+        133,
+        194,
+        167
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K33",
+      "label": "D",
+      "vk": "0x44",
+      "bIndex": 21,
+      "defaultFw": "0x0700",
+      "rect": [
+        212,
+        133,
+        242,
+        167
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K34",
+      "label": "F",
+      "vk": "0x46",
+      "bIndex": 27,
+      "defaultFw": "0x0900",
+      "rect": [
+        260,
+        133,
+        290,
+        167
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K35",
+      "label": "G",
+      "vk": "0x47",
+      "bIndex": 33,
+      "defaultFw": "0x0A00",
+      "rect": [
+        309,
+        134,
+        339,
+        168
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K36",
+      "label": "H",
+      "vk": "0x48",
+      "bIndex": 39,
+      "defaultFw": "0x0B00",
+      "rect": [
+        357,
+        134,
+        387,
+        168
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K37",
+      "label": "J",
+      "vk": "0x4A",
+      "bIndex": 45,
+      "defaultFw": "0x0D00",
+      "rect": [
+        405,
+        134,
+        435,
+        168
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K38",
+      "label": "K",
+      "vk": "0x4B",
+      "bIndex": 51,
+      "defaultFw": "0x0E00",
+      "rect": [
+        453,
+        134,
+        483,
+        168
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K39",
+      "label": "L",
+      "vk": "0x4C",
+      "bIndex": 57,
+      "defaultFw": "0x0F00",
+      "rect": [
+        502,
+        134,
+        532,
+        168
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K40",
+      "label": "; / +",
+      "vk": "0xBA",
+      "bIndex": 63,
+      "defaultFw": "0x3300",
+      "rect": [
+        551,
+        134,
+        581,
+        168
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K41",
+      "label": ": / *",
+      "vk": "0xDE",
+      "bIndex": 69,
+      "defaultFw": "0x3400",
+      "rect": [
+        599,
+        134,
+        629,
+        168
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K42",
+      "label": "Enter",
+      "vk": "0x0D",
+      "bIndex": 81,
+      "defaultFw": "0x2800",
+      "rect": [
+        694,
+        133,
+        737,
+        167
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K43",
+      "label": "LShift",
+      "vk": "0xA0",
+      "bIndex": 4,
+      "defaultFw": "0x20000",
+      "rect": [
+        32,
+        181,
+        123,
+        215
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K44",
+      "label": "Z",
+      "vk": "0x5A",
+      "bIndex": 10,
+      "defaultFw": "0x1D00",
+      "rect": [
+        140,
+        181,
+        170,
+        215
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K45",
+      "label": "X",
+      "vk": "0x58",
+      "bIndex": 16,
+      "defaultFw": "0x1B00",
+      "rect": [
+        189,
+        181,
+        219,
+        215
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K46",
+      "label": "C",
+      "vk": "0x43",
+      "bIndex": 22,
+      "defaultFw": "0x0600",
+      "rect": [
+        237,
+        181,
+        267,
+        215
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K47",
+      "label": "V",
+      "vk": "0x56",
+      "bIndex": 28,
+      "defaultFw": "0x1900",
+      "rect": [
+        285,
+        181,
+        315,
+        215
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K48",
+      "label": "B",
+      "vk": "0x42",
+      "bIndex": 34,
+      "defaultFw": "0x0500",
+      "rect": [
+        334,
+        181,
+        364,
+        215
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K49",
+      "label": "N",
+      "vk": "0x4E",
+      "bIndex": 40,
+      "defaultFw": "0x1100",
+      "rect": [
+        382,
+        182,
+        412,
+        216
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K50",
+      "label": "M",
+      "vk": "0x4D",
+      "bIndex": 46,
+      "defaultFw": "0x1000",
+      "rect": [
+        430,
+        182,
+        460,
+        216
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K51",
+      "label": ",",
+      "vk": "0xBC",
+      "bIndex": 52,
+      "defaultFw": "0x3600",
+      "rect": [
+        478,
+        182,
+        508,
+        216
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K52",
+      "label": ".",
+      "vk": "0xBE",
+      "bIndex": 58,
+      "defaultFw": "0x3700",
+      "rect": [
+        527,
+        182,
+        557,
+        216
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K53",
+      "label": "/",
+      "vk": "0xBF",
+      "bIndex": 64,
+      "defaultFw": "0x3800",
+      "rect": [
+        575,
+        182,
+        605,
+        216
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K54",
+      "label": "RShift",
+      "vk": "0xA1",
+      "bIndex": 82,
+      "defaultFw": "0x200000",
+      "rect": [
+        624,
+        181,
+        688,
+        215
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K55",
+      "label": "Up",
+      "vk": "0x26",
+      "bIndex": 88,
+      "defaultFw": "0x5200",
+      "rect": [
+        708,
+        181,
+        738,
+        215
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K56",
+      "label": "LCtrl",
+      "vk": "0xA2",
+      "bIndex": 5,
+      "defaultFw": "0x10000",
+      "rect": [
+        32,
+        229,
+        75,
+        263
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K57",
+      "label": "LWin",
+      "vk": "0x5B",
+      "bIndex": 11,
+      "defaultFw": "0x80000",
+      "rect": [
+        92,
+        229,
+        135,
+        263
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K58",
+      "label": "LAlt",
+      "vk": "0xA4",
+      "bIndex": 17,
+      "defaultFw": "0x40000",
+      "rect": [
+        152,
+        229,
+        195,
+        263
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K59",
+      "label": "Space",
+      "vk": "0x20",
+      "bIndex": 35,
+      "defaultFw": "0x2C00",
+      "rect": [
+        260,
+        229,
+        400,
+        263
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K60",
+      "label": "RAlt",
+      "vk": "0xA5",
+      "bIndex": 53,
+      "defaultFw": "0x400000",
+      "rect": [
+        514,
+        229,
+        557,
+        263
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K61",
+      "label": "FN",
+      "vk": "0xFA",
+      "bIndex": 59,
+      "defaultFw": "0xB000",
+      "rect": [
+        575,
+        229,
+        618,
+        263
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K62",
+      "label": "Left",
+      "vk": "0x25",
+      "bIndex": 65,
+      "defaultFw": "0x5000",
+      "rect": [
+        659,
+        230,
+        689,
+        264
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K63",
+      "label": "Down",
+      "vk": "0x28",
+      "bIndex": 89,
+      "defaultFw": "0x5100",
+      "rect": [
+        708,
+        230,
+        738,
+        264
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K64",
+      "label": "PgUp",
+      "vk": "0x21",
+      "bIndex": 93,
+      "defaultFw": "0x4B00",
+      "rect": [
+        756,
+        134,
+        786,
+        168
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K65",
+      "label": "PgDn",
+      "vk": "0x22",
+      "bIndex": 94,
+      "defaultFw": "0x4E00",
+      "rect": [
+        756,
+        181,
+        786,
+        215
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K66",
+      "label": "Right",
+      "vk": "0x27",
+      "bIndex": 95,
+      "defaultFw": "0x4F00",
+      "rect": [
+        756,
+        230,
+        786,
+        264
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K67",
+      "label": "¥ / |",
+      "vk": "0xC3",
+      "bIndex": 79,
+      "defaultFw": "0x8900",
+      "rect": [
+        660,
+        37,
+        690,
+        71
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K68",
+      "label": "無変換",
+      "vk": "0xEB",
+      "bIndex": 23,
+      "defaultFw": "0x8B00",
+      "rect": [
+        213,
+        230,
+        243,
+        264
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K69",
+      "label": "変換",
+      "vk": "0xDA",
+      "bIndex": 41,
+      "defaultFw": "0x8A00",
+      "rect": [
+        418,
+        230,
+        448,
+        264
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K70",
+      "label": "かな",
+      "vk": "0xD7",
+      "bIndex": 47,
+      "defaultFw": "0x8800",
+      "rect": [
+        466,
+        230,
+        496,
+        264
+      ],
+      "hidden": false
+    },
+    {
+      "id": "K71",
+      "label": "Mute",
+      "vk": "0x8F",
+      "bIndex": 91,
+      "defaultFw": "0x10000E2",
+      "rect": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "hidden": true
+    }
+  ]
+}
