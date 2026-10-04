@@ -38,6 +38,9 @@ h1{font-size:27px;margin:0 0 6px}
 .layout-key.layout-match{background:#13231f;border-color:#386e5b}.layout-key.layout-different{background:#30201f;border-color:#a04e49}.layout-key.layout-no-reference{background:#20252c;border-color:#58616b}
 .layout-key.layout-match .layout-state{color:#9fe3ca}.layout-key.layout-different .layout-state{color:#ff9b9b}.layout-key.layout-no-reference .layout-state{color:#b2bbc5}
 .layout-key .layout-state{font-size:9px;font-weight:800;line-height:1}.keyComparison{display:grid;gap:10px;margin-top:14px}
+.layout-key .read-label{font-size:clamp(9px,1.2vw,15px);line-height:1;font-weight:800;color:#edf1f5;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.layout-key .physical-position{font-size:clamp(6px,.72vw,9px);color:#84909d;line-height:1;margin-top:2px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.layout-key.layout-unknown .read-label{color:#ffd28b}
 .keyComparisonStatus{padding:9px;border-radius:8px;font-weight:750}.keyComparisonStatus.match{background:#13231f;color:#9fe3ca}.keyComparisonStatus.different{background:#30201f;color:#ff9b9b}.keyComparisonStatus.no-reference{background:#20252c;color:#b2bbc5}
 .comparisonValue{display:grid;gap:4px;padding:10px;border:1px solid var(--line);border-radius:9px}.comparisonValue small{color:var(--muted);font-size:11px}.comparisonValue strong{font-size:16px}.comparisonValue code{font-size:13px;color:#b5c1cc}
 .match-dot{background:#386e5b;border-color:#9fe3ca}.different-dot{background:#a04e49;border-color:#ff9b9b}.no-reference-dot{background:#58616b;border-color:#b2bbc5}

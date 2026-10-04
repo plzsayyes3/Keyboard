@@ -9,6 +9,7 @@ import {
   isBeiYingIdentifyResponse,
   parseBeiYingKeyMatrixResponse,
   decodeBeiYingKeyCode,
+  formatBeiYingKeycapLabel,
   compareBeiYingMatrixKey
 } from "./protocol.js?comparison=1";
 
@@ -139,23 +140,25 @@ function renderKeyboard() {
     const [left, top, right, bottom] = key.rect;
     button.type = "button";
     button.className = `key layout-key layout-${comparison.status}`;
+    if (decoded.label === "不明なコード" || decoded.label === "未割り当て") button.classList.add("layout-unknown");
     if (state.selectedKey?.id === key.id) button.classList.add("selected");
     button.style.left = `${left / width * 100}%`;
     button.style.top = `${top / height * 100}%`;
     button.style.width = `${(right - left) / width * 100}%`;
     button.style.height = `${(bottom - top) / height * 100}%`;
-    const label = document.createElement("span");
-    label.textContent = key.label;
-    const id = document.createElement("small");
-    id.textContent = key.id;
     const assignment = document.createElement("span");
     assignment.className = "read-label";
-    assignment.textContent = decoded.label;
+    assignment.textContent = formatBeiYingKeycapLabel(decoded.label);
+    assignment.setAttribute("aria-label", decoded.label);
+    const physical = document.createElement("small");
+    physical.className = "physical-position";
+    physical.textContent = `${key.label} · ${key.id}`;
     const badge = document.createElement("small");
     badge.className = "layout-state";
     badge.textContent = comparison.status === "match" ? "一致" : comparison.status === "different" ? "差異" : "基準なし";
-    button.title = `${key.label} · ${decoded.label} · ${comparison.status}`;
-    button.append(label, id, assignment, badge);
+    button.title = `物理位置 ${key.label} (${key.id}) · 割り当て ${decoded.label} · ${comparison.status}`;
+    button.setAttribute("aria-label", `${key.label} (${key.id}): ${decoded.label}、${comparison.status}`);
+    button.append(assignment, physical, badge);
     button.addEventListener("click", () => {
       state.selectedKey = key;
       renderKeyboard();

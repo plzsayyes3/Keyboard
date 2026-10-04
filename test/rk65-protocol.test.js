@@ -12,6 +12,7 @@ import {
   summarizeHidCollections,
   buildBeiYingReadRequest,
   decodeBeiYingKeyCode,
+  formatBeiYingKeycapLabel,
   compareBeiYingMatrixKey,
   isBeiYingReadTarget,
   isBeiYingIdentifyResponse,
@@ -242,6 +243,14 @@ test("read key codes show known labels while retaining raw hex for unknowns", ()
   assert.deepEqual(decodeBeiYingKeyCode([1, 0, 0, 0x28]), {
     label: "不明なコード", raw: "01 00 00 28"
   });
+});
+
+test("read keycap labels prioritize the live assignment and use compact Remap-style legends", () => {
+  assert.equal(formatBeiYingKeycapLabel("Backspace"), "BS");
+  assert.equal(formatBeiYingKeycapLabel("J"), "J");
+  assert.equal(formatBeiYingKeycapLabel("⌘ + Enter"), "⌘ + Enter");
+  assert.equal(formatBeiYingKeycapLabel("不明なコード"), "?");
+  assert.equal(formatBeiYingKeycapLabel("未割り当て"), "—");
 });
 
 test("Fn layer backup preserves explicit layer metadata", () => {

@@ -200,6 +200,14 @@ export function decodeBeiYingKeyCode(bytes) {
   return {label: [...modifiers, keyLabel].join(" + "), raw};
 }
 
+export function formatBeiYingKeycapLabel(label) {
+  const compactLabels = new Map([
+    ["Backspace", "BS"], ["Escape", "Esc"], ["CapsLock", "Caps"],
+    ["未割り当て", "—"], ["不明なコード", "?"]
+  ]);
+  return compactLabels.get(label) || label;
+}
+
 export function compareBeiYingMatrixKey(response, referenceSlots, layer, bIndex) {
   const matrix = parseBeiYingKeyMatrixResponse(response, layer);
   if (!Number.isInteger(bIndex) || bIndex < 0 || bIndex >= BEIYING_MATRIX_LENGTH / 4) {
