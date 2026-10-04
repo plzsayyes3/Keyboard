@@ -19,12 +19,20 @@ REPORT_LENGTH = 519
 RESPONSE_LENGTH = 512
 
 
-def request(command: str) -> bytes:
+def matrix_header(layer: int) -> bytes:
+    if layer not in (0, 1):
+        raise ValueError(f"Unsupported key-matrix layer: {layer}")
+    return bytes([REPORT_ID, 0x83, layer, 0x00, 0x01, 0x00, 0xF8, 0x01])
+
+
+def request(command: str, layer: int = 0) -> bytes:
     report = bytearray(REPORT_LENGTH)
     if command == "identify":
         report[:7] = bytes([0x82, 0x01, 0x00, 0x01, 0x00, 0x0A, 0x00])
     elif command == "key-matrix":
-        report[:7] = bytes([0x83, 0x00, 0x00, 0x01, 0x00, 0xF8, 0x01])
+        if layer not in (0, 1):
+            raise ValueError(f"Unsupported key-matrix layer: {layer}")
+        report[:7] = bytes([0x83, layer, 0x00, 0x01, 0x00, 0xF8, 0x01])
     else:
         raise ValueError(f"Unsupported read command: {command}")
     return bytes(report)
@@ -45,10 +53,15 @@ def receive(device, expected_command: int, expected_length: int, delay: float = 
 
 
 def send_read(
-    device, command: str, expected_command: int, expected_length: int, delay: float = 0.0
+    device,
+    command: str,
+    expected_command: int,
+    expected_length: int,
+    delay: float = 0.0,
+    layer: int = 0,
 ) -> bytes:
     # HIDAPI requires the report ID in the first byte of the buffer.
-    sent = device.send_feature_report(bytes([REPORT_ID]) + request(command))
+    sent = device.send_feature_report(bytes([REPORT_ID]) + request(command, layer=layer))
     if sent < REPORT_LENGTH + 1:
         raise RuntimeError(f"Short feature report write: {sent} bytes")
     return receive(device, expected_command, expected_length, delay)
@@ -60,6 +73,13 @@ def main() -> int:
         "--output",
         type=Path,
         help="backup JSON destination (default: timestamped file in current directory)",
+    )
+    parser.add_argument(
+        "--layer",
+        type=int,
+        choices=(0, 1),
+        default=0,
+        help="key-matrix layer to read: 0=base (default), 1=Fn",
     )
     args = parser.parse_args()
 
@@ -107,18 +127,18 @@ def main() -> int:
             raise RuntimeError(f"Identify response too short: {len(identify)} bytes")
         print(f"identify-response length={len(identify)} hex={identify.hex(' ').upper()}")
 
-        matrix = send_read(device, "key-matrix", 0x83, RESPONSE_LENGTH)
+        matrix = send_read(device, "key-matrix", 0x83, RESPONSE_LENGTH, layer=args.layer)
         if len(matrix) != RESPONSE_LENGTH:
             raise RuntimeError(
                 f"Key-matrix response must be {RESPONSE_LENGTH} bytes; received {len(matrix)}"
             )
-        if matrix[:8] != bytes([0x06, 0x83, 0x00, 0x00, 0x01, 0x00, 0xF8, 0x01]):
+        if matrix[:8] != matrix_header(args.layer):
             raise RuntimeError(f"Unexpected key-matrix header: {matrix[:8].hex(' ').upper()}")
 
         henkan_offset = 8 + 41 * 4
         henkan = matrix[henkan_offset : henkan_offset + 4]
         print(
-            f"matrix-response length={len(matrix)} "
+            f"matrix-response layer={args.layer} length={len(matrix)} "
             f"Henkan(slot 41)={henkan.hex(' ').upper()} "
             f"F1(slot 7)={matrix[8 + 7 * 4 : 8 + 8 * 4].hex(' ').upper()}"
         )
@@ -129,6 +149,8 @@ def main() -> int:
         )
         backup = {
             "format": "rk65-beiying-matrix-backup-v1",
+            "layer": args.layer,
+            "layerName": "Fn" if args.layer == 1 else "base",
             "capturedAt": timestamp,
             "device": {
                 "productName": info.get("product_string"),
