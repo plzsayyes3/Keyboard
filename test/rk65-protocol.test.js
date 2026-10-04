@@ -9,7 +9,9 @@ import {
   summarizeReports,
   formatDiagnosticDetails,
   summarizeFeatureReport,
-  summarizeHidCollections
+  summarizeHidCollections,
+  buildBeiYingReadRequest,
+  isBeiYingReadTarget
 } from "../rk65/protocol.js";
 
 const profile = JSON.parse(
@@ -136,4 +138,35 @@ test("HID collection summary exposes feature report item descriptors", () => {
       }]
     }]
   );
+});
+
+test("BeiYing diagnostic requests match the R65 JP read commands", () => {
+  const identify = buildBeiYingReadRequest("identify");
+  const keyMatrix = buildBeiYingReadRequest("key-matrix");
+
+  assert.equal(identify.length, 519);
+  assert.deepEqual(Array.from(identify.slice(0, 8)), [0x82, 0x01, 0, 0x01, 0, 0x0a, 0, 0]);
+  assert.equal(keyMatrix.length, 519);
+  assert.deepEqual(Array.from(keyMatrix.slice(0, 8)), [0x83, 0, 0, 0x01, 0, 0xf8, 0x01, 0]);
+  assert.equal(identify.every((byte, index) => index < 8 || byte === 0), true);
+  assert.equal(keyMatrix.every((byte, index) => index < 8 || byte === 0), true);
+  assert.throws(() => buildBeiYingReadRequest("write"), /読み取り要求/);
+});
+
+test("BeiYing diagnostic reading requires exact R65 JP and 519-byte report 6", () => {
+  const device = {
+    opened: true,
+    vendorId: 0x258a,
+    productId: 0x01f7,
+    collections: [{
+      usagePage: 0xff00,
+      usage: 1,
+      featureReports: [{reportId: 6, items: [{reportSize: 8, reportCount: 519}]}]
+    }]
+  };
+
+  assert.equal(isBeiYingReadTarget(device), true);
+  assert.equal(isBeiYingReadTarget({...device, productId: 0x01f8}), false);
+  assert.equal(isBeiYingReadTarget({...device, collections: []}), false);
+  assert.equal(isBeiYingReadTarget({...device, opened: false}), false);
 });

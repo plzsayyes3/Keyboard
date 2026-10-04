@@ -88,11 +88,13 @@
         <div class="row">
           <button class="btn" id="copyPackets">9レポートをコピー</button>
           <button class="btn" id="copyDiag">診断情報をコピー</button>
+          <button class="btn" id="readDiagnostic" disabled>現在のキー配列を診断読取</button>
           <button class="btn" id="resetAll">変更を全初期化</button>
         </div>
+        <div id="readState" class="meta">対象のRK R65 JPを接続すると診断できます。</div>
         <p class="note">
           9レポートは既知のRK legacy keymap形式の<strong>プレビュー生成のみ</strong>です。
-          公式Web Appがこの個体に使う実通信を確認するまではキーボードへ送信しません。
+          診断読取は公式Web Appと同じ問い合わせをFeature Report <code>0x06</code>へ送信し、応答をConsoleへ表示します。キー設定の書き込みは行いません。
         </p>
       </section>
 
@@ -146,6 +148,6 @@
   </main>
 
   <div id="toast" class="toast"></div>
-  <script type="module" src="./app.js?diagnostics=hid-items-2"></script>
+  <script type="module" src="./app.js?diagnostics=beiying-read-1"></script>
 </body>
 </html>

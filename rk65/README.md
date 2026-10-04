@@ -21,7 +21,7 @@ RK65 日本語配列向けの専用キーマッパーです。
 
 ## 本体への書き込み
 
-Kludge Knight / Rangoli 系で使われているRK legacy keymap方式に合わせ、Feature Report `0x0A` を9本送る書き込み処理を実装しています。
+Kludge Knight / Rangoli 系で使われているRK legacy keymap方式に合わせ、Feature Report `0x0A` を9本送る書き込み処理を実装しています。実機のRK R65 JP (`258A:01F7`) は別のBeiYing方式 (`0xFF00 / 0x0001`、Feature Report `0x06`) と判明しており、この書き込み条件を満たしません。
 
 書き込みボタンは次の条件をすべて満たすまで無効です。
 
@@ -35,7 +35,7 @@ Kludge Knight / Rangoli 系で使われているRK legacy keymap方式に合わ�
 
 ### 重要な制約
 
-RK firmwareは現在の本体キーマップを読み戻せないため、このツールも「現在の外部リマップ」を自動取得できません。
+RK公式Webアプリには、この個体のキー配列を読み取る処理があります。このマッパーでは、読み取り専用の診断結果をConsoleへ出す段階であり、既存の設定を編集画面へ取り込む機能はまだありません。
 
 1キーだけ変更する場合でも、既定配列 + このブラウザで管理している変更を全キーマップとして送信します。そのため、RK公式ソフトなどで過去に設定した変更がブラウザ側に記録されていない場合、その変更は既定値へ戻る可能性があります。
 
@@ -48,6 +48,8 @@ RK firmwareは現在の本体キーマップを読み戻せないため、この
 候補プロファイルの物理位置・bIndexは、Kludge Knightに収録されているRK公式ソフト由来の `public/rk/Dev/01F7/KB.ini` を調査して作成しています。
 
 USB HIDのJIS International key名称はQMKのBasic Keycodes / USB HID Usageに対応させています。
+
+RK R65 JPの読み取り要求は[RK公式Webアプリ](https://drive.rkgaming.com/)の公開コードにある `getPassword` (`0x82`) と `getKeyMatrix` (`0x83`) を参照しています。診断はFeature Report `0x06` への要求と応答確認に限り、取得値を本体書き込みへ使いません。
 
 
 ## ガイド式キー検査モード

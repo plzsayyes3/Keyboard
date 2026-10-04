@@ -45,8 +45,8 @@ function putFirmwareCode(buffer, offset, value) {
  * - 65 bytes including report id
  * - key slot = bIndex * 4
  *
- * This is intentionally preview-only until the user's RK65 protocol
- * is verified against the official web configurator.
+ * The observed RK R65 JP uses a different BeiYing report-0x06 protocol.
+ * Keep this legacy format separate from its diagnostic read requests.
  */
 export function buildLegacyReports(profile, overrides = {}) {
   const REPORTS = 9;
@@ -127,6 +127,30 @@ export function summarizeFeatureReport(reportId, data) {
     byteLength: bytes.length,
     hex: bytes.map(byte => byte.toString(16).toUpperCase().padStart(2, "0")).join(" ")
   };
+}
+
+export function isBeiYingReadTarget(device) {
+  return !!device?.opened && device.vendorId === RK_VENDOR_ID && device.productId === 0x01f7 &&
+    (device.collections || []).some(collection =>
+      collection.usagePage === 0xff00 && collection.usage === 0x0001 &&
+      (collection.featureReports || []).some(report =>
+        report.reportId === 0x06 && (report.items || []).some(item =>
+          item.reportSize === 8 && item.reportCount === 519
+        )
+      )
+    );
+}
+
+export function buildBeiYingReadRequest(kind) {
+  const request = new Uint8Array(519);
+  if (kind === "identify") {
+    request.set([0x82, 0x01, 0, 0x01, 0, 0x0a, 0]);
+  } else if (kind === "key-matrix") {
+    request.set([0x83, 0, 0, 0x01, 0, 0xf8, 0x01]);
+  } else {
+    throw new Error("未対応の読み取り要求です");
+  }
+  return request;
 }
 
 function definedFields(value, fields) {

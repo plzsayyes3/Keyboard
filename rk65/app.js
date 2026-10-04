@@ -11,8 +11,10 @@ import {
   summarizeReports,
   formatDiagnosticDetails,
   summarizeFeatureReport,
-  summarizeHidCollections
-} from "./protocol.js";
+  summarizeHidCollections,
+  isBeiYingReadTarget,
+  buildBeiYingReadRequest
+} from "./protocol.js?diagnostics=beiying-read-1";
 
 const $ = (s) => document.querySelector(s);
 const state = {
@@ -20,6 +22,7 @@ const state = {
   selected: null,
   overrides: {},
   device: null,
+  readingDiagnostic: false,
   testMode: false,
   testIndex: 0,
   testedKeys: {},
@@ -36,6 +39,52 @@ const TARGETS = buildTargets();
 function diag(level, event, details = {}) {
   const method = typeof console?.[level] === "function" ? console[level] : console.log;
   method.call(console, `[RK65] ${event} ${formatDiagnosticDetails(details)}`);
+}
+
+function updateReadUI() {
+  const button = $("#readDiagnostic");
+  button.disabled = state.readingDiagnostic || !isBeiYingReadTarget(state.device);
+  if (!state.readingDiagnostic && !isBeiYingReadTarget(state.device)) {
+    $("#readState").textContent = "対象のRK R65 JPを接続すると診断できます。";
+  }
+}
+
+async function readDiagnostic() {
+  if (!isBeiYingReadTarget(state.device) || state.readingDiagnostic) return;
+  const device = state.device;
+  state.readingDiagnostic = true;
+  updateReadUI();
+  const status = $("#readState");
+  status.textContent = "識別情報を読み取り中…";
+  let stage = "identify";
+  try {
+    const identifyRequest = buildBeiYingReadRequest("identify");
+    diag("info", "read-request", {stage, reportId: 6, command: "0x82", byteLength: identifyRequest.length});
+    await device.sendFeatureReport(6, identifyRequest);
+    await new Promise(resolve => setTimeout(resolve, 500));
+    const identifyData = await device.receiveFeatureReport(6);
+    const identifyBytes = new Uint8Array(identifyData.buffer, identifyData.byteOffset, identifyData.byteLength);
+    diag("info", "read-response", {stage, reportId: 6, byteLength: identifyData.byteLength, nonZeroBytes: identifyBytes.filter(byte => byte !== 0).length});
+    if (identifyData.byteLength < 18) throw new Error(`識別応答が短すぎます (${identifyData.byteLength} bytes)`);
+
+    stage = "key-matrix";
+    status.textContent = "現在のキー配列を読み取り中…";
+    const matrixRequest = buildBeiYingReadRequest("key-matrix");
+    diag("info", "read-request", {stage, reportId: 6, command: "0x83", byteLength: matrixRequest.length, layer: 0, table: 0, board: 0});
+    await device.sendFeatureReport(6, matrixRequest);
+    const matrixData = await device.receiveFeatureReport(6);
+    const matrixBytes = new Uint8Array(matrixData.buffer, matrixData.byteOffset, matrixData.byteLength);
+    diag("info", "read-response", {stage, ...summarizeFeatureReport(6, matrixBytes)});
+    if (matrixData.byteLength < 134) throw new Error(`キー配列応答が短すぎます (${matrixData.byteLength} bytes)`);
+    status.textContent = `診断読取完了 · ${matrixData.byteLength} bytes（Consoleを確認）`;
+    diag("info", "read-complete", {byteLength: matrixData.byteLength});
+  } catch (e) {
+    status.textContent = "診断読取失敗 · " + (e?.message || String(e));
+    diag("error", "read-failure", {stage, message: e?.message || String(e)});
+  } finally {
+    state.readingDiagnostic = false;
+    updateReadUI();
+  }
 }
 
 async function probeFeatureReports(device) {
@@ -113,7 +162,7 @@ function buildTargets() {
 }
 
 async function init() {
-  diag("info", "diagnostics-ready", {version: "hid-items-2"});
+  diag("info", "diagnostics-ready", {version: "beiying-read-1"});
   state.profile = await fetch("./profiles/r65-jis-01f7.json").then(r => r.json());
   loadLocal();
   loadTestState();
@@ -123,6 +172,7 @@ async function init() {
   updateSupport();
   bind();
   updateFnReportUI();
+  updateReadUI();
 }
 
 function storageKey() {
@@ -179,6 +229,7 @@ function bind() {
   $("#resetKey").addEventListener("click", resetSelected);
   $("#resetAll").addEventListener("click", resetAll);
   $("#copyDiag").addEventListener("click", copyDiagnostics);
+  $("#readDiagnostic").addEventListener("click", readDiagnostic);
   $("#copyPackets").addEventListener("click", copyPackets);
   $("#exportBtn").addEventListener("click", exportMappings);
   $("#importInput").addEventListener("change", importMappings);
@@ -907,6 +958,7 @@ async function connect() {
     $("#device").className = samePid ? "status ok" : "status warn";
     updateFnReportUI();
     updateWriteUI();
+    updateReadUI();
     diag("info", "connect-success", {
       samePid,
       vendorId: formatHex(device.vendorId, 4),
