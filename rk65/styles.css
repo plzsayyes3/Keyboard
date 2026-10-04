@@ -64,7 +64,7 @@ h1{font-size:27px;margin:0 0 6px}
 .toast.show{opacity:1;transform:translate(-50%,0)}.toast.error{border-color:#7a3d3d;color:#ffc1c1}
 #fatal{white-space:pre-wrap;color:#ffabab}
 @media(max-width:820px){
-  .top{display:block}.actions{justify-content:flex-start;margin-top:14px}.grid{grid-template-columns:1fr}.targets{grid-template-columns:1fr 1fr}
+  .top{display:block}.actions{justify-content:flex-start;margin-top:14px}.grid{grid-template-columns:minmax(0,1fr)}.grid>.card{min-width:0}.targets{grid-template-columns:1fr 1fr}
 }
 
 .keytest{margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#0e1217}
