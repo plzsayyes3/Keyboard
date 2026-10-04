@@ -113,6 +113,7 @@ function buildTargets() {
 }
 
 async function init() {
+  diag("info", "diagnostics-ready", {version: "hid-items-2"});
   state.profile = await fetch("./profiles/r65-jis-01f7.json").then(r => r.json());
   loadLocal();
   loadTestState();
