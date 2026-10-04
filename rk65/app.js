@@ -16,9 +16,10 @@ import {
   buildBeiYingReadRequest,
   isBeiYingIdentifyResponse,
   parseBeiYingKeyMatrixResponse,
+  decodeBeiYingKeyCode,
   buildBeiYingWritePreview,
   createBeiYingBackup
-} from "./protocol.js?diagnostics=beiying-preview-1";
+} from "./protocol.js?diagnostics=read-visual-1";
 
 const $ = (s) => document.querySelector(s);
 const state = {
@@ -28,6 +29,7 @@ const state = {
   device: null,
   readingDiagnostic: false,
   matrixResponse: null,
+  matrixLayer: 0,
   backupDownloaded: false,
   previewSignature: null,
   testMode: false,
@@ -50,7 +52,9 @@ function diag(level, event, details = {}) {
 
 function updateReadUI() {
   const button = $("#readDiagnostic");
+  const layerSelect = $("#readLayer");
   button.disabled = state.readingDiagnostic || !isBeiYingReadTarget(state.device);
+  layerSelect.disabled = state.readingDiagnostic || !isBeiYingReadTarget(state.device);
   if (!state.readingDiagnostic && !isBeiYingReadTarget(state.device)) {
     $("#readState").textContent = "対象のRK R65 JPを接続すると診断できます。";
   }
@@ -58,14 +62,17 @@ function updateReadUI() {
 
 function updatePreviewUI() {
   const available = !!state.matrixResponse && isBeiYingReadTarget(state.device);
+  const previewAvailable = available && state.matrixLayer === 0;
   $("#downloadMatrixBackup").disabled = !available;
-  $("#previewBeiYingWrite").disabled = !available || !state.backupDownloaded;
+  $("#previewBeiYingWrite").disabled = !previewAvailable || !state.backupDownloaded;
   const signature = JSON.stringify(state.overrides);
   if (!available || state.previewSignature !== signature) {
     state.previewSignature = null;
     $("#previewState").textContent = !available
       ? "実機から配列を読み取ると、バックアップと事前確認ができます。"
-      : state.backupDownloaded
+      : state.matrixLayer === 1
+        ? "Fnレイヤーの読み出し・バックアップ専用です。書き込み事前確認は通常レイヤーでのみ利用できます。"
+        : state.backupDownloaded
         ? "元の配列のバックアップを保存したら、変更内容を事前確認してください。"
         : "先に元の配列をファイルへ保存してください。";
   }
@@ -73,21 +80,21 @@ function updatePreviewUI() {
 
 function downloadMatrixBackup() {
   if (!state.matrixResponse || !isBeiYingReadTarget(state.device)) return;
-  const backup = createBeiYingBackup(state.matrixResponse, new Date().toISOString());
+  const backup = createBeiYingBackup(state.matrixResponse, new Date().toISOString(), state.matrixLayer);
   const blob = new Blob([JSON.stringify(backup, null, 2)], {type: "application/json"});
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "rk65-original-matrix-backup.json";
+  link.download = `rk65-layer${state.matrixLayer}-matrix-backup.json`;
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
   state.backupDownloaded = true;
-  diag("info", "matrix-backup-downloaded", {byteLength: backup.responseBytes.length});
+  diag("info", "matrix-backup-downloaded", {byteLength: backup.responseBytes.length, layer: state.matrixLayer});
   updatePreviewUI();
 }
 
 function previewBeiYingWrite() {
-  if (!state.matrixResponse || !state.backupDownloaded || !isBeiYingReadTarget(state.device)) return;
+  if (!state.matrixResponse || state.matrixLayer !== 0 || !state.backupDownloaded || !isBeiYingReadTarget(state.device)) return;
   try {
     const preview = buildBeiYingWritePreview(state.matrixResponse, state.overrides);
     const {before, after} = preview.changes[0];
@@ -113,9 +120,13 @@ async function readDiagnostic() {
   if (!isBeiYingReadTarget(state.device) || state.readingDiagnostic) return;
   const device = state.device;
   state.readingDiagnostic = true;
+  state.matrixLayer = Number($("#readLayer").value);
   state.matrixResponse = null;
   state.backupDownloaded = false;
   state.previewSignature = null;
+  renderKeyboard();
+  $("#matrixViewState").hidden = true;
+  updateInspector();
   updatePreviewUI();
   updateReadUI();
   const status = $("#readState");
@@ -133,19 +144,25 @@ async function readDiagnostic() {
 
     stage = "key-matrix";
     status.textContent = "現在のキー配列を読み取り中…";
-    const matrixRequest = buildBeiYingReadRequest("key-matrix");
-    diag("info", "read-request", {stage, reportId: 6, command: "0x83", byteLength: matrixRequest.length, layer: 0, table: 0, board: 0});
+    const layer = state.matrixLayer;
+    const matrixRequest = buildBeiYingReadRequest("key-matrix", layer);
+    diag("info", "read-request", {stage, reportId: 6, command: "0x83", byteLength: matrixRequest.length, layer, table: 0, board: 0});
     await device.sendFeatureReport(6, matrixRequest);
     const matrixData = await device.receiveFeatureReport(6);
     const matrixBytes = new Uint8Array(matrixData.buffer, matrixData.byteOffset, matrixData.byteLength);
     diag("info", "read-response", {stage, ...summarizeFeatureReport(6, matrixBytes)});
-    parseBeiYingKeyMatrixResponse(matrixBytes);
+    parseBeiYingKeyMatrixResponse(matrixBytes, layer);
     state.matrixResponse = Uint8Array.from(matrixBytes);
+    state.matrixLayer = layer;
     state.backupDownloaded = false;
     state.previewSignature = null;
     updatePreviewUI();
-    status.textContent = `診断読取完了 · ${matrixData.byteLength} bytes（Consoleを確認）`;
-    diag("info", "read-complete", {byteLength: matrixData.byteLength});
+    status.textContent = `${layer === 1 ? "Fnレイヤー" : "通常レイヤー"}を読み出しました。キーボード図に値を表示中 · ${matrixData.byteLength} bytes`;
+    diag("info", "read-complete", {byteLength: matrixData.byteLength, layer});
+    renderKeyboard();
+    updateInspector();
+    $("#matrixViewState").hidden = false;
+    $("#matrixViewState").textContent = `${layer === 1 ? "Fnレイヤー" : "通常レイヤー"}の実機読み出し値を表示中。キー図には解釈名、キーを選択するとslotと生コードを表示します。`;
   } catch (e) {
     status.textContent = "診断読取失敗 · " + (e?.message || String(e));
     diag("error", "read-failure", {stage, message: e?.message || String(e)});
@@ -214,7 +231,7 @@ function buildTargets() {
 }
 
 async function init() {
-  diag("info", "diagnostics-ready", {version: "beiying-preview-1"});
+  diag("info", "diagnostics-ready", {version: "read-visual-1"});
   state.profile = await fetch("./profiles/r65-jis-01f7.json").then(r => r.json());
   loadLocal();
   loadTestState();
@@ -283,6 +300,17 @@ function bind() {
   $("#resetAll").addEventListener("click", resetAll);
   $("#copyDiag").addEventListener("click", copyDiagnostics);
   $("#readDiagnostic").addEventListener("click", readDiagnostic);
+  $("#readLayer").addEventListener("change", () => {
+    if (state.matrixResponse && Number($("#readLayer").value) !== state.matrixLayer) {
+      state.matrixResponse = null;
+      state.backupDownloaded = false;
+      $("#matrixViewState").hidden = true;
+      $("#readState").textContent = `${Number($("#readLayer").value) === 1 ? "Fnレイヤー" : "通常レイヤー"}を選択中です。キー配列を読み出してください。`;
+      renderKeyboard();
+      updateInspector();
+      updatePreviewUI();
+    }
+  });
   $("#downloadMatrixBackup").addEventListener("click", downloadMatrixBackup);
   $("#previewBeiYingWrite").addEventListener("click", previewBeiYingWrite);
   $("#copyPackets").addEventListener("click", copyPackets);
@@ -340,8 +368,16 @@ function renderKeyboard() {
     btn.style.top = (t/height*100) + "%";
     btn.style.width = ((r-l)/width*100) + "%";
     btn.style.height = ((b-t)/height*100) + "%";
-    btn.innerHTML = `<span>${escapeHtml(key.label)}</span><small>${key.id}</small>`;
+    let readCode = null;
+    if (state.matrixResponse && key.bIndex * 4 + 4 <= 504) {
+      readCode = decodeBeiYingKeyCode(state.matrixResponse.slice(8 + key.bIndex * 4, 12 + key.bIndex * 4));
+      btn.classList.add("read-mapped");
+      if (readCode.label === "不明なコード") btn.classList.add("read-unknown");
+    }
+    btn.innerHTML = `<span>${escapeHtml(key.label)}</span><small>${key.id}</small>` +
+      (readCode ? `<span class="read-label">${escapeHtml(readCode.label)}</span>` : "");
     btn.title = `${key.label} · bIndex ${key.bIndex} · default ${key.defaultFw}` +
+      (readCode ? ` · 実機: ${readCode.label} · raw ${readCode.raw}` : "") +
       (expectedCode ? ` · event.code ${expectedCode}` : "");
     btn.addEventListener("click", () => {
       if (state.testMode) return;
@@ -771,6 +807,15 @@ function updateInspector() {
   $("#defaultCode").textContent = key ? key.defaultFw : "—";
   $("#currentCode").textContent = key ? formatHex(parseFirmwareCode(currentCode(key))) : "—";
   $("#rawCode").value = key ? formatHex(parseFirmwareCode(currentCode(key))) : "";
+  const readAssignment = $("#readAssignment");
+  const hasReadAssignment = !!(key && state.matrixResponse && key.bIndex * 4 + 4 <= 504);
+  readAssignment.hidden = !hasReadAssignment;
+  if (hasReadAssignment) {
+    const decoded = decodeBeiYingKeyCode(state.matrixResponse.slice(8 + key.bIndex * 4, 12 + key.bIndex * 4));
+    $("#readAssignmentLayer").textContent = state.matrixLayer === 1 ? "Fnレイヤー" : "通常レイヤー";
+    $("#readAssignmentName").textContent = decoded.label;
+    $("#readAssignmentRaw").textContent = `slot ${key.bIndex} · ${decoded.raw}`;
+  }
   $("#applyRaw").disabled = !key;
   $("#resetKey").disabled = !key;
   updateWriteUI();
@@ -1018,8 +1063,13 @@ async function connect() {
     if (!device.opened) await device.open();
     state.device = device;
     state.matrixResponse = null;
+    state.matrixLayer = Number($("#readLayer").value);
     state.backupDownloaded = false;
     state.previewSignature = null;
+    renderKeyboard();
+    $("#matrixViewState").hidden = true;
+    updateInspector();
+    $("#readState").textContent = "接続しました。読み取るレイヤーを選択してください。";
     diag("info", "device-opened", summarizeHidDevice(device));
     diag("info", "hid-collections", summarizeHidCollections(device.collections));
     const samePid = device.productId === parseInt(state.profile.productId.slice(2), 16);

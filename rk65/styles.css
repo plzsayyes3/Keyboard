@@ -25,6 +25,13 @@ h1{font-size:27px;margin:0 0 6px}
 .keyboard{position:relative;width:100%;min-width:720px;background:#0d1014;border:1px solid #222a32;border-radius:14px}
 .key{position:absolute;border:1px solid #39434e;background:#181e25;border-radius:6px;padding:2px;color:#e8edf2;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
 .key span{font-size:clamp(7px,1vw,11px);white-space:nowrap}.key small{font-size:7px;color:#64707d;margin-top:1px}
+.key .read-label{font-size:clamp(6px,.78vw,9px);line-height:1.05;font-weight:700;color:#9fe3ca;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.key.read-mapped{background:#13231f;border-color:#386e5b}.key.read-unknown{background:#272018;border-color:#806644}.key.read-unknown .read-label{color:#ffd28b}
+.read-unknown-dot{background:#806644;border-color:#ffd28b}
+.matrixViewState{margin:6px 0 0;padding:9px 12px;border:1px solid #386e5b;border-radius:9px;color:#9fe3ca;font-size:13px}
+.readAssignment{display:grid;gap:5px;margin:12px 0;padding:10px;border:1px solid #386e5b;border-radius:10px;background:#101e19}
+.readAssignment small{font-size:10px;letter-spacing:.06em;color:#9fe3ca}.readAssignment strong{font-size:16px}.readAssignment code{font-size:13px;color:#b5c1cc}
+.readLayerLabel{color:var(--muted);font-size:13px}.readLayer{background:#12171d;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
 .key:hover{border-color:#617182}.key.selected{outline:2px solid var(--accent);z-index:2}.key.changed{background:#183128;border-color:#4fae8b}
 .legend{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:10px}
 .dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;background:#183128;border:1px solid #4fae8b}

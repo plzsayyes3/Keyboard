@@ -36,8 +36,10 @@
           <span><i class="dot"></i>変更あり</span>
           <span><i class="dot test-ok-dot"></i>検査済み</span>
           <span><i class="dot test-current-dot"></i>今押しているキー</span>
+          <span><i class="dot read-unknown-dot"></i>未解読のコード</span>
           <span>キー内の小文字はRK設定上のK番号</span>
         </div>
+        <div id="matrixViewState" class="matrixViewState" hidden></div>
 
         <div class="keytest">
           <div class="keytestHead">
@@ -88,7 +90,12 @@
         <div class="row">
           <button class="btn" id="copyPackets">9レポートをコピー</button>
           <button class="btn" id="copyDiag">診断情報をコピー</button>
-          <button class="btn" id="readDiagnostic" disabled>現在のキー配列を診断読取</button>
+          <label class="readLayerLabel" for="readLayer">読み取る層</label>
+          <select class="readLayer" id="readLayer" disabled>
+            <option value="0">通常レイヤー</option>
+            <option value="1">Fnレイヤー</option>
+          </select>
+          <button class="btn" id="readDiagnostic" disabled>キー配列を読み出して表示</button>
           <button class="btn" id="resetAll">変更を全初期化</button>
         </div>
         <div id="readState" class="meta">対象のRK R65 JPを接続すると診断できます。</div>
@@ -101,13 +108,18 @@
         <p class="note">
           9レポートは既知のRK legacy keymap形式の<strong>プレビュー生成のみ</strong>です。
           診断読取は公式Web Appと同じ問い合わせをFeature Report <code>0x06</code>へ送信します。
-          バックアップは読み取った512バイトの応答を保存します。事前確認は変換キー（slot 41）のLANG1/LANG2変更だけを検査し、本体へは送信しません。
+          読み出した層の割り当てをキーボード図に表示します。キーを選択すると解釈名と生コードを確認でき、未知コードもhexのまま表示します。Fn層では書き込み事前確認を無効にし、読み取り・バックアップだけを行います。
         </p>
       </section>
 
       <aside class="card">
         <div id="selectedName" class="inspectorTitle">キーを選択</div>
         <div id="selectedMeta" class="meta">左のキーボードから変更したいキーを押してください。</div>
+        <div id="readAssignment" class="readAssignment" hidden>
+          <small>DEVICE READ · <span id="readAssignmentLayer"></span></small>
+          <strong id="readAssignmentName"></strong>
+          <code id="readAssignmentRaw"></code>
+        </div>
 
         <div class="codes">
           <div class="codebox"><small>DEFAULT</small><code id="defaultCode">—</code></div>
@@ -155,6 +167,6 @@
   </main>
 
   <div id="toast" class="toast"></div>
-  <script type="module" src="./app.js?diagnostics=beiying-preview-1"></script>
+    <script type="module" src="./app.js?diagnostics=read-visual-1"></script>
 </body>
 </html>

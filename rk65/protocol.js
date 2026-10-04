@@ -141,12 +141,13 @@ export function isBeiYingReadTarget(device) {
     );
 }
 
-export function buildBeiYingReadRequest(kind) {
+export function buildBeiYingReadRequest(kind, layer = 0) {
   const request = new Uint8Array(519);
   if (kind === "identify") {
     request.set([0x82, 0x01, 0, 0x01, 0, 0x0a, 0]);
   } else if (kind === "key-matrix") {
-    request.set([0x83, 0, 0, 0x01, 0, 0xf8, 0x01]);
+    if (layer !== 0 && layer !== 1) throw new Error("未対応のキー配列レイヤーです");
+    request.set([0x83, layer, 0, 0x01, 0, 0xf8, 0x01]);
   } else {
     throw new Error("未対応の読み取り要求です");
   }
@@ -158,14 +159,45 @@ export function isBeiYingIdentifyResponse(bytes) {
 }
 
 const BEIYING_MATRIX_LENGTH = 504;
-const BEIYING_RESPONSE_HEADER = [0x06, 0x83, 0, 0, 0x01, 0, 0xf8, 0x01];
-
-export function parseBeiYingKeyMatrixResponse(bytes) {
+export function parseBeiYingKeyMatrixResponse(bytes, layer = 0) {
   if (bytes?.length !== 512) throw new Error("キー配列応答は512バイト必要です");
-  if (!BEIYING_RESPONSE_HEADER.every((byte, index) => bytes[index] === byte)) {
+  if (layer !== 0 && layer !== 1) throw new Error("未対応のキー配列レイヤーです");
+  const expectedHeader = [0x06, 0x83, layer, 0, 0x01, 0, 0xf8, 0x01];
+  if (!expectedHeader.every((byte, index) => bytes[index] === byte)) {
     throw new Error("キー配列応答のヘッダーまたはレイヤーが一致しません");
   }
   return Uint8Array.from(bytes.slice(8));
+}
+
+const HID_USAGE_LABELS = new Map([
+  ...Array.from({length: 26}, (_, index) => [0x04 + index, String.fromCharCode(65 + index)]),
+  ...Array.from({length: 9}, (_, index) => [0x1e + index, String(index + 1)]),
+  [0x27, "0"], [0x28, "Enter"], [0x29, "Escape"], [0x2a, "Backspace"],
+  [0x2b, "Tab"], [0x2c, "Space"], [0x2d, "-"], [0x2e, "="],
+  [0x2f, "["], [0x30, "]"], [0x31, "\\"], [0x32, "#"], [0x33, ";"],
+  [0x34, "'"], [0x35, "`"], [0x36, ","], [0x37, "."], [0x38, "/"],
+  [0x39, "CapsLock"], ...Array.from({length: 12}, (_, index) => [0x3a + index, `F${index + 1}`]),
+  [0x4f, "→"], [0x50, "←"], [0x51, "↓"], [0x52, "↑"],
+  [0x87, "IntlRo / ろ"], [0x88, "KanaMode"], [0x89, "IntlYen / ¥"],
+  [0x8a, "Convert / 変換"], [0x8b, "NonConvert / 無変換"]
+]);
+
+const HID_MODIFIER_LABELS = [
+  [0x01, "Ctrl"], [0x02, "Shift"], [0x04, "Alt"], [0x08, "⌘"],
+  [0x10, "右Ctrl"], [0x20, "右Shift"], [0x40, "右Alt"], [0x80, "右⌘"]
+];
+
+export function decodeBeiYingKeyCode(bytes) {
+  if (!bytes || bytes.length !== 4) throw new Error("キーコードは4バイト必要です");
+  const raw = Array.from(bytes, byte => Number(byte).toString(16).toUpperCase().padStart(2, "0")).join(" ");
+  if (bytes.every(byte => byte === 0)) return {label: "未割り当て", raw};
+  if (bytes[0] !== 0 || bytes[2] !== 0) return {label: "不明なコード", raw};
+  const modifiers = HID_MODIFIER_LABELS.filter(([mask]) => bytes[1] & mask).map(([, label]) => label);
+  const keyLabel = bytes[3] === 0x90 ? "LANG1 / かな"
+    : bytes[3] === 0x91 ? "LANG2 / 英数"
+      : HID_USAGE_LABELS.get(bytes[3]);
+  if (!keyLabel) return {label: "不明なコード", raw};
+  return {label: [...modifiers, keyLabel].join(" + "), raw};
 }
 
 export function buildBeiYingWritePreview(response, overrides) {
@@ -198,10 +230,12 @@ export function verifyBeiYingWrite(readback, request) {
   return matrix.every((byte, index) => byte === request[7 + index]);
 }
 
-export function createBeiYingBackup(response, capturedAt) {
-  parseBeiYingKeyMatrixResponse(response);
+export function createBeiYingBackup(response, capturedAt, layer = 0) {
+  parseBeiYingKeyMatrixResponse(response, layer);
   return {
     format: "rk65-beiying-matrix-backup-v1",
+    layer,
+    layerName: layer === 1 ? "Fn" : "base",
     capturedAt,
     responseBytes: Array.from(response)
   };

@@ -11,6 +11,7 @@ import {
   summarizeFeatureReport,
   summarizeHidCollections,
   buildBeiYingReadRequest,
+  decodeBeiYingKeyCode,
   isBeiYingReadTarget,
   isBeiYingIdentifyResponse,
   parseBeiYingKeyMatrixResponse,
@@ -203,6 +204,49 @@ test("BeiYing matrix parsing accepts only a complete layer-0 504-byte response",
   const wrongLayer = response.slice();
   wrongLayer[4] = 2;
   assert.throws(() => parseBeiYingKeyMatrixResponse(wrongLayer), /応答/);
+});
+
+test("BeiYing matrix read requests and validation support the Fn layer", () => {
+  const request = buildBeiYingReadRequest("key-matrix", 1);
+  assert.deepEqual(Array.from(request.slice(0, 7)), [0x83, 1, 0, 1, 0, 0xf8, 1]);
+  const response = new Uint8Array(512);
+  response.set([0x06, 0x83, 1, 0, 1, 0, 0xf8, 1]);
+  assert.equal(parseBeiYingKeyMatrixResponse(response, 1).length, 504);
+  assert.throws(() => parseBeiYingKeyMatrixResponse(response), /レイヤー/);
+  assert.throws(() => buildBeiYingReadRequest("key-matrix", 2), /レイヤー/);
+});
+
+test("read key codes show known labels while retaining raw hex for unknowns", () => {
+  assert.deepEqual(decodeBeiYingKeyCode([0, 0, 0, 0x8a]), {
+    label: "Convert / 変換", raw: "00 00 00 8A"
+  });
+  assert.deepEqual(decodeBeiYingKeyCode([0, 0, 0, 0x8b]), {
+    label: "NonConvert / 無変換", raw: "00 00 00 8B"
+  });
+  assert.deepEqual(decodeBeiYingKeyCode([0, 0, 0, 0x90]), {
+    label: "LANG1 / かな", raw: "00 00 00 90"
+  });
+  assert.deepEqual(decodeBeiYingKeyCode([0, 8, 0, 0x28]), {
+    label: "⌘ + Enter", raw: "00 08 00 28"
+  });
+  assert.deepEqual(decodeBeiYingKeyCode([0x12, 0x34, 0x56, 0x78]), {
+    label: "不明なコード", raw: "12 34 56 78"
+  });
+  assert.deepEqual(decodeBeiYingKeyCode([0, 0, 0, 0]), {
+    label: "未割り当て", raw: "00 00 00 00"
+  });
+  assert.deepEqual(decodeBeiYingKeyCode([1, 0, 0, 0x28]), {
+    label: "不明なコード", raw: "01 00 00 28"
+  });
+});
+
+test("Fn layer backup preserves explicit layer metadata", () => {
+  const response = new Uint8Array(512);
+  response.set([0x06, 0x83, 1, 0, 1, 0, 0xf8, 1]);
+  const backup = createBeiYingBackup(response, "2026-10-04T00:00:00.000Z", 1);
+  assert.equal(backup.layer, 1);
+  assert.equal(backup.layerName, "Fn");
+  assert.throws(() => createBeiYingBackup(response, "x"), /レイヤー/);
 });
 
 test("BeiYing write preview changes only Henkan slot 41 to LANG1 and keeps the captured matrix", () => {
