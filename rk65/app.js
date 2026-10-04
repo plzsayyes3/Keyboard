@@ -13,8 +13,9 @@ import {
   summarizeFeatureReport,
   summarizeHidCollections,
   isBeiYingReadTarget,
-  buildBeiYingReadRequest
-} from "./protocol.js?diagnostics=beiying-read-1";
+  buildBeiYingReadRequest,
+  isBeiYingIdentifyResponse
+} from "./protocol.js?diagnostics=beiying-read-2";
 
 const $ = (s) => document.querySelector(s);
 const state = {
@@ -65,7 +66,7 @@ async function readDiagnostic() {
     const identifyData = await device.receiveFeatureReport(6);
     const identifyBytes = new Uint8Array(identifyData.buffer, identifyData.byteOffset, identifyData.byteLength);
     diag("info", "read-response", {stage, reportId: 6, byteLength: identifyData.byteLength, nonZeroBytes: identifyBytes.filter(byte => byte !== 0).length});
-    if (identifyData.byteLength < 18) throw new Error(`識別応答が短すぎます (${identifyData.byteLength} bytes)`);
+    if (!isBeiYingIdentifyResponse(identifyBytes)) throw new Error(`識別応答が不正です (${identifyData.byteLength} bytes)`);
 
     stage = "key-matrix";
     status.textContent = "現在のキー配列を読み取り中…";
@@ -85,22 +86,6 @@ async function readDiagnostic() {
     state.readingDiagnostic = false;
     updateReadUI();
   }
-}
-
-async function probeFeatureReports(device) {
-  const reportIds = [...new Set((device.collections || [])
-    .flatMap(collection => (collection.featureReports || []).map(report => report.reportId)))]
-    .filter(reportId => reportId !== 0x0a);
-  diag("info", "feature-report-read-start", {reportIds});
-  for (const reportId of reportIds) {
-    try {
-      const data = await device.receiveFeatureReport(reportId);
-      diag("info", "feature-report-read-success", summarizeFeatureReport(reportId, new Uint8Array(data.buffer, data.byteOffset, data.byteLength)));
-    } catch (e) {
-      diag("warn", "feature-report-read-failure", {reportId, message: e?.message || String(e)});
-    }
-  }
-  diag("info", "feature-report-read-complete", {reportCount: reportIds.length});
 }
 
 function hidFw(usage) { return (usage & 0xff) << 8; }
@@ -162,7 +147,7 @@ function buildTargets() {
 }
 
 async function init() {
-  diag("info", "diagnostics-ready", {version: "beiying-read-1"});
+  diag("info", "diagnostics-ready", {version: "beiying-read-2"});
   state.profile = await fetch("./profiles/r65-jis-01f7.json").then(r => r.json());
   loadLocal();
   loadTestState();
@@ -950,7 +935,6 @@ async function connect() {
     state.device = device;
     diag("info", "device-opened", summarizeHidDevice(device));
     diag("info", "hid-collections", summarizeHidCollections(device.collections));
-    await probeFeatureReports(device);
     const samePid = device.productId === parseInt(state.profile.productId.slice(2), 16);
     $("#device").textContent =
       `${device.productName || "RK Keyboard"} / VID ${formatHex(device.vendorId,4)} / PID ${formatHex(device.productId,4)}` +

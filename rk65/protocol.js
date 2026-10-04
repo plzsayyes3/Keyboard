@@ -153,6 +153,10 @@ export function buildBeiYingReadRequest(kind) {
   return request;
 }
 
+export function isBeiYingIdentifyResponse(bytes) {
+  return bytes.length >= 18 && bytes[0] === 0x06 && bytes[1] === 0x82;
+}
+
 function definedFields(value, fields) {
   return Object.fromEntries(fields
     .filter(field => value[field] !== undefined)

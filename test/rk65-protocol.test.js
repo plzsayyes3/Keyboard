@@ -11,7 +11,8 @@ import {
   summarizeFeatureReport,
   summarizeHidCollections,
   buildBeiYingReadRequest,
-  isBeiYingReadTarget
+  isBeiYingReadTarget,
+  isBeiYingIdentifyResponse
 } from "../rk65/protocol.js";
 
 const profile = JSON.parse(
@@ -169,4 +170,11 @@ test("BeiYing diagnostic reading requires exact R65 JP and 519-byte report 6", (
   assert.equal(isBeiYingReadTarget({...device, productId: 0x01f8}), false);
   assert.equal(isBeiYingReadTarget({...device, collections: []}), false);
   assert.equal(isBeiYingReadTarget({...device, opened: false}), false);
+});
+
+test("BeiYing identify response requires report 6 and command 0x82", () => {
+  const response = Uint8Array.from([0x06, 0x82, 0x01, 0, 0x01, 0, 0x0a, 0, 0x03, 0, 0, 0, 0x02, 0x26, 0, 0, 0x10, 0]);
+  assert.equal(isBeiYingIdentifyResponse(response), true);
+  assert.equal(isBeiYingIdentifyResponse(response.slice(0, 8)), false);
+  assert.equal(isBeiYingIdentifyResponse(Uint8Array.from([0x06, 0x83, ...response.slice(2)])), false);
 });
