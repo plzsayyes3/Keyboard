@@ -11,7 +11,8 @@ import {
   decodeBeiYingKeyCode,
   formatBeiYingKeycapLabel,
   compareBeiYingMatrixKey
-} from "./protocol.js?comparison=1";
+} from "./protocol.js?comparison=2";
+import {buildBeiYingDemoResponse} from "./demo-fixture.js?comparison=2";
 
 const $ = selector => document.querySelector(selector);
 const state = {
@@ -22,13 +23,16 @@ const state = {
   layer: 0,
   selectedKey: null,
   comparisons: new Map(),
-  reading: false
+  reading: false,
+  demoMode: false
 };
 
 function updateControls() {
   const connected = isBeiYingReadTarget(state.device);
-  $("#readLayer").disabled = !connected || state.reading;
-  $("#readLayout").disabled = !connected || state.reading;
+  const canRead = connected || state.demoMode;
+  $("#readLayer").disabled = !canRead || state.reading;
+  $("#readLayout").disabled = !canRead || state.reading;
+  if (state.demoMode) return;
   if (!connected) $("#device").textContent = state.device
     ? `対象外のデバイスです · ${formatHex(state.device.vendorId, 4)}:${formatHex(state.device.productId, 4)} · RK R65 01F7が必要です`
     : "未接続。PC版 Chrome / Edge / Opera から接続してください。";
@@ -80,7 +84,7 @@ function clearReadView() {
 }
 
 async function readLayout() {
-  if (!isBeiYingReadTarget(state.device) || state.reading) return;
+  if ((!state.demoMode && !isBeiYingReadTarget(state.device)) || state.reading) return;
   state.reading = true;
   state.layer = Number($("#readLayer").value);
   state.response = null;
@@ -89,22 +93,26 @@ async function readLayout() {
   clearReadView();
   updateControls();
   setReadStatus("識別情報を読み取り中…");
-  let stage = "identify";
+  let stage = state.demoMode ? "offline-sample" : "identify";
   try {
-    const identifyRequest = buildBeiYingReadRequest("identify");
-    await state.device.sendFeatureReport(0x06, identifyRequest);
-    await new Promise(resolve => setTimeout(resolve, 500));
-    const identifyView = await state.device.receiveFeatureReport(0x06);
-    const identify = new Uint8Array(identifyView.buffer, identifyView.byteOffset, identifyView.byteLength);
-    if (!isBeiYingIdentifyResponse(identify)) throw new Error("識別応答が不正です");
+    if (state.demoMode) {
+      state.response = buildBeiYingDemoResponse(state.reference, state.layer);
+    } else {
+      const identifyRequest = buildBeiYingReadRequest("identify");
+      await state.device.sendFeatureReport(0x06, identifyRequest);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      const identifyView = await state.device.receiveFeatureReport(0x06);
+      const identify = new Uint8Array(identifyView.buffer, identifyView.byteOffset, identifyView.byteLength);
+      if (!isBeiYingIdentifyResponse(identify)) throw new Error("識別応答が不正です");
 
-    stage = "key-matrix";
-    const request = buildBeiYingReadRequest("key-matrix", state.layer);
-    await state.device.sendFeatureReport(0x06, request);
-    const view = await state.device.receiveFeatureReport(0x06);
-    const response = new Uint8Array(view.buffer, view.byteOffset, view.byteLength);
-    parseBeiYingKeyMatrixResponse(response, state.layer);
-    state.response = Uint8Array.from(response);
+      stage = "key-matrix";
+      const request = buildBeiYingReadRequest("key-matrix", state.layer);
+      await state.device.sendFeatureReport(0x06, request);
+      const view = await state.device.receiveFeatureReport(0x06);
+      const response = new Uint8Array(view.buffer, view.byteOffset, view.byteLength);
+      parseBeiYingKeyMatrixResponse(response, state.layer);
+      state.response = Uint8Array.from(response);
+    }
     const referenceLayer = state.reference.layers?.[String(state.layer)];
     for (const key of state.profile.keys.filter(item => !item.hidden)) {
       state.comparisons.set(key.id,
@@ -119,7 +127,9 @@ async function readLayout() {
     $("#keyboardWrap").hidden = false;
     $("#comparisonLegend").hidden = false;
     const layerName = state.layer === 1 ? "Fnレイヤー" : "通常レイヤー";
-    setReadStatus(`${layerName}の読み出し完了 · 504バイト · 読み取り専用`, "ok");
+    setReadStatus(state.demoMode
+      ? `${layerName}のサンプル表示 · 保存済みデータ · 実機通信なし`
+      : `${layerName}の読み出し完了 · 504バイト · 読み取り専用`, state.demoMode ? "warn" : "ok");
   } catch (error) {
     setReadStatus(`読み取り失敗 (${stage}): ${error?.message || String(error)}`, "warn");
   } finally {
@@ -220,11 +230,22 @@ async function init() {
   state.profile = await fetch("./profiles/r65-jis-01f7.json").then(response => response.json());
   state.reference = await fetch("./profiles/r65-jis-01f7-reference.json").then(response => response.json());
   const supported = "hid" in navigator;
-  $("#support").textContent = supported ? "WebHID対応ブラウザです" : "WebHID非対応です。PC版Chrome / Edgeをお使いください。";
-  $("#support").className = supported ? "status ok" : "status warn";
-  $("#connect").disabled = !supported;
+  const demoLayer = new URLSearchParams(location.search).get("demo");
+  state.demoMode = demoLayer === "base" || demoLayer === "fn";
+  $("#support").textContent = state.demoMode
+    ? "オフラインサンプル表示です。実機へのHID通信・書き込みは行いません。"
+    : supported ? "WebHID対応ブラウザです" : "WebHID非対応です。PC版Chrome / Edgeをお使いください。";
+  $("#support").className = state.demoMode ? "status warn" : supported ? "status ok" : "status warn";
+  $("#connect").disabled = !supported || state.demoMode;
   $("#connect").addEventListener("click", connect);
   $("#readLayout").addEventListener("click", readLayout);
+  if (state.demoMode) {
+    state.layer = demoLayer === "fn" ? 1 : 0;
+    $("#device").textContent = "サンプルデータ · 実機未接続";
+    $("#device").className = "status warn";
+    $("#readLayer").value = String(state.layer);
+    $("#readLayout").textContent = "保存データのサンプルを表示";
+  }
   $("#readLayer").addEventListener("change", () => {
     if (!state.response || Number($("#readLayer").value) === state.layer) return;
     state.response = null;
@@ -234,6 +255,7 @@ async function init() {
     setReadStatus("レイヤーを選択しました。新しい層を読み取ってください。");
   });
   updateControls();
+  if (state.demoMode) await readLayout();
 }
 
 init().catch(error => setReadStatus(`ページ初期化失敗: ${error?.message || String(error)}`, "warn"));
