@@ -897,7 +897,7 @@ async function connect() {
     if (!device.opened) await device.open();
     state.device = device;
     diag("info", "device-opened", summarizeHidDevice(device));
-    diag("debug", "hid-collections", summarizeHidCollections(device.collections));
+    diag("info", "hid-collections", summarizeHidCollections(device.collections));
     await probeFeatureReports(device);
     const samePid = device.productId === parseInt(state.profile.productId.slice(2), 16);
     $("#device").textContent =
