@@ -120,6 +120,15 @@ export function formatDiagnosticDetails(details) {
   return JSON.stringify(details);
 }
 
+export function summarizeFeatureReport(reportId, data) {
+  const bytes = Array.from(data, byte => Number(byte));
+  return {
+    reportId,
+    byteLength: bytes.length,
+    hex: bytes.map(byte => byte.toString(16).toUpperCase().padStart(2, "0")).join(" ")
+  };
+}
+
 export function summarizeHidDevice(device) {
   return {
     productName: device.productName,

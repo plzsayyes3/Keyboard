@@ -7,7 +7,8 @@ import {
   parseFirmwareCode,
   summarizeOverrides,
   summarizeReports,
-  formatDiagnosticDetails
+  formatDiagnosticDetails,
+  summarizeFeatureReport
 } from "../rk65/protocol.js";
 
 const profile = JSON.parse(
@@ -93,5 +94,12 @@ test("diagnostic details are directly readable without expanding console objects
   assert.equal(
     formatDiagnosticDetails({report0A: true, featureReportIds: [10]}),
     '{"report0A":true,"featureReportIds":[10]}'
+  );
+});
+
+test("feature report summary exposes report id, length, and bytes", () => {
+  assert.deepEqual(
+    summarizeFeatureReport(0x05, Uint8Array.from([0x0a, 0x01, 0xff])),
+    {reportId: 0x05, byteLength: 3, hex: "0A 01 FF"}
   );
 });

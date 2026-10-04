@@ -9,7 +9,8 @@ import {
   summarizeHidDevice,
   summarizeOverrides,
   summarizeReports,
-  formatDiagnosticDetails
+  formatDiagnosticDetails,
+  summarizeFeatureReport
 } from "./protocol.js";
 
 const $ = (s) => document.querySelector(s);
@@ -34,6 +35,22 @@ const TARGETS = buildTargets();
 function diag(level, event, details = {}) {
   const method = typeof console?.[level] === "function" ? console[level] : console.log;
   method.call(console, `[RK65] ${event} ${formatDiagnosticDetails(details)}`);
+}
+
+async function probeFeatureReports(device) {
+  const reportIds = [...new Set((device.collections || [])
+    .flatMap(collection => (collection.featureReports || []).map(report => report.reportId)))]
+    .filter(reportId => reportId !== 0x0a);
+  diag("info", "feature-report-read-start", {reportIds});
+  for (const reportId of reportIds) {
+    try {
+      const data = await device.receiveFeatureReport(reportId);
+      diag("info", "feature-report-read-success", summarizeFeatureReport(reportId, new Uint8Array(data.buffer, data.byteOffset, data.byteLength)));
+    } catch (e) {
+      diag("warn", "feature-report-read-failure", {reportId, message: e?.message || String(e)});
+    }
+  }
+  diag("info", "feature-report-read-complete", {reportCount: reportIds.length});
 }
 
 function hidFw(usage) { return (usage & 0xff) << 8; }
@@ -886,6 +903,7 @@ async function connect() {
       outputReportIds: (collection.outputReports || []).map(report => report.reportId),
       featureReportIds: (collection.featureReports || []).map(report => report.reportId)
     })));
+    await probeFeatureReports(device);
     const samePid = device.productId === parseInt(state.profile.productId.slice(2), 16);
     $("#device").textContent =
       `${device.productName || "RK Keyboard"} / VID ${formatHex(device.vendorId,4)} / PID ${formatHex(device.productId,4)}` +
