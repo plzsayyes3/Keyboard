@@ -89,6 +89,33 @@ export function reportsToHex(reports) {
   }).join("\n");
 }
 
+export function summarizeOverrides(profile, overrides = {}) {
+  return Object.entries(overrides)
+    .sort(([a], [b]) => Number(a) - Number(b))
+    .map(([rawBIndex, rawValue]) => {
+      const bIndex = Number(rawBIndex);
+      const key = profile.keys.find(item => item.bIndex === bIndex);
+      const value = formatHex(parseFirmwareCode(rawValue));
+      return {
+        bIndex,
+        keyId: key?.id || null,
+        label: key?.label || null,
+        value,
+        language: value === formatHex(0x9000) ? "LANG1" : value === formatHex(0x9100) ? "LANG2" : null
+      };
+    });
+}
+
+export function summarizeReports(reports) {
+  return reports.map((report, index) => ({
+    index: index + 1,
+    reportId: report[0],
+    byteLength: report.length,
+    header: Array.from(report.slice(0, 5)),
+    hex: Array.from(report, byte => byte.toString(16).toUpperCase().padStart(2, "0")).join(" ")
+  }));
+}
+
 export function summarizeHidDevice(device) {
   return {
     productName: device.productName,

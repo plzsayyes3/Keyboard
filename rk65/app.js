@@ -6,7 +6,9 @@ import {
   parseFirmwareCode,
   buildLegacyReports,
   reportsToHex,
-  summarizeHidDevice
+  summarizeHidDevice,
+  summarizeOverrides,
+  summarizeReports
 } from "./protocol.js";
 
 const $ = (s) => document.querySelector(s);
@@ -27,6 +29,11 @@ const state = {
 };
 
 const TARGETS = buildTargets();
+
+function diag(level, event, details = {}) {
+  const method = typeof console?.[level] === "function" ? console[level] : console.log;
+  method.call(console, `[RK65] ${event}`, details);
+}
 
 function hidFw(usage) { return (usage & 0xff) << 8; }
 function buildTargets() {
@@ -647,20 +654,40 @@ function updateInspector() {
 
 function exactTargetDeviceStatus() {
   const device = state.device;
-  if (!device?.opened) return {ok:false, reason:"RK65未接続"};
+  if (!device?.opened) {
+    diag("debug", "target-check", {ok: false, reason: "RK65未接続"});
+    return {ok:false, reason:"RK65未接続"};
+  }
 
   const expectedVid = parseInt(state.profile.vendorId.slice(2), 16);
   const expectedPid = parseInt(state.profile.productId.slice(2), 16);
   if (device.vendorId !== expectedVid || device.productId !== expectedPid) {
+    diag("warn", "target-check", {
+      ok: false,
+      reason: "VID/PID mismatch",
+      actual: {vendorId: formatHex(device.vendorId, 4), productId: formatHex(device.productId, 4)},
+      expected: {vendorId: formatHex(expectedVid, 4), productId: formatHex(expectedPid, 4)}
+    });
     return {ok:false, reason:`対象外 VID ${formatHex(device.vendorId,4)} / PID ${formatHex(device.productId,4)}`};
   }
 
   const configCollection = (device.collections || []).find(collection =>
     collection.usagePage === CONFIG_USAGE_PAGE && collection.usage === CONFIG_USAGE
   );
-  if (!configCollection) return {ok:false, reason:"RK設定用HID interface未検出"};
+  if (!configCollection) {
+    diag("warn", "target-check", {ok: false, reason: "RK設定用HID interface未検出"});
+    return {ok:false, reason:"RK設定用HID interface未検出"};
+  }
 
   const hasReport0A = (configCollection.featureReports || []).some(report => report.reportId === 0x0a);
+  diag("debug", "feature-report-detection", {
+    collection: {
+      usagePage: formatHex(configCollection.usagePage, 4),
+      usage: formatHex(configCollection.usage, 4)
+    },
+    featureReports: (configCollection.featureReports || []).map(report => ({reportId: report.reportId, byteLength: report.byteLength ?? null})),
+    report0A: hasReport0A
+  });
   if (!hasReport0A) return {ok:false, reason:"Feature Report 0x0A未検出"};
 
   return {ok:true, reason:"258A:01F7 / report 0x0A確認"};
@@ -709,6 +736,7 @@ function updateWriteUI() {
 }
 
 async function writeHardware() {
+  diag("info", "write-request", {overrides: summarizeOverrides(state.profile, state.overrides)});
   const target = exactTargetDeviceStatus();
   if (!target.ok) {
     showToast("書き込み不可: " + target.reason, true);
@@ -747,14 +775,28 @@ async function writeHardware() {
 
   try {
     const reports = buildLegacyReports(state.profile, state.overrides);
-    for (const report of reports) {
+    diag("info", "write-preflight", {
+      overrideCount: changed,
+      overrides: summarizeOverrides(state.profile, state.overrides),
+      reports: summarizeReports(reports)
+    });
+    for (const [index, report] of reports.entries()) {
       const reportId = report[0];
+      diag("debug", "sendFeatureReport", {
+        index: index + 1,
+        total: reports.length,
+        reportId,
+        byteLength: report.length,
+        hex: Array.from(report, byte => byte.toString(16).toUpperCase().padStart(2, "0")).join(" ")
+      });
       await state.device.sendFeatureReport(reportId, report.slice(1));
     }
+    diag("info", "write-success", {reportsSent: reports.length, overrideCount: changed});
     $("#writeState").textContent = `WRITE COMPLETE · ${changed}キー変更を送信`;
     $("#writeState").className = "status ok";
     showToast("RK-R65本体へキーマップを書き込みました");
   } catch (e) {
+    diag("error", "write-failure", {message: e?.message || String(e), error: e});
     $("#writeState").textContent = "WRITE FAILED";
     $("#writeState").className = "status warn";
     showToast("書き込み失敗: " + (e?.message || String(e)), true);
@@ -784,6 +826,14 @@ function renderTargets() {
 
 function applyCode(code) {
   if (!state.selected) return;
+  if (code === hidFw(0x90) || code === hidFw(0x91)) {
+    diag("info", "language-selection", {
+      keyId: state.selected.id,
+      bIndex: state.selected.bIndex,
+      language: code === hidFw(0x90) ? "LANG1" : "LANG2",
+      firmwareCode: formatHex(code)
+    });
+  }
   const defaultValue = parseFirmwareCode(state.selected.defaultFw);
   if ((code >>> 0) === defaultValue) delete state.overrides[state.selected.bIndex];
   else state.overrides[state.selected.bIndex] = formatHex(code >>> 0);
@@ -817,14 +867,24 @@ function resetAll() {
 }
 
 async function connect() {
+  diag("info", "connect-start", {filters: [{vendorId: formatHex(RK_VENDOR_ID, 4), usagePage: formatHex(CONFIG_USAGE_PAGE, 4), usage: formatHex(CONFIG_USAGE, 4)}]});
   try {
     const devices = await navigator.hid.requestDevice({
       filters: [{vendorId: RK_VENDOR_ID, usagePage: CONFIG_USAGE_PAGE, usage: CONFIG_USAGE}]
     });
     if (!devices.length) return;
     const device = devices[0];
+    diag("info", "device-selected", summarizeHidDevice(device));
     if (!device.opened) await device.open();
     state.device = device;
+    diag("info", "device-opened", summarizeHidDevice(device));
+    diag("debug", "hid-collections", (device.collections || []).map(collection => ({
+      usagePage: formatHex(collection.usagePage, 4),
+      usage: formatHex(collection.usage, 4),
+      inputReportIds: (collection.inputReports || []).map(report => report.reportId),
+      outputReportIds: (collection.outputReports || []).map(report => report.reportId),
+      featureReportIds: (collection.featureReports || []).map(report => report.reportId)
+    })));
     const samePid = device.productId === parseInt(state.profile.productId.slice(2), 16);
     $("#device").textContent =
       `${device.productName || "RK Keyboard"} / VID ${formatHex(device.vendorId,4)} / PID ${formatHex(device.productId,4)}` +
@@ -832,8 +892,17 @@ async function connect() {
     $("#device").className = samePid ? "status ok" : "status warn";
     updateFnReportUI();
     updateWriteUI();
+    diag("info", "connect-success", {
+      samePid,
+      vendorId: formatHex(device.vendorId, 4),
+      productId: formatHex(device.productId, 4),
+      lang1: formatHex(0x9000),
+      lang2: formatHex(0x9100),
+      target: exactTargetDeviceStatus()
+    });
     showToast(samePid ? "RK-R65 01F7を接続しました" : "接続しましたが01F7とは別PIDです", !samePid);
   } catch (e) {
+    diag("error", "connect-failure", {message: e?.message || String(e), error: e});
     showToast(e?.message || String(e), true);
   }
 }

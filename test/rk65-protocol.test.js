@@ -2,7 +2,12 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 
-import { buildLegacyReports, parseFirmwareCode } from "../rk65/protocol.js";
+import {
+  buildLegacyReports,
+  parseFirmwareCode,
+  summarizeOverrides,
+  summarizeReports
+} from "../rk65/protocol.js";
 
 const profile = JSON.parse(
   fs.readFileSync(new URL("../rk65/profiles/r65-jis-01f7.json", import.meta.url), "utf8")
@@ -56,4 +61,29 @@ test("legacy RK reports encode a LANG2 override at the selected bIndex", () => {
     Array.from(payload.slice(offset, offset + 4)),
     [0x00, 0x00, 0x91, 0x00]
   );
+});
+
+test("diagnostic override summary identifies LANG1/LANG2 changes", () => {
+  assert.deepEqual(
+    summarizeOverrides(profile, {
+      17: "0x00009000",
+      20: "0x00009100"
+    }),
+    [
+      { bIndex: 17, keyId: "K58", label: "LAlt", value: "0x00009000", language: "LANG1" },
+      { bIndex: 20, keyId: "K18", label: "E", value: "0x00009100", language: "LANG2" }
+    ]
+  );
+});
+
+test("diagnostic report summary includes id, length, and hex payload", () => {
+  const reports = buildLegacyReports(profile, { 17: "0x00009000" });
+
+  assert.deepEqual(summarizeReports(reports), reports.map((report, index) => ({
+    index: index + 1,
+    reportId: 0x0a,
+    byteLength: 65,
+    header: Array.from(report.slice(0, 5)),
+    hex: Array.from(report, byte => byte.toString(16).toUpperCase().padStart(2, "0")).join(" ")
+  })));
 });
