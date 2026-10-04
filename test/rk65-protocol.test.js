@@ -6,7 +6,8 @@ import {
   buildLegacyReports,
   parseFirmwareCode,
   summarizeOverrides,
-  summarizeReports
+  summarizeReports,
+  formatDiagnosticDetails
 } from "../rk65/protocol.js";
 
 const profile = JSON.parse(
@@ -86,4 +87,11 @@ test("diagnostic report summary includes id, length, and hex payload", () => {
     header: Array.from(report.slice(0, 5)),
     hex: Array.from(report, byte => byte.toString(16).toUpperCase().padStart(2, "0")).join(" ")
   })));
+});
+
+test("diagnostic details are directly readable without expanding console objects", () => {
+  assert.equal(
+    formatDiagnosticDetails({report0A: true, featureReportIds: [10]}),
+    '{"report0A":true,"featureReportIds":[10]}'
+  );
 });

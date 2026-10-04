@@ -116,6 +116,10 @@ export function summarizeReports(reports) {
   }));
 }
 
+export function formatDiagnosticDetails(details) {
+  return JSON.stringify(details);
+}
+
 export function summarizeHidDevice(device) {
   return {
     productName: device.productName,

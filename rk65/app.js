@@ -8,7 +8,8 @@ import {
   reportsToHex,
   summarizeHidDevice,
   summarizeOverrides,
-  summarizeReports
+  summarizeReports,
+  formatDiagnosticDetails
 } from "./protocol.js";
 
 const $ = (s) => document.querySelector(s);
@@ -32,7 +33,7 @@ const TARGETS = buildTargets();
 
 function diag(level, event, details = {}) {
   const method = typeof console?.[level] === "function" ? console[level] : console.log;
-  method.call(console, `[RK65] ${event}`, details);
+  method.call(console, `[RK65] ${event} ${formatDiagnosticDetails(details)}`);
 }
 
 function hidFw(usage) { return (usage & 0xff) << 8; }
