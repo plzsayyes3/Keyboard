@@ -12,6 +12,7 @@ import {
   summarizeHidCollections,
   buildBeiYingReadRequest,
   decodeBeiYingKeyCode,
+  compareBeiYingMatrixKey,
   isBeiYingReadTarget,
   isBeiYingIdentifyResponse,
   parseBeiYingKeyMatrixResponse,
@@ -22,6 +23,9 @@ import {
 
 const profile = JSON.parse(
   fs.readFileSync(new URL("../rk65/profiles/r65-jis-01f7.json", import.meta.url), "utf8")
+);
+const readReference = JSON.parse(
+  fs.readFileSync(new URL("../rk65/profiles/r65-jis-01f7-reference.json", import.meta.url), "utf8")
 );
 
 function flattenPayload(reports) {
@@ -247,6 +251,40 @@ test("Fn layer backup preserves explicit layer metadata", () => {
   assert.equal(backup.layer, 1);
   assert.equal(backup.layerName, "Fn");
   assert.throws(() => createBeiYingBackup(response, "x"), /レイヤー/);
+});
+
+test("read comparison distinguishes exact match, difference, and missing reference", () => {
+  const live = new Uint8Array(512);
+  const reference = new Uint8Array(512);
+  live.set([0x06, 0x83, 1, 0, 1, 0, 0xf8, 1]);
+  reference.set([0x06, 0x83, 1, 0, 1, 0, 0xf8, 1]);
+  live.set([0, 8, 0, 0x28], 8 + 26 * 4);
+  reference.set([0, 8, 0, 0x28], 8 + 26 * 4);
+  const referenceSlots = {26: "00080028"};
+  assert.equal(compareBeiYingMatrixKey(live, referenceSlots, 1, 26).status, "match");
+  live[8 + 26 * 4 + 3] = 0x29;
+  const changed = compareBeiYingMatrixKey(live, referenceSlots, 1, 26);
+  assert.equal(changed.status, "different");
+  assert.deepEqual(changed.live, [0, 8, 0, 0x29]);
+  assert.deepEqual(changed.reference, [0, 8, 0, 0x28]);
+  assert.equal(compareBeiYingMatrixKey(live, null, 1, 26).status, "no-reference");
+  assert.throws(() => compareBeiYingMatrixKey(live, referenceSlots, 0, 26), /レイヤー/);
+});
+
+test("verified layout reference covers both layers and the visible physical key slots", () => {
+  assert.equal(readReference.format, "rk65-verified-layout-reference-v1");
+  assert.match(readReference.note, /not factory defaults/);
+  for (const layer of [0, 1]) {
+    const slots = readReference.layers[String(layer)].slots;
+    for (const key of profile.keys.filter(key => !key.hidden)) {
+      assert.match(slots[key.bIndex], /^[0-9A-F]{8}$/);
+    }
+  }
+  assert.equal(readReference.layers["0"].slots[23], "00000091");
+  assert.equal(readReference.layers["0"].slots[41], "00000090");
+  assert.equal(readReference.layers["1"].slots[26], "00080028");
+  assert.equal(readReference.layers["1"].slots[28], "00000091");
+  assert.equal(readReference.layers["1"].slots[46], "00000090");
 });
 
 test("BeiYing write preview changes only Henkan slot 41 to LANG1 and keeps the captured matrix", () => {

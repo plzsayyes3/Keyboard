@@ -200,6 +200,26 @@ export function decodeBeiYingKeyCode(bytes) {
   return {label: [...modifiers, keyLabel].join(" + "), raw};
 }
 
+export function compareBeiYingMatrixKey(response, referenceSlots, layer, bIndex) {
+  const matrix = parseBeiYingKeyMatrixResponse(response, layer);
+  if (!Number.isInteger(bIndex) || bIndex < 0 || bIndex >= BEIYING_MATRIX_LENGTH / 4) {
+    throw new Error("キーslotが範囲外です");
+  }
+  const offset = bIndex * 4;
+  const live = Array.from(matrix.slice(offset, offset + 4));
+  const expectedHex = referenceSlots?.[bIndex];
+  if (expectedHex === undefined) return {status: "no-reference", live, reference: null};
+  if (typeof expectedHex !== "string" || !/^[0-9a-fA-F]{8}$/.test(expectedHex)) {
+    throw new Error("比較用の基準コードが不正です");
+  }
+  const reference = expectedHex.match(/../g).map(byte => Number.parseInt(byte, 16));
+  return {
+    status: live.every((byte, index) => byte === reference[index]) ? "match" : "different",
+    live,
+    reference
+  };
+}
+
 export function buildBeiYingWritePreview(response, overrides) {
   const backup = Uint8Array.from(response);
   const matrix = parseBeiYingKeyMatrixResponse(backup);

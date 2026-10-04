@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0d10" />
+  <title>現在のキー配置 · RK65 JIS</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <div>
+        <h1>現在のキー配置を確認</h1>
+        <p class="sub">RK65から通常/Fnレイヤーを読み取り、最後に確認した配列との差を表示します。ここでは編集・書き込みを行いません。</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="./index.html">編集マッパーへ戻る</a>
+        <button class="btn primary" id="connect">RK65を接続</button>
+      </div>
+    </header>
+
+    <div id="support" class="status"></div>
+    <div id="device" class="status">未接続。PC版 Chrome / Edge / Opera から接続してください。</div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>実機から読み取った配置</h2>
+        <div class="row currentReadActions">
+          <label class="readLayerLabel" for="readLayer">レイヤー</label>
+          <select class="readLayer" id="readLayer" disabled>
+            <option value="0">通常レイヤー</option>
+            <option value="1">Fnレイヤー</option>
+          </select>
+          <button class="btn" id="readLayout" disabled>選択した層を読み取る</button>
+        </div>
+        <div id="readState" class="meta" aria-live="polite">キーボードを接続して、確認する層を読み取ってください。</div>
+        <div id="comparisonSummary" class="comparisonSummary" hidden></div>
+        <div id="keyboardWrap" class="keyboardWrap" hidden>
+          <div id="keyboard" class="keyboard" aria-label="実機から読み取ったRK65キー配列"></div>
+        </div>
+        <div id="comparisonLegend" class="legend" hidden>
+          <span><i class="dot match-dot"></i>基準と一致</span>
+          <span><i class="dot different-dot"></i>基準と差異</span>
+          <span><i class="dot no-reference-dot"></i>比較基準なし</span>
+        </div>
+        <p class="note">
+          比較基準は2026-10-04に実機から読み出した、最後に確認済みの配列です。工場出荷時の正解を意味しません。<br />
+          キーを選ぶと実機の割り当てと比較基準のraw値を確認できます。実機から読んだ値が未知のコードでも、raw値同士で差分を判定します。
+        </p>
+      </section>
+
+      <aside class="card">
+        <div id="selectedName" class="inspectorTitle">キーを選択</div>
+        <div id="selectedMeta" class="meta">読み取り後、キーボード図のキーを選択してください。</div>
+        <div id="keyComparison" class="keyComparison" hidden>
+          <div id="keyComparisonStatus" class="keyComparisonStatus"></div>
+          <div class="comparisonValue">
+            <small>実機から読み取った値</small>
+            <strong id="actualAssignment"></strong>
+            <code id="actualRaw"></code>
+          </div>
+          <div class="comparisonValue">
+            <small>最後に確認した基準値</small>
+            <strong id="referenceAssignment"></strong>
+            <code id="referenceRaw"></code>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <script type="module" src="./current-layout.js?comparison=1"></script>
+</body>
+</html>
