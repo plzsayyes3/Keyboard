@@ -12,7 +12,7 @@
     <header class="top">
       <div>
         <h1>RK65 JIS Mapper</h1>
-        <p class="sub">RK65 日本語配列を、物理キーから直感的に編集。macOS向けの「かな / 英数（LANG1 / LANG2）」を任意キーへ割り当て、本体へ保存できます。</p>
+      <p class="sub">RK65 日本語配列を、物理キーから直感的に編集。macOS向け「かな / 英数（LANG1 / LANG2）」の割り当てと、対応状況に応じた本体設定の確認ができます。</p>
       </div>
       <div class="actions">
         <button class="btn primary" id="connect">RK65を接続</button>
@@ -92,9 +92,16 @@
           <button class="btn" id="resetAll">変更を全初期化</button>
         </div>
         <div id="readState" class="meta">対象のRK R65 JPを接続すると診断できます。</div>
+        <div class="sectionTitle">実機配列の保全・変更前確認</div>
+        <div class="row">
+          <button class="btn" id="downloadMatrixBackup" disabled>元の配列を保存</button>
+          <button class="btn" id="previewBeiYingWrite" disabled>変換キーの変更を事前確認</button>
+        </div>
+        <div id="previewState" class="status" aria-live="polite">実機から配列を読み取ると、バックアップと事前確認ができます。</div>
         <p class="note">
           9レポートは既知のRK legacy keymap形式の<strong>プレビュー生成のみ</strong>です。
-          診断読取は公式Web Appと同じ問い合わせをFeature Report <code>0x06</code>へ送信し、応答をConsoleへ表示します。キー設定の書き込みは行いません。
+          診断読取は公式Web Appと同じ問い合わせをFeature Report <code>0x06</code>へ送信します。
+          バックアップは読み取った512バイトの応答を保存します。事前確認は変換キー（slot 41）のLANG1/LANG2変更だけを検査し、本体へは送信しません。
         </p>
       </section>
 
@@ -132,7 +139,7 @@
         <div class="sectionTitle">本体へ書き込み</div>
         <label class="note" style="display:block">
           <input type="checkbox" id="writeAck" />
-          RKの仕様上、1キー変更でも全キーマップを書き込むことを理解しました。
+          旧方式では、1キー変更でも全キーマップを書き込むことを理解しました。
           このブラウザに記録されていない既存リマップは初期配列へ戻る可能性があります。
         </label>
         <div class="row">
@@ -140,14 +147,14 @@
         </div>
         <div id="writeState" class="locked">HARDWARE WRITE: LOCKED · RK65未接続</div>
         <p class="note">
-          書き込みは VID <code>0x258A</code> / PID <code>0x01F7</code>、
-          RK設定用HID interface、Feature Report <code>0x0A</code> がすべて一致し、変更内容が LANG1 / LANG2 のみの場合だけ有効になります。
+          上の書き込みボタンはlegacy方式（Feature Report <code>0x0A</code>）用です。
+          今回の実機はBeiYing方式（<code>0x06</code>）なのでロックを維持します。バックアップと変更前確認だけ利用できます。
         </p>
       </aside>
     </div>
   </main>
 
   <div id="toast" class="toast"></div>
-  <script type="module" src="./app.js?diagnostics=beiying-read-2"></script>
+  <script type="module" src="./app.js?diagnostics=beiying-preview-1"></script>
 </body>
 </html>

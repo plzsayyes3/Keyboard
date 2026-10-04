@@ -14,8 +14,11 @@ import {
   summarizeHidCollections,
   isBeiYingReadTarget,
   buildBeiYingReadRequest,
-  isBeiYingIdentifyResponse
-} from "./protocol.js?diagnostics=beiying-read-2";
+  isBeiYingIdentifyResponse,
+  parseBeiYingKeyMatrixResponse,
+  buildBeiYingWritePreview,
+  createBeiYingBackup
+} from "./protocol.js?diagnostics=beiying-preview-1";
 
 const $ = (s) => document.querySelector(s);
 const state = {
@@ -24,6 +27,9 @@ const state = {
   overrides: {},
   device: null,
   readingDiagnostic: false,
+  matrixResponse: null,
+  backupDownloaded: false,
+  previewSignature: null,
   testMode: false,
   testIndex: 0,
   testedKeys: {},
@@ -50,10 +56,67 @@ function updateReadUI() {
   }
 }
 
+function updatePreviewUI() {
+  const available = !!state.matrixResponse && isBeiYingReadTarget(state.device);
+  $("#downloadMatrixBackup").disabled = !available;
+  $("#previewBeiYingWrite").disabled = !available || !state.backupDownloaded;
+  const signature = JSON.stringify(state.overrides);
+  if (!available || state.previewSignature !== signature) {
+    state.previewSignature = null;
+    $("#previewState").textContent = !available
+      ? "実機から配列を読み取ると、バックアップと事前確認ができます。"
+      : state.backupDownloaded
+        ? "元の配列のバックアップを保存したら、変更内容を事前確認してください。"
+        : "先に元の配列をファイルへ保存してください。";
+  }
+}
+
+function downloadMatrixBackup() {
+  if (!state.matrixResponse || !isBeiYingReadTarget(state.device)) return;
+  const backup = createBeiYingBackup(state.matrixResponse, new Date().toISOString());
+  const blob = new Blob([JSON.stringify(backup, null, 2)], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "rk65-original-matrix-backup.json";
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  state.backupDownloaded = true;
+  diag("info", "matrix-backup-downloaded", {byteLength: backup.responseBytes.length});
+  updatePreviewUI();
+}
+
+function previewBeiYingWrite() {
+  if (!state.matrixResponse || !state.backupDownloaded || !isBeiYingReadTarget(state.device)) return;
+  try {
+    const preview = buildBeiYingWritePreview(state.matrixResponse, state.overrides);
+    const {before, after} = preview.changes[0];
+    const original = parseBeiYingKeyMatrixResponse(preview.backup);
+    const changedBytes = original.filter((byte, index) => byte !== preview.request[7 + index]).length;
+    state.previewSignature = JSON.stringify(state.overrides);
+    $("#previewState").textContent = `変換キー（slot 41）: ${before} → ${after}。504バイト中${504 - changedBytes}バイトは元の実機配列と同一です。書き込みはまだロック中です。`;
+    diag("info", "beiying-write-preview", {
+      reportId: 6,
+      command: "0x03",
+      requestByteLength: preview.request.length,
+      changes: preview.changes,
+      hardwareWriteEnabled: false
+    });
+  } catch (e) {
+    state.previewSignature = null;
+    $("#previewState").textContent = "事前確認不可: " + e.message;
+    diag("warn", "beiying-write-preview-rejected", {message: e.message});
+  }
+}
+
 async function readDiagnostic() {
   if (!isBeiYingReadTarget(state.device) || state.readingDiagnostic) return;
   const device = state.device;
   state.readingDiagnostic = true;
+  state.matrixResponse = null;
+  state.backupDownloaded = false;
+  state.previewSignature = null;
+  updatePreviewUI();
   updateReadUI();
   const status = $("#readState");
   status.textContent = "識別情報を読み取り中…";
@@ -76,7 +139,11 @@ async function readDiagnostic() {
     const matrixData = await device.receiveFeatureReport(6);
     const matrixBytes = new Uint8Array(matrixData.buffer, matrixData.byteOffset, matrixData.byteLength);
     diag("info", "read-response", {stage, ...summarizeFeatureReport(6, matrixBytes)});
-    if (matrixData.byteLength < 134) throw new Error(`キー配列応答が短すぎます (${matrixData.byteLength} bytes)`);
+    parseBeiYingKeyMatrixResponse(matrixBytes);
+    state.matrixResponse = Uint8Array.from(matrixBytes);
+    state.backupDownloaded = false;
+    state.previewSignature = null;
+    updatePreviewUI();
     status.textContent = `診断読取完了 · ${matrixData.byteLength} bytes（Consoleを確認）`;
     diag("info", "read-complete", {byteLength: matrixData.byteLength});
   } catch (e) {
@@ -147,7 +214,7 @@ function buildTargets() {
 }
 
 async function init() {
-  diag("info", "diagnostics-ready", {version: "beiying-read-2"});
+  diag("info", "diagnostics-ready", {version: "beiying-preview-1"});
   state.profile = await fetch("./profiles/r65-jis-01f7.json").then(r => r.json());
   loadLocal();
   loadTestState();
@@ -158,6 +225,7 @@ async function init() {
   bind();
   updateFnReportUI();
   updateReadUI();
+  updatePreviewUI();
 }
 
 function storageKey() {
@@ -215,6 +283,8 @@ function bind() {
   $("#resetAll").addEventListener("click", resetAll);
   $("#copyDiag").addEventListener("click", copyDiagnostics);
   $("#readDiagnostic").addEventListener("click", readDiagnostic);
+  $("#downloadMatrixBackup").addEventListener("click", downloadMatrixBackup);
+  $("#previewBeiYingWrite").addEventListener("click", previewBeiYingWrite);
   $("#copyPackets").addEventListener("click", copyPackets);
   $("#exportBtn").addEventListener("click", exportMappings);
   $("#importInput").addEventListener("change", importMappings);
@@ -770,6 +840,15 @@ function updateWriteUI() {
 
   if (!button || !stateBox) return;
 
+  if (isBeiYingReadTarget(state.device)) {
+    button.disabled = true;
+    stateBox.textContent = "HARDWARE WRITE: LOCKED · BeiYing 0x06書き込みは実機未検証";
+    stateBox.className = "locked";
+    stateBox.title = "バックアップと変更前確認のみ利用できます";
+    updatePreviewUI();
+    return;
+  }
+
   button.disabled = !(target.ok && ack && changed > 0 && nonMac.length === 0);
 
   if (!target.ok) {
@@ -789,10 +868,15 @@ function updateWriteUI() {
     stateBox.className = "status ok";
   }
   stateBox.title = target.reason;
+  updatePreviewUI();
 }
 
 async function writeHardware() {
   diag("info", "write-request", {overrides: summarizeOverrides(state.profile, state.overrides)});
+  if (isBeiYingReadTarget(state.device)) {
+    showToast("BeiYing方式の実機書き込みはまだロック中です", true);
+    return;
+  }
   const target = exactTargetDeviceStatus();
   if (!target.ok) {
     showToast("書き込み不可: " + target.reason, true);
@@ -933,6 +1017,9 @@ async function connect() {
     diag("info", "device-selected", summarizeHidDevice(device));
     if (!device.opened) await device.open();
     state.device = device;
+    state.matrixResponse = null;
+    state.backupDownloaded = false;
+    state.previewSignature = null;
     diag("info", "device-opened", summarizeHidDevice(device));
     diag("info", "hid-collections", summarizeHidCollections(device.collections));
     const samePid = device.productId === parseInt(state.profile.productId.slice(2), 16);
@@ -943,6 +1030,7 @@ async function connect() {
     updateFnReportUI();
     updateWriteUI();
     updateReadUI();
+    updatePreviewUI();
     diag("info", "connect-success", {
       samePid,
       vendorId: formatHex(device.vendorId, 4),

@@ -12,7 +12,11 @@ import {
   summarizeHidCollections,
   buildBeiYingReadRequest,
   isBeiYingReadTarget,
-  isBeiYingIdentifyResponse
+  isBeiYingIdentifyResponse,
+  parseBeiYingKeyMatrixResponse,
+  buildBeiYingWritePreview,
+  verifyBeiYingWrite,
+  createBeiYingBackup
 } from "../rk65/protocol.js";
 
 const profile = JSON.parse(
@@ -177,4 +181,71 @@ test("BeiYing identify response requires report 6 and command 0x82", () => {
   assert.equal(isBeiYingIdentifyResponse(response), true);
   assert.equal(isBeiYingIdentifyResponse(response.slice(0, 8)), false);
   assert.equal(isBeiYingIdentifyResponse(Uint8Array.from([0x06, 0x83, ...response.slice(2)])), false);
+});
+
+function sampleMatrixResponse() {
+  const response = new Uint8Array(512);
+  response.set([0x06, 0x83, 0, 0, 0x01, 0, 0xf8, 0x01]);
+  response[8 + 7 * 4 + 3] = 0x3a; // The real device's number-row slot 7 currently contains F1.
+  response[8 + 41 * 4 + 3] = 0x8a; // Henkan.
+  response[8 + 91 * 4] = 0x02; // Non-keyboard mapping must survive intact.
+  response[8 + 91 * 4 + 3] = 0xe2;
+  return response;
+}
+
+test("BeiYing matrix parsing accepts only a complete layer-0 504-byte response", () => {
+  const response = sampleMatrixResponse();
+  assert.equal(parseBeiYingKeyMatrixResponse(response).length, 504);
+  assert.throws(() => parseBeiYingKeyMatrixResponse(response.slice(0, 511)), /512/);
+  const wrongCommand = response.slice();
+  wrongCommand[1] = 0x82;
+  assert.throws(() => parseBeiYingKeyMatrixResponse(wrongCommand), /応答/);
+  const wrongLayer = response.slice();
+  wrongLayer[4] = 2;
+  assert.throws(() => parseBeiYingKeyMatrixResponse(wrongLayer), /応答/);
+});
+
+test("BeiYing write preview changes only Henkan slot 41 to LANG1 and keeps the captured matrix", () => {
+  const original = sampleMatrixResponse();
+  const {backup, request, changes} = buildBeiYingWritePreview(original, {41: "0x00009000"});
+  assert.equal(request.length, 519);
+  assert.deepEqual(Array.from(request.slice(0, 7)), [0x03, 0, 0, 0x01, 0, 0xf8, 0x01]);
+  assert.deepEqual(Array.from(request.slice(7 + 41 * 4, 7 + 42 * 4)), [0, 0, 0, 0x90]);
+  assert.equal(request[7 + 7 * 4 + 3], 0x3a);
+  assert.deepEqual(Array.from(request.slice(7 + 91 * 4, 7 + 92 * 4)), [0x02, 0, 0, 0xe2]);
+  assert.deepEqual(Array.from(backup), Array.from(original));
+  assert.deepEqual(changes, [{bIndex: 41, before: "0x0000008A", after: "0x00000090"}]);
+  const changed = Array.from(request.slice(7, 511)).filter((byte, index) => byte !== original[8 + index]);
+  assert.deepEqual(changed, [0x90]);
+});
+
+test("BeiYing write preview rejects other slots and non-LANG overrides", () => {
+  const response = sampleMatrixResponse();
+  assert.throws(() => buildBeiYingWritePreview(response, {7: "0x00009000"}), /変換キー/);
+  assert.throws(() => buildBeiYingWritePreview(response, {41: "0x00009000", 7: "0x00009000"}), /1キー/);
+  assert.throws(() => buildBeiYingWritePreview(response, {41: "0x00009200"}), /LANG1/);
+  const unknownSource = response.slice();
+  unknownSource[8 + 41 * 4 + 3] = 0x04;
+  assert.throws(() => buildBeiYingWritePreview(unknownSource, {41: "0x00009000"}), /元の値/);
+});
+
+test("BeiYing readback verification checks all 504 bytes, not only Henkan", () => {
+  const response = sampleMatrixResponse();
+  const {request} = buildBeiYingWritePreview(response, {41: "0x00009100"});
+  const readback = response.slice();
+  readback.set(request.slice(7, 511), 8);
+  assert.equal(verifyBeiYingWrite(readback, request), true);
+  readback[8 + 7 * 4 + 3] = 0x1e;
+  assert.equal(verifyBeiYingWrite(readback, request), false);
+});
+
+test("BeiYing backup preserves the full response independently of the live buffer", () => {
+  const response = sampleMatrixResponse();
+  const backup = createBeiYingBackup(response, "2026-10-04T00:00:00.000Z");
+  assert.equal(backup.format, "rk65-beiying-matrix-backup-v1");
+  assert.equal(backup.capturedAt, "2026-10-04T00:00:00.000Z");
+  assert.deepEqual(backup.responseBytes, Array.from(response));
+  response[8 + 41 * 4 + 3] = 0x90;
+  assert.equal(backup.responseBytes[8 + 41 * 4 + 3], 0x8a);
+  assert.throws(() => createBeiYingBackup(response.slice(0, 20), "x"), /512/);
 });

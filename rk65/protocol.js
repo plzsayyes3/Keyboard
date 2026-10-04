@@ -157,6 +157,56 @@ export function isBeiYingIdentifyResponse(bytes) {
   return bytes.length >= 18 && bytes[0] === 0x06 && bytes[1] === 0x82;
 }
 
+const BEIYING_MATRIX_LENGTH = 504;
+const BEIYING_RESPONSE_HEADER = [0x06, 0x83, 0, 0, 0x01, 0, 0xf8, 0x01];
+
+export function parseBeiYingKeyMatrixResponse(bytes) {
+  if (bytes?.length !== 512) throw new Error("キー配列応答は512バイト必要です");
+  if (!BEIYING_RESPONSE_HEADER.every((byte, index) => bytes[index] === byte)) {
+    throw new Error("キー配列応答のヘッダーまたはレイヤーが一致しません");
+  }
+  return Uint8Array.from(bytes.slice(8));
+}
+
+export function buildBeiYingWritePreview(response, overrides) {
+  const backup = Uint8Array.from(response);
+  const matrix = parseBeiYingKeyMatrixResponse(backup);
+  const entries = Object.entries(overrides || {});
+  if (entries.length !== 1) throw new Error("今回は1キーの変更だけを許可します");
+  const [rawIndex, rawValue] = entries[0];
+  if (rawIndex !== "41") throw new Error("今回は変換キー以外の書き込みを許可しません");
+  const code = parseFirmwareCode(rawValue);
+  if (code !== 0x9000 && code !== 0x9100) throw new Error("LANG1/LANG2以外の値は許可しません");
+  const offset = 41 * 4;
+  const before = new DataView(matrix.buffer).getUint32(offset);
+  if (![0x8a, 0x90, 0x91].includes(before)) throw new Error("変換キーの元の値が想定外です");
+  const after = code >>> 8;
+  const request = new Uint8Array(519);
+  request.set([0x03, 0, 0, 0x01, 0, BEIYING_MATRIX_LENGTH & 0xff, BEIYING_MATRIX_LENGTH >> 8]);
+  request.set(matrix, 7);
+  new DataView(request.buffer).setUint32(7 + offset, after);
+  return {
+    backup,
+    request,
+    changes: [{bIndex: 41, before: formatHex(before), after: formatHex(after)}]
+  };
+}
+
+export function verifyBeiYingWrite(readback, request) {
+  const matrix = parseBeiYingKeyMatrixResponse(readback);
+  if (request?.length !== 519 || request[0] !== 0x03) return false;
+  return matrix.every((byte, index) => byte === request[7 + index]);
+}
+
+export function createBeiYingBackup(response, capturedAt) {
+  parseBeiYingKeyMatrixResponse(response);
+  return {
+    format: "rk65-beiying-matrix-backup-v1",
+    capturedAt,
+    responseBytes: Array.from(response)
+  };
+}
+
 function definedFields(value, fields) {
   return Object.fromEntries(fields
     .filter(field => value[field] !== undefined)
