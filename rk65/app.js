@@ -10,7 +10,8 @@ import {
   summarizeOverrides,
   summarizeReports,
   formatDiagnosticDetails,
-  summarizeFeatureReport
+  summarizeFeatureReport,
+  summarizeHidCollections
 } from "./protocol.js";
 
 const $ = (s) => document.querySelector(s);
@@ -896,13 +897,7 @@ async function connect() {
     if (!device.opened) await device.open();
     state.device = device;
     diag("info", "device-opened", summarizeHidDevice(device));
-    diag("debug", "hid-collections", (device.collections || []).map(collection => ({
-      usagePage: formatHex(collection.usagePage, 4),
-      usage: formatHex(collection.usage, 4),
-      inputReportIds: (collection.inputReports || []).map(report => report.reportId),
-      outputReportIds: (collection.outputReports || []).map(report => report.reportId),
-      featureReportIds: (collection.featureReports || []).map(report => report.reportId)
-    })));
+    diag("debug", "hid-collections", summarizeHidCollections(device.collections));
     await probeFeatureReports(device);
     const samePid = device.productId === parseInt(state.profile.productId.slice(2), 16);
     $("#device").textContent =

@@ -8,7 +8,8 @@ import {
   summarizeOverrides,
   summarizeReports,
   formatDiagnosticDetails,
-  summarizeFeatureReport
+  summarizeFeatureReport,
+  summarizeHidCollections
 } from "../rk65/protocol.js";
 
 const profile = JSON.parse(
@@ -101,5 +102,38 @@ test("feature report summary exposes report id, length, and bytes", () => {
   assert.deepEqual(
     summarizeFeatureReport(0x05, Uint8Array.from([0x0a, 0x01, 0xff])),
     {reportId: 0x05, byteLength: 3, hex: "0A 01 FF"}
+  );
+});
+
+test("HID collection summary exposes feature report item descriptors", () => {
+  assert.deepEqual(
+    summarizeHidCollections([{
+      usagePage: 0xff00,
+      usage: 1,
+      featureReports: [{
+        reportId: 6,
+        items: [{
+          reportSize: 8,
+          reportCount: 8,
+          usages: [1, 2],
+          logicalMinimum: 0,
+          logicalMaximum: 255
+        }]
+      }]
+    }]),
+    [{
+      usagePage: "0xFF00",
+      usage: "0x0001",
+      featureReports: [{
+        reportId: 6,
+        items: [{
+          reportSize: 8,
+          reportCount: 8,
+          usages: [1, 2],
+          logicalMinimum: 0,
+          logicalMaximum: 255
+        }]
+      }]
+    }]
   );
 });

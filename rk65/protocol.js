@@ -129,6 +129,29 @@ export function summarizeFeatureReport(reportId, data) {
   };
 }
 
+function definedFields(value, fields) {
+  return Object.fromEntries(fields
+    .filter(field => value[field] !== undefined)
+    .map(field => [field, value[field]]));
+}
+
+export function summarizeHidCollections(collections = []) {
+  return collections.map(collection => ({
+    usagePage: formatHex(collection.usagePage, 4),
+    usage: formatHex(collection.usage, 4),
+    featureReports: (collection.featureReports || []).map(report => ({
+      reportId: report.reportId,
+      items: (report.items || []).map(item => definedFields(item, [
+        "reportSize", "reportCount", "usages", "usageMinimum", "usageMaximum",
+        "logicalMinimum", "logicalMaximum", "physicalMinimum", "physicalMaximum",
+        "unit", "unitExponent", "isAbsolute", "isArray", "isBufferedBytes",
+        "isConstant", "isLinear", "isRange", "isRelative", "isVolatile", "hasNull",
+        "hasPreferredState", "hasWrap"
+      ]))
+    }))
+  }));
+}
+
 export function summarizeHidDevice(device) {
   return {
     productName: device.productName,
