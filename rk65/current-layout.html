@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b0d10" />
   <title>現在のキー配置 · RK65 JIS</title>
-  <link rel="stylesheet" href="./styles.css?layout=2" />
+  <link rel="stylesheet" href="./styles.css?layout=3" />
 </head>
 <body>
   <main class="shell">
@@ -23,16 +23,22 @@
     <div id="support" class="status"></div>
     <div id="device" class="status">未接続。PC版 Chrome / Edge / Opera から接続してください。</div>
 
-    <div class="grid">
-      <section class="card">
-        <h2>実機から読み取った配置</h2>
-        <div class="row currentReadActions">
+    <div class="grid keymapLayout">
+      <section class="card keymap-card">
+        <div class="keymapHeader">
+          <div class="keymapTitleBlock">
+            <div class="keymapEyebrow">DEVICE LAYOUT · RK R65 JP</div>
+            <h2>実機のキーマップ</h2>
+            <p>キー上段は実機の割り当て、下段は物理位置です。キーを選ぶとraw値と基準との差を確認できます。</p>
+          </div>
+          <div class="keymapTools">
           <label class="readLayerLabel" for="readLayer">レイヤー</label>
           <select class="readLayer" id="readLayer" disabled>
             <option value="0">通常レイヤー</option>
             <option value="1">Fnレイヤー</option>
           </select>
           <button class="btn" id="readLayout" disabled>選択した層を読み取る</button>
+          </div>
         </div>
         <div id="readState" class="meta" aria-live="polite">キーボードを接続して、確認する層を読み取ってください。</div>
         <div id="comparisonSummary" class="comparisonSummary" hidden></div>
@@ -44,13 +50,12 @@
           <span><i class="dot different-dot"></i>基準と差異</span>
           <span><i class="dot no-reference-dot"></i>比較基準なし</span>
         </div>
-        <p class="note">
-          比較基準は2026-10-04に実機から読み出した、最後に確認済みの配列です。工場出荷時の正解を意味しません。<br />
-          キー上の大きな表示は実機から読み取った割り当て、小さな表示は物理キーの印字と位置です。キーを選ぶとフル名とraw値を確認できます。未知のコードでもraw値同士で差分を判定します。
-        </p>
+        <div class="legend"><span><i class="dot match-dot"></i>基準と一致</span><span><i class="dot different-dot"></i>基準と差異</span><span><i class="dot no-reference-dot"></i>比較基準なし</span></div>
+        <p class="note">比較基準は2026-10-04に実機から読み出した最後の確認済み配列で、工場出荷時の正解ではありません。未知のコードもraw値で比較します。</p>
       </section>
 
-      <aside class="card">
+      <aside class="card inspector-card">
+        <div class="inspectorEyebrow">SELECTED KEY</div>
         <div id="selectedName" class="inspectorTitle">キーを選択</div>
         <div id="selectedMeta" class="meta">読み取り後、キーボード図のキーを選択してください。</div>
         <div id="keyComparison" class="keyComparison" hidden>

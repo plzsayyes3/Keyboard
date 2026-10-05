@@ -374,8 +374,9 @@ function renderKeyboard() {
       btn.classList.add("read-mapped");
       if (readCode.label === "不明なコード") btn.classList.add("read-unknown");
     }
-    btn.innerHTML = `<span>${escapeHtml(key.label)}</span><small>${key.id}</small>` +
-      (readCode ? `<span class="read-label">${escapeHtml(readCode.label)}</span>` : "");
+    btn.innerHTML = readCode
+      ? `<span class="read-label">${escapeHtml(readCode.label)}</span><small class="physical-position">${escapeHtml(key.label)} · ${key.id}</small>`
+      : `<span>${escapeHtml(key.label)}</span><small>${key.id}</small>`;
     btn.title = `${key.label} · bIndex ${key.bIndex} · default ${key.defaultFw}` +
       (readCode ? ` · 実機: ${readCode.label} · raw ${readCode.raw}` : "") +
       (expectedCode ? ` · event.code ${expectedCode}` : "");
