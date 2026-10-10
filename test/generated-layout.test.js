@@ -14,6 +14,21 @@ test('generated layout contains the complete v18 practice primitives', () => {
   assert.ok(resolveExpectedKeys(index, 'ふぁ').some((keys) => keys.length === 3));
 });
 
+test('three-key kana chords accept any physical keydown order when unambiguous', () => {
+  const engine = new NaginataEngine(createLayoutIndex(generated));
+  const permutations = [
+    ['KeyJ', 'KeyR', 'KeyI'], ['KeyJ', 'KeyI', 'KeyR'], ['KeyR', 'KeyJ', 'KeyI'],
+    ['KeyR', 'KeyI', 'KeyJ'], ['KeyI', 'KeyJ', 'KeyR'], ['KeyI', 'KeyR', 'KeyJ']
+  ];
+  for (const keys of permutations) assert.equal(engine.convert(keys).text, 'じょ', keys.join('+'));
+});
+
+test('ambiguous ordered definitions require an explicit supported order', () => {
+  const engine = new NaginataEngine(createLayoutIndex(generated));
+  assert.equal(engine.convert(['KeyJ', 'KeyE', 'KeyK']).text, 'でぃ');
+  assert.equal(engine.convert(['KeyE', 'KeyJ', 'KeyK']).kind, 'ambiguous');
+});
+
 test('generated layout completes a multi-character word through physical outputs', () => {
   const index = createLayoutIndex(generated);
   const session = new PracticeSession([{ expected: 'しょうじょ' }], { tokenize: (text) => tokenizeText(index, text) });

@@ -9,21 +9,45 @@ test('A mode forwards converted text output', () => {
   assert.deepEqual(outputs, ['し']);
 });
 
-test('A mode accepts converted kana from KeyboardEvent.key', () => {
+test('A mode accepts converted kana from KeyboardEvent.key but ignores Process keys', async () => {
   const outputs = [];
   const controller = createInputController({ mode: 'converted', onOutput: (value) => outputs.push(value) });
-  controller.handleKeyDown({ key: 'じょ', code: 'KeyI', isComposing: false, target: { id: 'other' } });
   controller.handleKeyDown({ key: 'Process', code: 'KeyI', isComposing: true, target: { id: 'other' } });
+  await new Promise((resolve) => setTimeout(resolve, 5));
+  controller.handleKeyDown({ key: 'じょ', code: 'KeyI', isComposing: false, target: { id: 'other' } });
+  await new Promise((resolve) => setTimeout(resolve, 5));
   assert.deepEqual(outputs, ['じょ']);
 });
 
-test('A mode accepts input-event text from a focused capture field', () => {
+test('A mode does not submit or clear an input while IME composition is active', () => {
+  const outputs = [];
+  const target = { id: 'converted-input', value: 'じ' };
+  const event = Object.create({ get data() { return 'じ'; }, get isComposing() { return true; } });
+  Object.assign(event, { target });
+  const controller = createInputController({ mode: 'converted', onOutput: (value) => outputs.push(value) });
+  controller.handleBeforeInput(event);
+  controller.handleInput(event);
+  assert.deepEqual(outputs, []);
+  assert.equal(target.value, 'じ');
+});
+
+test('A mode receives finalized composition text once and clears it after composition', () => {
   const outputs = [];
   const target = { id: 'converted-input', value: 'が' };
   const controller = createInputController({ mode: 'converted', onOutput: (value) => outputs.push(value) });
+  controller.handleBeforeInput({ data: 'が', target, isComposing: false, inputType: 'insertFromComposition' });
   controller.handleInput({ data: 'が', target });
   assert.deepEqual(outputs, ['が']);
   assert.equal(target.value, '');
+});
+
+test('A mode reads inherited native event fields without spreading the Event object', () => {
+  const outputs = [];
+  const event = Object.create({ get key() { return 'Process'; }, get isComposing() { return true; } });
+  Object.assign(event, { target: { id: 'body' } });
+  const controller = createInputController({ mode: 'converted', onOutput: (value) => outputs.push(value) });
+  controller.handleKeyDown(event);
+  assert.deepEqual(outputs, []);
 });
 
 test('B mode converts pressed physical codes on keyup', () => {
@@ -64,4 +88,27 @@ test('B mode excludes OS modifier keys from physical chords', () => {
   controller.handleKeyUp({ code: 'MetaLeft' });
   assert.deepEqual(outputs, ['KeyJ']);
   assert.ok(held.every((keys) => !keys.includes('ShiftLeft') && !keys.includes('MetaLeft')));
+});
+
+test('clearing a physical controller after focus loss prevents a stale chord output', () => {
+  const outputs = [];
+  const engine = { convert: (keys) => ({ text: keys.join('+'), keys, kind: 'test' }) };
+  const controller = createInputController({ mode: 'site', engine, onOutput: (value) => outputs.push(value) });
+  controller.handleKeyDown({ code: 'KeyJ', repeat: false });
+  controller.handleKeyDown({ code: 'KeyR', repeat: false });
+  controller.clear();
+  controller.handleKeyUp({ code: 'KeyR' });
+  controller.handleKeyUp({ code: 'KeyJ' });
+  assert.deepEqual(outputs, []);
+  assert.deepEqual(controller.pressed, []);
+});
+
+test('unknown physical combinations report feedback instead of silently latching', () => {
+  const results = [];
+  const engine = { convert: (keys) => ({ text: '', keys, kind: 'unknown' }) };
+  const controller = createInputController({ mode: 'site', engine, onOutput: (value, result) => results.push({ value, kind: result.kind }) });
+  controller.handleKeyDown({ code: 'KeyJ', repeat: false });
+  controller.handleKeyDown({ code: 'KeyR', repeat: false });
+  controller.handleKeyUp({ code: 'KeyR' });
+  assert.deepEqual(results, [{ value: '', kind: 'unknown' }]);
 });

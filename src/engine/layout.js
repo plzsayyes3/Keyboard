@@ -10,8 +10,17 @@ export function createLayoutIndex(layout) {
   const single = new Map(Object.entries(layout.layers?.single ?? {}));
   const shifted = new Map(Object.entries(layout.layers?.centerShift ?? {}));
   const combos = new Map();
+  const combosByKeySet = new Map();
   for (const combo of layout.combos ?? []) {
-    combos.set(orderedKeyId(combo.keys), { ...combo, keys: [...combo.keys] });
+    const entry = { ...combo, keys: [...combo.keys] };
+    combos.set(orderedKeyId(combo.keys), entry);
+    const keySetId = sortedKeyId(combo.keys);
+    const candidates = combosByKeySet.get(keySetId) ?? [];
+    const outputId = `${combo.text ?? ''}\u0000${combo.action ?? ''}`;
+    if (!candidates.some((candidate) => `${candidate.text ?? ''}\u0000${candidate.action ?? ''}` === outputId)) {
+      candidates.push(entry);
+      combosByKeySet.set(keySetId, candidates);
+    }
   }
   if (!layout.preserveComboOrder) {
     for (const combo of layout.combos ?? []) {
@@ -24,6 +33,7 @@ export function createLayoutIndex(layout) {
     single,
     shifted,
     combos,
+    combosByKeySet,
     centerShiftKey: layout.centerShiftKey ?? 'Space',
     physicalKeys: layout.physicalKeys ?? [],
     simultaneousWindowMs: layout.simultaneousWindowMs ?? 140,

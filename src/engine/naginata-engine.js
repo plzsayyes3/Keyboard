@@ -27,6 +27,20 @@ export class NaginataEngine {
       };
     }
 
+    const keySetCandidates = this.index.combosByKeySet?.get([...normalized].sort().join('+')) ?? [];
+    if (keySetCandidates.length === 1) {
+      const [candidate] = keySetCandidates;
+      return {
+        text: candidate.text ?? '',
+        action: candidate.action ?? null,
+        keys: [...normalized],
+        kind: candidate.kind ?? 'combo'
+      };
+    }
+    if (keySetCandidates.length > 1) {
+      return { text: '', keys: [...normalized], kind: 'ambiguous' };
+    }
+
     if (normalized.length === 1) {
       const text = this.index.single.get(normalized[0]);
       if (text) return { text, keys: normalized, kind: 'single' };

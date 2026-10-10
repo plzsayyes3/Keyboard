@@ -1,6 +1,5 @@
 :root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; color: #1d2633; background: #edf2f6; }
 * { box-sizing: border-box; }
-.converted-capture { position: fixed; width: 1px; height: 1px; opacity: 0; pointer-events: none; border: 0; padding: 0; }
 body { margin: 0; min-width: 320px; }
 #app { max-width: 1180px; margin: 0 auto; padding: 16px 16px 24px; }
 .hero { display: flex; justify-content: space-between; gap: 20px; align-items: center; margin-bottom: 12px; }
@@ -13,6 +12,7 @@ h1 { margin: 0; font-size: clamp(24px, 4vw, 36px); letter-spacing: -.04em; }
 .controls { display: flex; flex-wrap: wrap; gap: 8px 10px; padding: 10px; margin-bottom: 12px; align-items: end; }
 label { color: #647484; display: grid; gap: 4px; font-size: 10px; font-weight: 700; }
 select, button { border: 1px solid #c8d5df; border-radius: 8px; background: #fff; color: #1d2633; font: inherit; padding: 7px 9px; font-size: 13px; }
+.converted-input-control input { width: 180px; border: 1px solid #79b5d1; border-radius: 8px; padding: 7px 9px; color: #1d2633; font: inherit; font-size: 13px; outline-color: #3478a5; }
 button { cursor: pointer; font-weight: 700; }
 button.secondary { background: #eaf4f9; border-color: #b9d9e9; color: #266687; }
 .practice-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 12px; }
