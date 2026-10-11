@@ -1,0 +1,648 @@
+{
+  "id": "complete",
+  "title": "配列全習",
+  "source": "data/reference/naginata-v18.txt",
+  "sourceHash": "6472668ee04443367b346f620450b22b794ef5f1a044287e2733c7f9f01afa04",
+  "items": [
+    {
+      "text": "き",
+      "expected": "き"
+    },
+    {
+      "text": "て",
+      "expected": "て"
+    },
+    {
+      "text": "し",
+      "expected": "し"
+    },
+    {
+      "text": "る",
+      "expected": "る"
+    },
+    {
+      "text": "す",
+      "expected": "す"
+    },
+    {
+      "text": "へ",
+      "expected": "へ"
+    },
+    {
+      "text": "ろ",
+      "expected": "ろ"
+    },
+    {
+      "text": "け",
+      "expected": "け"
+    },
+    {
+      "text": "と",
+      "expected": "と"
+    },
+    {
+      "text": "か",
+      "expected": "か"
+    },
+    {
+      "text": "っ",
+      "expected": "っ"
+    },
+    {
+      "text": "く",
+      "expected": "く"
+    },
+    {
+      "text": "あ",
+      "expected": "あ"
+    },
+    {
+      "text": "い",
+      "expected": "い"
+    },
+    {
+      "text": "う",
+      "expected": "う"
+    },
+    {
+      "text": "ー",
+      "expected": "ー"
+    },
+    {
+      "text": "ほ",
+      "expected": "ほ"
+    },
+    {
+      "text": "ひ",
+      "expected": "ひ"
+    },
+    {
+      "text": "は",
+      "expected": "は"
+    },
+    {
+      "text": "こ",
+      "expected": "こ"
+    },
+    {
+      "text": "そ",
+      "expected": "そ"
+    },
+    {
+      "text": "た",
+      "expected": "た"
+    },
+    {
+      "text": "な",
+      "expected": "な"
+    },
+    {
+      "text": "ん",
+      "expected": "ん"
+    },
+    {
+      "text": "ら",
+      "expected": "ら"
+    },
+    {
+      "text": "れ",
+      "expected": "れ"
+    },
+    {
+      "text": "ね",
+      "expected": "ね"
+    },
+    {
+      "text": "り",
+      "expected": "り"
+    },
+    {
+      "text": "め",
+      "expected": "め"
+    },
+    {
+      "text": "さ",
+      "expected": "さ"
+    },
+    {
+      "text": "よ",
+      "expected": "よ"
+    },
+    {
+      "text": "え",
+      "expected": "え"
+    },
+    {
+      "text": "ゆ",
+      "expected": "ゆ"
+    },
+    {
+      "text": "せ",
+      "expected": "せ"
+    },
+    {
+      "text": "み",
+      "expected": "み"
+    },
+    {
+      "text": "に",
+      "expected": "に"
+    },
+    {
+      "text": "ま",
+      "expected": "ま"
+    },
+    {
+      "text": "ち",
+      "expected": "ち"
+    },
+    {
+      "text": "や",
+      "expected": "や"
+    },
+    {
+      "text": "の",
+      "expected": "の"
+    },
+    {
+      "text": "も",
+      "expected": "も"
+    },
+    {
+      "text": "つ",
+      "expected": "つ"
+    },
+    {
+      "text": "ふ",
+      "expected": "ふ"
+    },
+    {
+      "text": "を",
+      "expected": "を"
+    },
+    {
+      "text": "ぬ",
+      "expected": "ぬ"
+    },
+    {
+      "text": "お",
+      "expected": "お"
+    },
+    {
+      "text": "む",
+      "expected": "む"
+    },
+    {
+      "text": "わ",
+      "expected": "わ"
+    },
+    {
+      "text": "ざ",
+      "expected": "ざ"
+    },
+    {
+      "text": "ず",
+      "expected": "ず"
+    },
+    {
+      "text": "べ",
+      "expected": "べ"
+    },
+    {
+      "text": "ぐ",
+      "expected": "ぐ"
+    },
+    {
+      "text": "づ",
+      "expected": "づ"
+    },
+    {
+      "text": "ぶ",
+      "expected": "ぶ"
+    },
+    {
+      "text": "だ",
+      "expected": "だ"
+    },
+    {
+      "text": "ぎ",
+      "expected": "ぎ"
+    },
+    {
+      "text": "で",
+      "expected": "で"
+    },
+    {
+      "text": "じ",
+      "expected": "じ"
+    },
+    {
+      "text": "ぜ",
+      "expected": "ぜ"
+    },
+    {
+      "text": "げ",
+      "expected": "げ"
+    },
+    {
+      "text": "ど",
+      "expected": "ど"
+    },
+    {
+      "text": "が",
+      "expected": "が"
+    },
+    {
+      "text": "ぢ",
+      "expected": "ぢ"
+    },
+    {
+      "text": "ぼ",
+      "expected": "ぼ"
+    },
+    {
+      "text": "び",
+      "expected": "び"
+    },
+    {
+      "text": "ば",
+      "expected": "ば"
+    },
+    {
+      "text": "ご",
+      "expected": "ご"
+    },
+    {
+      "text": "ぞ",
+      "expected": "ぞ"
+    },
+    {
+      "text": "ぺ",
+      "expected": "ぺ"
+    },
+    {
+      "text": "ぷ",
+      "expected": "ぷ"
+    },
+    {
+      "text": "ぽ",
+      "expected": "ぽ"
+    },
+    {
+      "text": "ぴ",
+      "expected": "ぴ"
+    },
+    {
+      "text": "ぱ",
+      "expected": "ぱ"
+    },
+    {
+      "text": "ょ",
+      "expected": "ょ"
+    },
+    {
+      "text": "ぇ",
+      "expected": "ぇ"
+    },
+    {
+      "text": "ゅ",
+      "expected": "ゅ"
+    },
+    {
+      "text": "ヶ",
+      "expected": "ヶ"
+    },
+    {
+      "text": "ヵ",
+      "expected": "ヵ"
+    },
+    {
+      "text": "ゃ",
+      "expected": "ゃ"
+    },
+    {
+      "text": "ぁ",
+      "expected": "ぁ"
+    },
+    {
+      "text": "ぃ",
+      "expected": "ぃ"
+    },
+    {
+      "text": "ぅ",
+      "expected": "ぅ"
+    },
+    {
+      "text": "ぉ",
+      "expected": "ぉ"
+    },
+    {
+      "text": "ゎ",
+      "expected": "ゎ"
+    },
+    {
+      "text": "きゃ",
+      "expected": "きゃ"
+    },
+    {
+      "text": "りゃ",
+      "expected": "りゃ"
+    },
+    {
+      "text": "しゃ",
+      "expected": "しゃ"
+    },
+    {
+      "text": "みゃ",
+      "expected": "みゃ"
+    },
+    {
+      "text": "にゃ",
+      "expected": "にゃ"
+    },
+    {
+      "text": "ちゃ",
+      "expected": "ちゃ"
+    },
+    {
+      "text": "ひゃ",
+      "expected": "ひゃ"
+    },
+    {
+      "text": "きゅ",
+      "expected": "きゅ"
+    },
+    {
+      "text": "りゅ",
+      "expected": "りゅ"
+    },
+    {
+      "text": "しゅ",
+      "expected": "しゅ"
+    },
+    {
+      "text": "みゅ",
+      "expected": "みゅ"
+    },
+    {
+      "text": "にゅ",
+      "expected": "にゅ"
+    },
+    {
+      "text": "ちゅ",
+      "expected": "ちゅ"
+    },
+    {
+      "text": "ひゅ",
+      "expected": "ひゅ"
+    },
+    {
+      "text": "きょ",
+      "expected": "きょ"
+    },
+    {
+      "text": "りょ",
+      "expected": "りょ"
+    },
+    {
+      "text": "しょ",
+      "expected": "しょ"
+    },
+    {
+      "text": "みょ",
+      "expected": "みょ"
+    },
+    {
+      "text": "にょ",
+      "expected": "にょ"
+    },
+    {
+      "text": "ちょ",
+      "expected": "ちょ"
+    },
+    {
+      "text": "ひょ",
+      "expected": "ひょ"
+    },
+    {
+      "text": "ぎゃ",
+      "expected": "ぎゃ"
+    },
+    {
+      "text": "じゃ",
+      "expected": "じゃ"
+    },
+    {
+      "text": "ぢゃ",
+      "expected": "ぢゃ"
+    },
+    {
+      "text": "びゃ",
+      "expected": "びゃ"
+    },
+    {
+      "text": "ぎゅ",
+      "expected": "ぎゅ"
+    },
+    {
+      "text": "じゅ",
+      "expected": "じゅ"
+    },
+    {
+      "text": "ぢゅ",
+      "expected": "ぢゅ"
+    },
+    {
+      "text": "びゅ",
+      "expected": "びゅ"
+    },
+    {
+      "text": "ぎょ",
+      "expected": "ぎょ"
+    },
+    {
+      "text": "じょ",
+      "expected": "じょ"
+    },
+    {
+      "text": "ぢょ",
+      "expected": "ぢょ"
+    },
+    {
+      "text": "びょ",
+      "expected": "びょ"
+    },
+    {
+      "text": "ぴょ",
+      "expected": "ぴょ"
+    },
+    {
+      "text": "ぴゅ",
+      "expected": "ぴゅ"
+    },
+    {
+      "text": "ぴゃ",
+      "expected": "ぴゃ"
+    },
+    {
+      "text": "てゅ",
+      "expected": "てゅ"
+    },
+    {
+      "text": "てぃ",
+      "expected": "てぃ"
+    },
+    {
+      "text": "でゅ",
+      "expected": "でゅ"
+    },
+    {
+      "text": "でぃ",
+      "expected": "でぃ"
+    },
+    {
+      "text": "とぅ",
+      "expected": "とぅ"
+    },
+    {
+      "text": "どぅ",
+      "expected": "どぅ"
+    },
+    {
+      "text": "しぇ",
+      "expected": "しぇ"
+    },
+    {
+      "text": "ちぇ",
+      "expected": "ちぇ"
+    },
+    {
+      "text": "じぇ",
+      "expected": "じぇ"
+    },
+    {
+      "text": "ぢぇ",
+      "expected": "ぢぇ"
+    },
+    {
+      "text": "ふぇ",
+      "expected": "ふぇ"
+    },
+    {
+      "text": "ふゅ",
+      "expected": "ふゅ"
+    },
+    {
+      "text": "ふぁ",
+      "expected": "ふぁ"
+    },
+    {
+      "text": "ふぃ",
+      "expected": "ふぃ"
+    },
+    {
+      "text": "ふぉ",
+      "expected": "ふぉ"
+    },
+    {
+      "text": "ヴぇ",
+      "expected": "ヴぇ"
+    },
+    {
+      "text": "ヴゅ",
+      "expected": "ヴゅ"
+    },
+    {
+      "text": "ヴぁ",
+      "expected": "ヴぁ"
+    },
+    {
+      "text": "ヴぃ",
+      "expected": "ヴぃ"
+    },
+    {
+      "text": "ヴ",
+      "expected": "ヴ"
+    },
+    {
+      "text": "ヴぉ",
+      "expected": "ヴぉ"
+    },
+    {
+      "text": "うぇ",
+      "expected": "うぇ"
+    },
+    {
+      "text": "うぃ",
+      "expected": "うぃ"
+    },
+    {
+      "text": "うぉ",
+      "expected": "うぉ"
+    },
+    {
+      "text": "いぇ",
+      "expected": "いぇ"
+    },
+    {
+      "text": "つぁ",
+      "expected": "つぁ"
+    },
+    {
+      "text": "くぇ",
+      "expected": "くぇ"
+    },
+    {
+      "text": "くぁ",
+      "expected": "くぁ"
+    },
+    {
+      "text": "くぃ",
+      "expected": "くぃ"
+    },
+    {
+      "text": "くぉ",
+      "expected": "くぉ"
+    },
+    {
+      "text": "くゎ",
+      "expected": "くゎ"
+    },
+    {
+      "text": "ぐぇ",
+      "expected": "ぐぇ"
+    },
+    {
+      "text": "ぐぁ",
+      "expected": "ぐぁ"
+    },
+    {
+      "text": "ぐぃ",
+      "expected": "ぐぃ"
+    },
+    {
+      "text": "ぐぉ",
+      "expected": "ぐぉ"
+    },
+    {
+      "text": "ぐゎ",
+      "expected": "ぐゎ"
+    },
+    {
+      "text": "・",
+      "expected": "・"
+    },
+    {
+      "text": "トシ",
+      "expected": "トシ"
+    },
+    {
+      "text": "ヒロシ",
+      "expected": "ヒロシ"
+    },
+    {
+      "text": "ユカ",
+      "expected": "ユカ"
+    }
+  ]
+}

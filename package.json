@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build:layout": "node scripts/build-naginata-layout.mjs",
+    "build:lesson:complete": "node scripts/build-complete-lesson.mjs",
     "test": "node --test"
   }
 }
